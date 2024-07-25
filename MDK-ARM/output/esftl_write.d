@@ -1,0 +1,10 @@
+.\output\esftl_write.o: ..\NFTL\esFtl_write.c
+.\output\esftl_write.o: ..\NFTL\esFtl_definitions.h
+.\output\esftl_write.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\esftl_write.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\esftl_write.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\esftl_write.o: ..\NFTL\esFtl_disk.h
+.\output\esftl_write.o: ..\NFTL\esFtl_cache.h
+.\output\esftl_write.o: ..\NFTL\esFtl_defragment.h
+.\output\esftl_write.o: ..\NFTL\esFtl_bbm.h
+.\output\esftl_write.o: ..\NFTL\esFtl_write.h

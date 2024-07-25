@@ -1,0 +1,11 @@
+.\output\test.o: ..\NFTL\test.c
+.\output\test.o: ..\NFTL\esFtl.h
+.\output\test.o: ..\NFTL\esFtl_definitions.h
+.\output\test.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\test.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\test.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\test.o: ..\NFTL\esFtl_disk.h
+.\output\test.o: ..\NFTL\esFtl_init.h
+.\output\test.o: ..\NFTL\esFtl_read.h
+.\output\test.o: ..\NFTL\esFtl_write.h
+.\output\test.o: ..\NFTL\esFtl_defragment.h
