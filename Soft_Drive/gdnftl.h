@@ -72,6 +72,8 @@
 #define    SPI_NAND_READY               1        //NAND flash is ready
 #define    SPI_NAND_FAIL                0        //NAND flash operation fail flag
 #define    SPI_NAND_SUCCESS             1        //NAND flash operation success flag
+#define    SPI_NAND_ECC4                2        //NAND flash ECC exceeds limits, need to move data
+#define    SPI_NAND_ECC5                3        //NAND flash ECC exceeds limits, need to move data
 #define    OIP                          0x01     //Operation in progress bit
 #define    WEL                          0x02     //Write enable latch bit 
 #define    E_FAIL                       0x04     //Erase fail bit
@@ -102,6 +104,7 @@
 #define RBT_SIZE    BLOCK_NUM_FOR_USER	//block number for users
 #define ENV_SIZE    3
 #define TOTAL_BLOCK 1024
+#define BLOCK_SIZE   64
 #define BST_COMPRESSED_SIZE TOTAL_BLOCK/8
 #define EMPTY       0
 #define NOT_EMPTY   1
@@ -109,26 +112,28 @@
 #define L2P_THRESHOLD 10
 #define BST_THRESHOLD 10
 
+#define SUPPORTED_FLASH_IDS_COUNT 13
+
 
 static void load_DBTRBT_from_nand(uint8_t type);
 static uint8_t check_whether_in_DBT_array(uint16_t BlockNo);
 uint8_t update_DBTRBT_to_nand(uint8_t type);
-static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo);
+static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static uint16_t re_mapping_RBT(uint16_t ori_BlockNo,uint16_t old_replace_BlockNo);
 static uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
 static uint16_t get_replace_block_from_ram(uint16_t BlockNo);
-static uint8_t update_DBTRBT_array(uint16_t BlockNo);
+static uint8_t update_DBTRBT_array(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static void alloc_DBTRBT_block_addr(void);
 static void init_build_DBTRBT(void);
 static uint8_t rebuild_DBTRBT_array(void);
 static void set_mapped_physical_block(uint16_t block_No, uint16_t physical_block); 
-static uint8_t update_L2PBST_to_nand(void);
+ uint8_t update_L2PBST_to_nand(void);
 static uint8_t update_ABT_to_nand(void);
 static void load_ABT_from_nand(void);
-static void load_L2PBST_from_nand(void);
+ void load_L2PBST_from_nand(void);
 //void compress_BST(const bool *BST, uint8_t *BST_compressed, uint16_t total_blocks);
 //void decompress_BST(const uint8_t *BST_compressed, bool *BST, uint16_t total_blocks);
-
+static void swap_L2P(uint16_t LogicalBlockNo, uint16_t ReplacePB);
 
 uint16_t get_mapped_physical_block(uint16_t block_No);
 void set_ABT(uint16_t block_No, uint16_t value);

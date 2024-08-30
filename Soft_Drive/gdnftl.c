@@ -22,6 +22,7 @@
 //#define  TEST
 #define NFTL_TEST
 #define LOG
+#define ABT_ENABLE
 //#define DEMO//ONLY TEST CODE, ERASE ALL WHEN INIT
 //#define TEST_LOAD_UPDATE_ABTL2P
 static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read page data */
@@ -32,8 +33,9 @@ static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read pag
 #define TYPE_DBT        0
 #define TYPE_RBT        1
 #define TYPE_ENV        2
-#define TYPE_DBT_RBT    1
-#define WL_THRESHOLD 1
+#define TYPE_ABT        3
+#define TYPE_L2PBST     4
+#define WL_THRESHOLD 5
 #define DBT_SIZE    200
 #define RBT_SIZE    BLOCK_NUM_FOR_USER
 #define ENV_SIZE    3
@@ -75,22 +77,22 @@ uint8_t BST_compressed[BST_COMPRESSED_SIZE];
 
 uint16_t g16LastValidBlock;
 uint16_t g16BadBlockNum;
+uint16_t table_area_lastvalid = Table_AREA_END;
 
+volatile bool     BST[TOTAL_BLOCK];//mark if the physical block is empty
 uint16_t ABT[TOTAL_BLOCK];//PHYSICAL BLOCK ERASE COUNT
-uint64_t PST[RBT_SIZE];
 uint16_t L2P[RBT_SIZE];//LOGICAL BLOCK ADDRESS TO PHYSICAL BLOCK ADDRESS
 uint8_t  ABT_CNT = 0;//COUNTER RECORD HOW MANY TIMES ABT MODIFIED 
 uint8_t  L2P_CNT = 0;//COUNTER RECORD HOW MANY TIMES L2P MODIFIED 
 uint8_t  BST_CNT = 0;//COUNTER RECORD HOW MANY TIMES BST MODIFIED 
 uint8_t  DBT_BLOCK_1;
 /* detect the nandflash block is or not bad */
-bool     BST[TOTAL_BLOCK];//mark if the physical block is empty
+
 
 bool FLAG_ABT_UPDATE = 0;
 bool FLAG_L2P_UPDATE = 0;
 bool FLAG_BST_UPDATE = 0;
 
-#define SUPPORTED_FLASH_IDS_COUNT 12
 const uint16_t supported_flash_ids[SUPPORTED_FLASH_IDS_COUNT] = {
     0xC891,//GD5F1GM7UE
     0xC881,//GD5F1GM7RE
@@ -104,36 +106,38 @@ const uint16_t supported_flash_ids[SUPPORTED_FLASH_IDS_COUNT] = {
     0xC885,//GD5F4GM8RE
     0xC855,//GD5F4GQ6UE
     0xC845,//GD5F4GQ6RE
-		0xC831
+	0xC831
 };
 
 static void load_DBTRBT_from_nand(uint8_t type);
 static uint8_t check_whether_in_DBT_array(uint16_t BlockNo);
 uint8_t update_DBTRBT_to_nand(uint8_t type);
-static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo);
+static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static uint16_t re_mapping_RBT(uint16_t ori_BlockNo,uint16_t old_replace_BlockNo);
 static uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
 static uint16_t get_replace_block_from_ram(uint16_t BlockNo);
-static uint8_t update_DBTRBT_array(uint16_t BlockNo);
+static uint8_t update_DBTRBT_array(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static void alloc_DBTRBT_block_addr(void);
 static void init_build_DBTRBT(void);
 static uint8_t rebuild_DBTRBT_array(void);
 static void set_mapped_physical_block(uint16_t block_No, uint16_t physical_block); 
-static uint8_t update_L2PBST_to_nand(void);
+ uint8_t update_L2PBST_to_nand(void);
 static uint8_t update_ABT_to_nand(void);
+static uint8_t mark_bad_block(uint16_t physical_block_no);
 static void load_ABT_from_nand(void);
-static void load_L2PBST_from_nand(void);
-static void compress_BST(const bool *BST, uint8_t *BST_compressed, uint16_t total_blocks);
-static void decompress_BST(const uint8_t *BST_compressed, bool *BST, uint16_t total_blocks);
+ void load_L2PBST_from_nand(void);
+static void compress_BST(volatile bool *BST, uint8_t *BST_compressed, uint16_t total_blocks);
+static void decompress_BST(const uint8_t *BST_compressed, volatile bool *BST, uint16_t total_blocks);
+static uint8_t table_block_replacement(uint8_t type);
 
-static uint16_t get_mapped_physical_block(uint16_t block_No);
+uint16_t get_mapped_physical_block(uint16_t block_No);
 static void set_ABT(uint16_t block_No, uint16_t value);
 static uint16_t get_ABT(uint16_t block_No);
 static void set_BST(uint16_t block_No, uint16_t value);
-static bool get_BST(uint16_t block_No);
+bool get_BST(uint16_t block_No);
 
 static uint16_t get_empty_block(bool *array, size_t size, uint16_t ori_block);
-static uint16_t get_min_erase_block(void);
+static uint16_t get_min_erase_block(uint16_t ori_pb);
 static uint16_t calculate_average(uint16_t *array, uint16_t size);
 static uint16_t select_proper_block(uint16_t physical_block_No);
 uint16_t select_unmapped_block(void);
@@ -205,7 +209,7 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
         return SPI_NAND_FAIL;
     }
     if(check_whether_in_DBT_array(physical_block)==true){//check if the mapped physical block is bad block
-        replace_block = get_replace_block_from_ram(physical_block);
+        replace_block = get_replace_block_from_ram(block_No);
         #ifdef LOG
             printf("*********Bad Block**********\nBad block detected: %x Original PB: %X Updated PB: %X\n",block_No, physical_block, replace_block);
 		#endif
@@ -216,40 +220,46 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
     
     //check erase cnt
     //based on wear leveling select the proper physical block
-	average = calculate_average(ABT, 1024);
-    if((ABT[replace_block] - average) > WL_THRESHOLD){
-    
-        proper_block = select_proper_block(replace_block);
-        //swap mapping table L2P
-        L2P[block_No] = proper_block;
-		#ifdef LOG
-        printf("***************Wear Leveling************* \nphyblock %d ers_cnt %d average %d rpl_blk %d", replace_block, ABT[replace_block], average, proper_block);		
-        #endif
-        for (i = 0; i < sizeof(L2P); i++)
-        {
-            if (L2P[i] == proper_block && i != block_No)//find the logical block that mapped to properblock
-            {
-                L2P[i] = replace_block;//swap
-                break;
-            }           
+    #ifdef ABT_ENABLE
+        average = calculate_average(ABT, 1024);
+        if((ABT[replace_block] - average) > WL_THRESHOLD){
+        
+            proper_block = select_proper_block(replace_block);
+            
+            #ifdef LOG
+            printf("***************Wear Leveling************* \nphyblock %d ers_cnt %d average %d rpl_blk %d\n", replace_block, ABT[replace_block], average, proper_block);		
+            #endif
+            //swap mapping table L2P
+            swap_L2P(block_No, proper_block);
+            
+            L2P_CNT++;//COUNTER ++ 
+            //CHECK IF NEED TO UPDATE L2P
         }
-        L2P_CNT++;//COUNTER ++ 
-        //CHECK IF NEED TO UPDATE L2P
-    }
+    #endif
     replace_block = get_mapped_physical_block(logical_block);//ACTUAL PROGRAM PHYSICAL BLOCK
+		
     memset(tem_buffer, 0x5A, SPI_NAND_PAGE_SIZE);
     memcpy(tem_buffer, buffer, buf_len);
+    #ifdef LOG
+				printf("*********PROGRAM LB:%d PB:%d PAGE:%d**********\n",block_No, replace_block, page_No);
+	#endif
     result = spi_nandflash_write_data(tem_buffer,replace_block*SPI_NAND_BLOCK_SIZE+page_No,0,SPI_NAND_PAGE_SIZE);
-    if(result == SPI_NAND_FAIL){     
-        update_DBTRBT_array(replace_block);
+    if(result == SPI_NAND_FAIL){
+        #ifdef LOG
+            printf("***************Program Failed, Block Replacing************* \n");		
+        #endif     
+        update_DBTRBT_array(block_No, replace_block);
+        mark_bad_block(replace_block);
         re_mapping_RBT(block_No,replace_block);
         update_DBTRBT_to_nand(TYPE_DBT);
         update_DBTRBT_to_nand(TYPE_RBT); 
+        new_replace_block = get_replace_block_from_ram(block_No);
         //copy the old block content to new alloced block
         for(page_idx = 0;page_idx < page_No;page_idx++){
-            new_replace_block = get_replace_block_from_ram(replace_block);
             move_page_data(new_replace_block,replace_block,page_idx);
         }
+        swap_L2P(block_No, new_replace_block);
+        //L2P[block_No] = new_replace_block;//update the L2P table
     }
     else{
         BST[replace_block] = NOT_EMPTY;//mark this physical block as not empty
@@ -266,7 +276,10 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
         ABT_CNT = 0;
     }
 
-    if(BST_CNT > 10){
+    if(BST_CNT > 64){
+        #ifdef LOG
+        printf("***************L2PBST TO NAND************* \n");		
+        #endif
         update_L2PBST_to_nand();
         BST_CNT = 0;
     }
@@ -287,21 +300,52 @@ uint8_t nandflash_page_read(uint8_t *buffer, uint16_t block_No, uint8_t page_No,
 {
     uint16_t p_block_no = L2P[block_No];
     uint16_t replace_block;     
+    uint8_t result;
+    uint16_t ori_block;
+    uint16_t des_block;
+		uint8_t		i;
     if((block_No > USER_AREA_END)||(page_No>=SPI_NAND_BLOCK_SIZE)||(buf_len>SPI_NAND_PAGE_SIZE)){
         return SPI_NAND_FAIL;
     }
     
     if(check_whether_in_DBT_array(p_block_no)==true){//check pba is bb or not
-        replace_block = get_replace_block_from_ram(p_block_no);
-        L2P[block_No] = replace_block;//update L2P TABLE
+        replace_block = get_replace_block_from_ram(block_No);
+        set_mapped_physical_block(block_No, replace_block);//update L2P TABLE
     }else{
         replace_block = p_block_no;
     }
-    
-    if(spi_nandflash_read_data(buffer,replace_block*SPI_NAND_BLOCK_SIZE+page_No,address_in_page,buf_len) == SPI_NAND_SUCCESS){
+		#ifdef LOG
+			printf("*********READ PB:%X Page: %d**********\n",replace_block, page_No);
+		#endif
+    result = spi_nandflash_read_data(buffer,replace_block*SPI_NAND_BLOCK_SIZE+page_No,address_in_page,buf_len);
+    if(result == SPI_NAND_SUCCESS){
 //        memcpy(buffer, tem_buffer, buf_len);
         return SPI_NAND_SUCCESS;
-    }else{ 
+    }
+    else if (result == SPI_NAND_ECC5)//5bits ECC triggered, back up data
+    {   
+        ori_block = replace_block;
+        des_block = select_unmapped_block();
+        swap_L2P(block_No, des_block);
+				#ifdef LOG
+            printf("\n***************ECC TRIGGER. MOVE DATA FROM BLOCK: %d TO BLOCK: %d******************\n", ori_block, des_block);
+            //while (1);
+        #endif
+        //L2P[block_No] = des_block;//update the L2P table
+        for(i = 0; i < SPI_NAND_BLOCK_SIZE; i++){//move current block to a new block
+			move_page_data(des_block,ori_block,i);
+	    }
+		/*TODO: MARK AS BAD BLOCK*/	
+        //update L2P BST TO NAND
+        update_L2PBST_to_nand();
+        
+        return SPI_NAND_ECC5;
+    }
+    
+    else if(result == SPI_NAND_FAIL){ 
+        #ifdef LOG
+            printf("*********READ FAIL**********\nPB: %X\n",replace_block);
+		#endif 
         return SPI_NAND_FAIL;
     }
 }
@@ -340,7 +384,7 @@ uint8_t nandflash_block_erase(uint16_t block_No)
     uint8_t result;
     uint16_t replace_block;
     uint16_t proper_block;
-    uint16_t physical_block;
+    uint16_t physical_block, new_replace_block;
 
     physical_block = L2P[block_No];
 Start_Erase:
@@ -356,20 +400,30 @@ Start_Erase:
     
     if(true==check_whether_in_DBT_array(physical_block)){//if the lba is a bad block
 
-        replace_block = get_replace_block_from_ram(physical_block);
+        replace_block = get_replace_block_from_ram(block_No);
 		#ifdef LOG
             printf("*********Bad Block**********\nBad block detected: %x Original PB: %X Updated PB: %X\n",block_No, physical_block, replace_block);
 		#endif
-        L2P[physical_block] = replace_block;//update the L2P table
+        //swap_L2P(block_No, replace_block);
+        set_mapped_physical_block(block_No, replace_block);//update the L2P table
     }else{
         replace_block = physical_block;
     }
+		#ifdef LOG
+			printf("*********ERASE LB:%d PB:%d**********\n",block_No, replace_block);
+		#endif
     result = spi_nandflash_block_erase(replace_block);
-    if(result == SPI_NAND_FAIL){     
-        update_DBTRBT_array(replace_block);
+    if(result == SPI_NAND_FAIL){   
+        #ifdef LOG
+            printf("*********ERASE FAIL**********\nPB: %X\n",replace_block);
+		#endif  
+        update_DBTRBT_array(block_No,replace_block);
+        mark_bad_block(replace_block);
         re_mapping_RBT(block_No,replace_block);
         update_DBTRBT_to_nand(TYPE_DBT);
         update_DBTRBT_to_nand(TYPE_RBT); 
+        new_replace_block = get_replace_block_from_ram(block_No);
+        swap_L2P(block_No, new_replace_block);
         goto Start_Erase;
     }
 #ifdef DEBUG
@@ -385,11 +439,17 @@ Start_Erase:
     }
     //CHECK IF NEED TO UPDATE BST&ABT
     if(ABT_CNT > 10){
+        #ifdef LOG
+            printf("************Upate ABT to array********\n");
+		#endif
         update_ABT_to_nand();
         ABT_CNT = 0;
     }
 
-    if(BST_CNT > 10){
+    if(BST_CNT > 64){
+        #ifdef LOG
+            printf("************Upate BSTL2P to array********\n");
+		#endif
         update_L2PBST_to_nand();
         BST_CNT = 0;
     }
@@ -479,7 +539,7 @@ static void load_ABT_from_nand()
     \param[out] none
     \retval     none
 */
-static void load_L2PBST_from_nand()
+ void load_L2PBST_from_nand()
 {
     spi_nandflash_read_data(tem_buffer,g16L2PBST_Block[g8DL2PBST_CRT_Block_Idx]*SPI_NAND_BLOCK_SIZE+g8DL2PBST_CRT_Page,0,SPI_NAND_PAGE_SIZE);
     memcpy(L2P,tem_buffer,RBT_SIZE*sizeof(L2P[0]));
@@ -562,6 +622,8 @@ static uint8_t update_ABT_to_nand()
         tem_buffer[SPI_NAND_PAGE_SIZE+4+5]= (g16ABT_Block[1-g8ABT_CRT_Block_Idx]&0xFF00)>>8;        
         result = spi_nandflash_write_data(tem_buffer,BlockNo*SPI_NAND_BLOCK_SIZE+PageNo,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
         if(result==SPI_NAND_FAIL){
+            update_DBTRBT_array(BlockNo, BlockNo);
+            table_block_replacement(TYPE_ABT);
             return result;
         }
         else{
@@ -581,7 +643,7 @@ static uint8_t update_ABT_to_nand()
     \param[out] none
     \retval     m8Result: update action if success or not
 */
-static uint8_t update_L2PBST_to_nand()
+ uint8_t update_L2PBST_to_nand()
 {
     uint16_t  BlockNo;
     uint16_t  PageNo;           
@@ -619,17 +681,22 @@ static uint8_t update_L2PBST_to_nand()
         tem_buffer[SPI_NAND_PAGE_SIZE+4+2]= 'T';    //0x54
         tem_buffer[SPI_NAND_PAGE_SIZE+4+3]= '!';    //0x21
         tem_buffer[SPI_NAND_PAGE_SIZE+4+4]= (g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]&0xFF);         //record the pair block No
-        tem_buffer[SPI_NAND_PAGE_SIZE+4+5]= (g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]&0xFF00)>>8;        
+        tem_buffer[SPI_NAND_PAGE_SIZE+4+5]= (g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]&0xFF00)>>8; 
+        #ifdef LOG
+        printf("L2P PBLOCK: %d PAGE: %d\n", BlockNo, PageNo);		
+        #endif       
         result = spi_nandflash_write_data(tem_buffer,BlockNo*SPI_NAND_BLOCK_SIZE+PageNo,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
         if(result==SPI_NAND_FAIL){
+            update_DBTRBT_array(BlockNo, BlockNo);
+            table_block_replacement(TYPE_L2PBST);
             return result;
         }
         else{
             BST[BlockNo] = NOT_EMPTY;
         }
         if(L2PBST_Erase_Flag == true){
-            spi_nandflash_block_erase(g16ABT_Block[1-g8ABT_CRT_Block_Idx]);
-            BST[g16ABT_Block[1-g8ABT_CRT_Block_Idx]] = EMPTY;
+            spi_nandflash_block_erase(g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]);
+            BST[g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]] = EMPTY;
         }
     
 
@@ -683,6 +750,8 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
         tem_buffer[SPI_NAND_PAGE_SIZE+4+5]= (g16DBT_Block[1-g8DBT_CRT_Block_Idx]&0xFF00)>>8;        
         result = spi_nandflash_write_data(tem_buffer,BlockNo*SPI_NAND_BLOCK_SIZE+PageNo,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
         if(result==SPI_NAND_FAIL){
+            update_DBTRBT_array(BlockNo, BlockNo);
+            table_block_replacement(TYPE_DBT);
             return result;
         }
         else{
@@ -723,6 +792,8 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
         tem_buffer[SPI_NAND_PAGE_SIZE+4+5]= (g16RBT_Block[1-g8RBT_CRT_Block_Idx]&0xFF00)>>8;
         result = spi_nandflash_write_data(tem_buffer,BlockNo*SPI_NAND_BLOCK_SIZE+PageNo,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
         if(result==SPI_NAND_FAIL){
+            update_DBTRBT_array(BlockNo, BlockNo);
+            table_block_replacement(TYPE_RBT);
             return result;
         }   
         else{
@@ -763,6 +834,8 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
         tem_buffer[SPI_NAND_PAGE_SIZE+4+5]= (g16ENV_Block[1-g8ENV_CRT_Block_Idx]&0xFF00)>>8;
         result = spi_nandflash_write_data(tem_buffer,BlockNo*SPI_NAND_BLOCK_SIZE+PageNo,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
         if(result==SPI_NAND_FAIL){
+            update_DBTRBT_array(BlockNo, BlockNo);
+            table_block_replacement(TYPE_ENV);
             return result;
         }
         else{
@@ -784,7 +857,7 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
     \param[out] none
     \retval     none
 */
-static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo)
+static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo, uint16_t PhysicalBlockNo)
 {
 #ifdef DEBUG
     //printf("\r%s:%x\n",__func__,BlockNo);
@@ -800,7 +873,7 @@ static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo)
     g16BadBlockNum++; 
     DBT[0] = g16BadBlockNum;        //bad block number
     DBT[1] = g16LastValidBlock;     //record last valid block
-    DBT[1+g16BadBlockNum] = BlockNo;
+    DBT[1+g16BadBlockNum] = PhysicalBlockNo;
 }
 
 /*!
@@ -836,6 +909,71 @@ static uint16_t re_mapping_RBT(uint16_t ori_BlockNo,uint16_t old_replace_BlockNo
 }
 
 /*!
+    \brief      MANAGE BLOCK REPLACEMENT WHEN ECC ERROR OR FAIL IN TABLE AREA
+    \param[in]  type:need load table type
+    \param[out] none
+    \retval     
+*/
+static uint8_t table_block_replacement(uint8_t type){
+    if (type == TYPE_DBT)
+    {   
+        if(check_whether_in_DBT_array(table_area_lastvalid) == false)
+        {
+            mark_bad_block(g16DBT_Block[g8DBT_CRT_Block_Idx]);// MARK AS BAD
+            g16DBT_Block[g8DBT_CRT_Block_Idx] = table_area_lastvalid;
+            table_area_lastvalid--;
+            g8DBT_CRT_Page = 0x00;
+        }
+    }
+    else if (type == TYPE_ABT)
+    {   
+        if(check_whether_in_DBT_array(table_area_lastvalid) == false)
+        {
+            mark_bad_block(g16ABT_Block[g8ABT_CRT_Block_Idx]);
+            g16ABT_Block[g8ABT_CRT_Block_Idx] = table_area_lastvalid;
+            table_area_lastvalid --;
+            g8ABT_CRT_Page = 0x00;
+        }
+    }
+    else if (type == TYPE_L2PBST)
+    {   
+        if(check_whether_in_DBT_array(table_area_lastvalid) == false)
+        {   
+            
+            #ifdef LOG
+                printf("L2P TABLE BLOCK FAIL. REPLACING FROM %d TO %d", g16L2PBST_Block[g8DL2PBST_CRT_Block_Idx], table_area_lastvalid);
+            #endif
+            mark_bad_block(g16L2PBST_Block[g8DL2PBST_CRT_Block_Idx]);
+            g16L2PBST_Block[g8DL2PBST_CRT_Block_Idx] = table_area_lastvalid;
+            table_area_lastvalid --;
+            g8DL2PBST_CRT_Page = 0x00;
+        }
+    }
+    else if (type == TYPE_RBT)
+    {   
+        if(check_whether_in_DBT_array(table_area_lastvalid) == false)
+        {
+            mark_bad_block(g16RBT_Block[g8RBT_CRT_Block_Idx]);
+            g16RBT_Block[g8RBT_CRT_Block_Idx] = table_area_lastvalid;
+            table_area_lastvalid --;
+            g8RBT_CRT_Page = 0x00;
+        }
+    }
+    else if (type == TYPE_ENV)
+    {   
+        if(check_whether_in_DBT_array(table_area_lastvalid) == false)
+        {
+            mark_bad_block(g16ENV_Block[g8ENV_CRT_Block_Idx]);
+            g16ENV_Block[g8ENV_CRT_Block_Idx] = table_area_lastvalid;
+            table_area_lastvalid --;
+            g8ENV_CRT_Page = 0x00;
+        }
+    }
+ 
+}
+
+
+/*!
     \brief      move page data(include spare area) from source block to destination block.
     \param[in]  des_block_No:block number before mapping;old replace BlockNo:block number before mapping
     \param[out] none
@@ -849,7 +987,8 @@ static uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_
         return result;
     }
     result = spi_nandflash_write_data(tem_buffer,des_block_No*SPI_NAND_BLOCK_SIZE+page_No,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
-    return result;
+    BST[des_block_No] = NOT_EMPTY;
+		return result;
 }
 
 /*!
@@ -869,15 +1008,15 @@ static uint16_t get_replace_block_from_ram(uint16_t BlockNo)
     \param[out] none
     \retval     result:update success or not
 */
-static uint8_t update_DBTRBT_array(uint16_t BlockNo)
+static uint8_t update_DBTRBT_array(uint16_t BlockNo, uint16_t PhysicalBlockNo)
 {
     uint8_t   result = true;
 #ifdef DEBUG
     //printf("\r%s:%x\n",__func__,BlockNo);
 #endif
-    result = check_whether_in_DBT_array(BlockNo);
+    result = check_whether_in_DBT_array(PhysicalBlockNo);
     if ( result==false ) {
-        add_bad_Block_to_DBTRBT_ram(BlockNo);
+        add_bad_Block_to_DBTRBT_ram(BlockNo, PhysicalBlockNo);
     }
     return result;
 }
@@ -899,7 +1038,7 @@ static void alloc_DBTRBTABTPST_block_addr(void)
     memset(RBT,0,RBT_SIZE);
     memset(ABT, 0, sizeof(ABT));
     //memset(PST, 0, sizeof(PST));
-    memset(BST,0,TOTAL_BLOCK);//Initialize block status as unwritten
+    //memset(BST,0,TOTAL_BLOCK);//Initialize block status as unwritten
     //init L2P TABLE L2P[1] = 1(BLOCK1)....
 	#ifdef TEST
         ABT[0x3B5] = 10;
@@ -907,6 +1046,9 @@ static void alloc_DBTRBTABTPST_block_addr(void)
     #endif
     for (i = 0; i < RBT_SIZE; ++i) {
         L2P[i] = (uint16_t)i;
+    };
+    for (i = 0; i < TOTAL_BLOCK; ++i) {
+        BST[i] = (bool) 0;
     };
 #ifdef DEBUG
     printf("\r%s\n",__func__);
@@ -1035,7 +1177,7 @@ static void init_build_DBTRBTABTPST(void)
                 DBT[1+g16BadBlockNum] = g16LastValidBlock;
                 g16LastValidBlock--;                
             }
-            add_bad_Block_to_DBTRBT_ram(BlockNo);
+            add_bad_Block_to_DBTRBT_ram(BlockNo, BlockNo);
             continue;
         }
         else{
@@ -1069,7 +1211,9 @@ static uint8_t rebuild_DBTRBT_array(void)
     uint16_t  Pair_block_No;
     uint8_t   Spare_data2[6];
     uint8_t   result  = true;
-
+    uint16_t cur_table_blocks[10];
+    uint16_t min = Table_AREA_END;
+    uint8_t i;
    
 
     //check DBT whether exist in nand
@@ -1115,6 +1259,26 @@ static uint8_t rebuild_DBTRBT_array(void)
         update_DBTRBT_to_nand(TYPE_DBT);
         update_DBTRBT_to_nand(TYPE_RBT);
         update_DBTRBT_to_nand(TYPE_ENV);
+        cur_table_blocks[0] = g16DBT_Block[0];
+        cur_table_blocks[1] = g16DBT_Block[1];
+        cur_table_blocks[2] = g16ABT_Block[0];
+        cur_table_blocks[3] = g16ABT_Block[1];
+        cur_table_blocks[4] = g16L2PBST_Block[0];
+        cur_table_blocks[5] = g16L2PBST_Block[1];
+        cur_table_blocks[6] = g16RBT_Block[0];
+        cur_table_blocks[7] = g16RBT_Block[1];
+        cur_table_blocks[8] = g16ENV_Block[0];
+        cur_table_blocks[9] = g16ENV_Block[1];
+        for ( i = 0; i < 10; i++)
+        {
+            if(cur_table_blocks[i] < min){
+                min = cur_table_blocks[i];
+            }
+            else{
+                continue;
+            }
+        }
+        table_area_lastvalid = min - 1;                        
         return result;
     }
 
@@ -1263,8 +1427,44 @@ static uint8_t rebuild_DBTRBT_array(void)
     }else{
 		update_DBTRBT_to_nand(TYPE_ENV);
     }   
-		return 0;
+
+    cur_table_blocks[0] = g16DBT_Block[0];
+    cur_table_blocks[1] = g16DBT_Block[1];
+    cur_table_blocks[2] = g16ABT_Block[0];
+    cur_table_blocks[3] = g16ABT_Block[1];
+    cur_table_blocks[4] = g16L2PBST_Block[0];
+    cur_table_blocks[5] = g16L2PBST_Block[1];
+    cur_table_blocks[6] = g16RBT_Block[0];
+    cur_table_blocks[7] = g16RBT_Block[1];
+    cur_table_blocks[8] = g16ENV_Block[0];
+    cur_table_blocks[9] = g16ENV_Block[1];
+    for ( i = 0; i < 10; i++)
+        {
+            if(cur_table_blocks[i] < min){
+                min = cur_table_blocks[i];
+            }
+            else{
+                continue;
+            }
+        }
+    table_area_lastvalid = min - 1;  
+	return 0;
 }
+
+/*
+    \brief      MARK AS BAD BLOCK---PROGRAM THE SPARE AREA OF THE 1ST PAGE OF THE BAD BLOCK AS 00h
+    \param[in]  none
+    \param[out] none
+    \retval     result:  success or not
+*/
+static uint8_t mark_bad_block(uint16_t physical_block_no){
+    uint8_t result = SPI_NAND_SUCCESS;
+    uint8_t *buffer = 0x00;
+    result = spi_nandflash_block_erase(physical_block_no);
+    result = spi_nandflash_write_spare(buffer,physical_block_no*BLOCK_SIZE, 0, 1);
+    return result;
+}
+
 /*!
     \brief      CHECK WHICH PHYSICAL BLOCK TO BE PROGRAMMED BASED ON WEAR LEVELING 
                 (IF TARGET BLCOK ERASE COUNT-AVERAGE>3, SELECT AN EMPTY BLOCK AND REMAP ALL)
@@ -1277,7 +1477,7 @@ static uint16_t select_proper_block(uint16_t physical_block_No){
     //uint16_t physical_block_no = L2P[physical_block_No];
     uint16_t physical_replace_block;
     uint16_t i;
-    physical_replace_block = get_min_erase_block();
+    physical_replace_block = get_min_erase_block(physical_block_No);
     
     //physical_replace_block = get_empty_block(BST, RBT_SIZE, physical_block_No);
     return physical_replace_block;
@@ -1409,53 +1609,38 @@ static uint16_t get_empty_block(bool *array, size_t size, uint16_t ori_block) {
     \param[out] none
     \retval     none
 */
-static uint16_t get_min_erase_block(void) {
-    uint16_t i,j;
-	bool skip = false;
-    uint16_t block, return_block = 0xFFFF;
-    uint16_t erase_cnt_min;
-    uint16_t *skip_blocks[5][2] = {g16DBT_Block, g16RBT_Block, g16ABT_Block, g16L2PBST_Block, g16ENV_Block};
-	for (block = 0; block < g16LastValidBlock; block++)
-    {   
-        if(check_whether_in_DBT_array(block) == true){
+static uint16_t get_min_erase_block(uint16_t ori_pb) {
+    uint16_t i, block;
+    uint16_t return_block = 0xFFFF;
+    uint16_t erase_cnt_min = 0xFFFF;
+    bool skip = false;
+    
+    
+
+    for (block = 0; block < USER_AREA_END; block++) {   
+        // Skip blocks present in the DBT (Defective Block Table)
+        if (check_whether_in_DBT_array(block)) {
             continue;
         }
-				skip = false;
-         for (i = 0; i < 5; i++) {
-            for ( j = 0; j < sizeof(g16DBT_Block); j++)
-            {
-                if (block == *(skip_blocks[i][j])) {
-                skip = true;
-                break;  // SKIP
-                }               
-            }  
-            if (skip)
-                {
-                    break;
-                } 
-        }
-        if (skip) continue;
-		//find minimum erase block		
-        if(block == 0){
-            erase_cnt_min = ABT[block];
-            return_block = block;
-						if(ABT[block] == 0){
-							break;
-						}
-        }
-        else if(ABT[block] == 0 && BST[block] == EMPTY){
-            return_block = block;
-            break;
-        }
-        else{
-            if(ABT[block] < erase_cnt_min){
-                return_block = block;
+
+        // Find the block with the minimum erase count that is empty
+        if (BST[block] == EMPTY) {
+            if (ABT[block] < erase_cnt_min) {
                 erase_cnt_min = ABT[block];
-            }
-            else{
-                continue;
+                return_block = block;
+                
+                // If the erase count is zero, break early
+                if (erase_cnt_min == 0) {
+                    break;
+                }
             }
         }
+    }
+    if(return_block == 0xFFFF){
+        #ifdef LOG
+            printf("WEARLEVELING FAILED, NO EMPTY BLOCK IN USER AREA\n");
+        #endif
+        return_block = ori_pb;
     }
     return return_block;
 }
@@ -1466,7 +1651,7 @@ static uint16_t get_min_erase_block(void) {
     \param[out] none
     \retval     none
 */
-static uint16_t get_mapped_physical_block(uint16_t block_No) {
+uint16_t get_mapped_physical_block(uint16_t block_No) {
     return L2P[block_No];
 }
 
@@ -1484,7 +1669,7 @@ static void set_mapped_physical_block(uint16_t block_No, uint16_t physical_block
 
 
 // Function to compress BST
-void compress_BST(const bool *BST, uint8_t *BST_compressed, uint16_t total_blocks) {
+void compress_BST(volatile bool *BST, uint8_t *BST_compressed, uint16_t total_blocks) {
 		uint16_t i = 0;
     for (i = 0; i < total_blocks; i++) {
         uint16_t byte_index = i / 8;
@@ -1497,7 +1682,7 @@ void compress_BST(const bool *BST, uint8_t *BST_compressed, uint16_t total_block
     }
 }
 
-void decompress_BST(const uint8_t *BST_compressed, bool *BST, uint16_t total_blocks) {
+void decompress_BST(const uint8_t *BST_compressed, volatile bool *BST, uint16_t total_blocks) {
     uint16_t i = 0;
 		for ( i = 0; i < total_blocks; i++) {
         uint16_t byte_index = i / 8;
@@ -1546,8 +1731,25 @@ static void set_BST(uint16_t block_No, uint16_t value){
     \retval     none
 */
 
-static bool get_BST(uint16_t block_No){
+bool get_BST(uint16_t block_No){
     return BST[block_No];
+}
+
+static void swap_L2P(uint16_t LogicalBlockNo, uint16_t ReplacePB){
+    // Get the current physical block number mapped to the given logical block number
+    uint16_t originalPB = L2P[LogicalBlockNo];
+    
+    // Find the logical block number currently mapped to the replacement physical block
+    uint16_t replaceLB;
+    for (replaceLB = 0; replaceLB < USER_AREA_END; replaceLB++) {
+        if (L2P[replaceLB] == ReplacePB) {
+            break;
+        }
+    }
+    
+    // Swap the mapping relationships between the logical blocks
+    L2P[LogicalBlockNo] = ReplacePB;
+    L2P[replaceLB] = originalPB;
 }
 
 static void env_check(void)

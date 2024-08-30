@@ -32,7 +32,7 @@ static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read pag
 #define TYPE_RBT        1
 #define TYPE_ENV        2
 #define TYPE_DBT_RBT    1
-#define WL_THRESHOLD 1
+#define WL_THRESHOLD 5
 #define DBT_SIZE    200
 #define RBT_SIZE    BLOCK_NUM_FOR_USER
 #define ENV_SIZE    3
@@ -640,7 +640,9 @@ uint8_t spi_nandflash_read_data(uint8_t *buffer,uint32_t page_No,uint32_t addres
 {
     uint8_t result = SPI_NAND_SUCCESS;
     uint8_t status = 0;
+    uint8_t status2 = 0;
     uint8_t retrycnt = 0;
+    uint16_t ECCstatus = 0;
 #ifdef DEBUG
     printf("\rspi_nandflash_read_data:%x %x %x %x\n",page_No/64,page_No%64,address_in_page,byte_cnt);
 #endif
@@ -657,10 +659,92 @@ ReadRetry:
     spi_nandflash_read_cache(buffer, address_in_page, byte_cnt);
 //    printfData((uint32_t)buffer,16);      //for debug
     spi_nandflash_get_feature( STATUS, &status );
+    spi_nandflash_get_feature(STATUS2, &status2);
+    ECCstatus = (status << 8) | status2;
 #ifdef DEBUG
     printf("status:%x\n",status);
 #endif
-    if(( (status & ECCS0) == 0 )&&( (status & ECCS1) == ECCS1 )){    //UECC
+    if(ECCstatus == 0x1000){    //UECC
+        if(retrycnt < 3){
+            retrycnt++;
+#ifdef DEBUG
+            printf("\rReadretry:%x\n",retrycnt); 
+#endif         
+            goto ReadRetry;
+        }
+        else{
+#ifdef LOG
+            printf("\r************4 OR LESS ECC BITS DETECTED************ PB:%d, Page:%d\n", page_No/64, page_No%64);
+#endif
+            result = SPI_NAND_ECC4;
+            return result;
+        }      
+    }
+    else if(ECCstatus == 0x1010){    //UECC
+        if(retrycnt < 3){
+            retrycnt++;
+#ifdef DEBUG
+            printf("\rReadretry:%x\n",retrycnt); 
+#endif         
+            goto ReadRetry;
+        }
+        else{
+#ifdef LOG
+            printf("\r************5 ECC BITS DETECTED************ PB:%d, Page:%d\n", page_No/64, page_No%64);
+#endif
+            result = SPI_NAND_ECC5;
+            return result;
+        }      
+    }
+    else if(ECCstatus == 0x1020){    //UECC
+        if(retrycnt < 3){
+            retrycnt++;
+#ifdef DEBUG
+            printf("\rReadretry:%x\n",retrycnt); 
+#endif         
+            goto ReadRetry;
+        }
+        else{
+#ifdef LOG
+            printf("\r************6 ECC BITS DETECTED************ PB:%d, Page:%d\n", page_No/64, page_No%64);
+#endif
+            result = SPI_NAND_ECC5;
+            return result;
+        }      
+    }
+    else if(ECCstatus == 0x1030){    //UECC
+        if(retrycnt < 3){
+            retrycnt++;
+#ifdef DEBUG
+            printf("\rReadretry:%x\n",retrycnt); 
+#endif         
+            goto ReadRetry;
+        }
+        else{
+#ifdef LOG
+            printf("\r************7 ECC BITS DETECTED************ PB:%d, Page:%d\n", page_No/64, page_No%64);
+#endif
+            result = SPI_NAND_ECC5;
+            return result;
+        }      
+    }
+    else if(( (status & ECCS0) == ECCS0 )&&( (status & ECCS1) == ECCS1 )){    //UECC
+        if(retrycnt < 3){
+            retrycnt++;
+#ifdef DEBUG
+            printf("\rReadretry:%x\n",retrycnt); 
+#endif         
+            goto ReadRetry;
+        }
+        else{
+#ifdef LOG
+            printf("\r************8 ECC BITS DETECTED************ PB:%d, Page:%d\n", page_No/64, page_No%64);
+#endif
+            result = SPI_NAND_ECC5;
+            return result;
+        }      
+    }
+    else if(( (status & ECCS0) == 0 )&&( (status & ECCS1) == ECCS1 )){    //UECC
         if(retrycnt < 3){
             retrycnt++;
 #ifdef DEBUG
@@ -672,7 +756,9 @@ ReadRetry:
 #ifdef DEBUG
             printf("\rRead Fail\n");
 #endif
+            printf("\r************OVER 8 ECC BITS DETECTED************ PB:%d, Page:%d\n", page_No/64, page_No%64);
             result = SPI_NAND_FAIL;
+            return result;
         }      
     }               
     return result;
@@ -696,11 +782,6 @@ uint8_t spi_nandflash_write_data(uint8_t *buffer,uint32_t page_No,uint16_t addre
     printf("\rspi_nandflash_write_data:%x %x %x %x\n",page_No/64,page_No%64,address_in_page,byte_cnt);
 #endif
 
-// #ifdef TEST
-//     if((page_No/64%10)==0){
-//         return SPI_NAND_FAIL;
-//     }
-// #endif
     /*send the program load command,write data to cache*/
     spi_nandflash_program_load(buffer, address_in_page, byte_cnt);
     /*send the program excute command*/
@@ -720,7 +801,7 @@ uint8_t spi_nandflash_write_data(uint8_t *buffer,uint32_t page_No,uint16_t addre
     }       
     
 #ifdef WRITE_PAGE_VERIFY_EN
-    spi_nandflash_read_data (tem_buffer,page_No, address_in_page, byte_cnt);
+    spi_nandflash_read_data(tem_buffer,page_No, address_in_page, byte_cnt);
     if (memcmp(tem_buffer, buffer,  byte_cnt) != 0){
 #ifdef DEBUG
         printf("\rdata compare fail\n");

@@ -40,6 +40,7 @@ OF SUCH DAMAGE.
 //#include "gd5f1gxx.h"
 #include "string.h"
 #include "gdnftl.h"
+#include "test.h"
 
 #define BUFFER_SIZE              (2048)
 #define countof(a)               (sizeof(a) / sizeof(*(a)))
@@ -59,6 +60,8 @@ uint8_t count;
 __IO uint32_t TimingDelay = 0;
 
 uint8_t tx_buffer[BUFFER_SIZE];
+uint8_t tx_buffer1[BUFFER_SIZE];
+uint8_t tx_buffer2[BUFFER_SIZE];
 uint8_t rx_buffer[BUFFER_SIZE];
 uint8_t erase_buf[BUFFER_SIZE];
 uint32_t nandflash_id = 0;
@@ -91,7 +94,13 @@ extern uint16_t ENV[ENV_SIZE];
 
 int main(void)
 {
-		int i;
+		uint32_t i = 0;
+    uint8_t j = 0;
+    uint32_t count = 1000;
+    for(i = 0; i < BUFFER_SIZE; i++){
+            tx_buffer1[i] = 0x55;
+						tx_buffer2[i] = 0xAA;
+        }
 		/* systick configuration */
     systick_config();
     delay_1ms(10);
@@ -127,11 +136,19 @@ int main(void)
 				printf("logical: %d physical: %d erase_cnt: %d \n", i, L2P[i], ABT[L2P[i]]);
 			}
 		#endif
+    
     /* read SPI NAND ID */
     nandflash_id = spi_nandflash_read_id();
     printf("\n\rThe Flash_ID:0x%X\n\r\n\r",nandflash_id);
-	
-    test_case1();    
+		printf("*****************FULLY ERASE PROGRAM TEST******************\n");
+    //test_case1();   
+    for ( i = 0; i < count; i++)
+    {		
+			
+			printf("CYCLE: %d\n", i);
+    }
+    
+    
 }
 
 #else
@@ -378,16 +395,60 @@ int fputc(int ch, FILE *f)
             2. Keep erasing same bad block check ABT
 */
 void test_case1(void){
-    uint16_t logical_block = 330;
+    uint16_t logical_block = 200;
     //uint16_t physical_block = L2P[logical_block];
     //uint16_t Erase_CNT = get_ABT(physical_block);
-    uint16_t i = 0;
+    uint32_t i = 0;
+    uint8_t j = 0;
+    uint32_t count = 1000000;
     for(i = 0; i < BUFFER_SIZE; i++){
-            tx_buffer[i] = i+50;
+            tx_buffer1[i] = 0x55;
+						tx_buffer2[i] = 0xAA;
         }
+		/*
+    for ( i = 0; i < count; i++)
+    {   
+				if(i%2){
+					printf("CLCYE:%d Pattern:0x55 \t\n", i);
+					nandflash_block_erase(logical_block);
+					for ( j = 0; j < 64; j++)
+					{   
+            nandflash_page_program(tx_buffer1, logical_block, j, BUFFER_SIZE);
+						nandflash_page_read(rx_buffer, logical_block, j, 0, BUFFER_SIZE);
+					}
+				}
+				else{
+					printf("CLCYE:%d Pattern:0xAA \t\n", i);
+					nandflash_block_erase(logical_block);
+					for ( j = 0; j < 64; j++)
+					{   
+            nandflash_page_program(tx_buffer2, logical_block, j, BUFFER_SIZE);
+						nandflash_page_read(rx_buffer, logical_block, j, 0, BUFFER_SIZE);
+					}
+				}
+        
+        
+    }
+		*/
     
+    //nandflash_block_erase(logical_block);
+		//nandflash_page_program(tx_buffer, logical_block, 0, BUFFER_SIZE);
+    //nandflash_page_program(tx_buffer, logical_block, 1, BUFFER_SIZE);	
+    //nandflash_page_program(tx_buffer, logical_block, 2, BUFFER_SIZE);		
+    /*READ TEST TO TRIGGER ECC DATA MOVE*/
 		
-
+    for ( i = 0; i < count; i++)
+    {
+			printf("Read Cycle %d\t\t", i);
+			for ( j = 0; j < 64; j++)
+					{   
+            //nandflash_page_program(tx_buffer1, logical_block, j, BUFFER_SIZE);
+						nandflash_page_read(rx_buffer, logical_block, j, 0, BUFFER_SIZE);
+					}
+    }
+		
+    
+/*
     for(i = 0; i < 300; i++){
 				//SET ENV TO BACK UP 
         ENV[0] = 0x00;
@@ -427,6 +488,7 @@ void test_case1(void){
         nandflash_block_erase(logical_block);
         printf("After Erasing \n Logical Block: %d Physical Block: %d Block Erase CNT: %d \n", logical_block, L2P[logical_block],ABT[L2P[logical_block]]);
     }
+*/
 		
 		#ifdef DEBUG
 			//print L2P

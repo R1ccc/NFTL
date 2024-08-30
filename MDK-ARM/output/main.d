@@ -47,3 +47,5 @@
 .\output\main.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\output\main.o: ..\Soft_Drive\gdnftl.h
 .\output\main.o: ..\Soft_Drive\gd5f1gxx.h
+.\output\main.o: ..\test.h
+.\output\main.o: C:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\time.h

@@ -438,6 +438,11 @@
               <FileType>1</FileType>
               <FilePath>..\systick.c</FilePath>
             </File>
+            <File>
+              <FileName>test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -639,9 +644,9 @@
               <FilePath>..\Soft_Drive\gd5f1gxx.c</FilePath>
             </File>
             <File>
-              <FileName>gdnftl.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\Soft_Drive\gdnftl.lib</FilePath>
+              <FileName>gdnftl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Soft_Drive\gdnftl.c</FilePath>
             </File>
           </Files>
         </Group>

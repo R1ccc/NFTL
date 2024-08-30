@@ -94,6 +94,8 @@
 #define    SPI_NAND_READY               1        //NAND flash is ready
 #define    SPI_NAND_FAIL                0        //NAND flash operation fail flag
 #define    SPI_NAND_SUCCESS             1        //NAND flash operation success flag
+#define    SPI_NAND_ECC4                2        //NAND flash ECC exceeds limits, need to move data
+#define    SPI_NAND_ECC5                3        //NAND flash ECC exceeds limits, need to move data
 #define    OIP                          0x01     //Operation in progress bit
 #define    WEL                          0x02     //Write enable latch bit 
 #define    E_FAIL                       0x04     //Erase fail bit
@@ -101,6 +103,8 @@
 
 #define    ECCS0                        0x10     //ECCS0 bit
 #define    ECCS1                        0x20     //ECCS1 bit
+#define    ECCSE0                        0x10     //ECCSE0 bit
+#define    ECCSE1                        0x20     //ECCSE1 bit
 
 #define    ECC_OVERLIMIT                0  
 
