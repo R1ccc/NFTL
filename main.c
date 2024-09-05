@@ -140,12 +140,14 @@ int main(void)
     /* read SPI NAND ID */
     nandflash_id = spi_nandflash_read_id();
     printf("\n\rThe Flash_ID:0x%X\n\r\n\r",nandflash_id);
-		printf("*****************FULLY ERASE PROGRAM TEST******************\n");
+		printf("*****************CERTAIN BLOCK ERS PGM TEST******************\n");
     //test_case1();   
+		nandflash_erase();
     for ( i = 0; i < count; i++)
     {		
 			
 			printf("CYCLE: %d\n", i);
+            nandflash_page_program_certain_blocks(tx_buffer1, tx_buffer2, SPI_NAND_PAGE_SIZE);
     }
     
     

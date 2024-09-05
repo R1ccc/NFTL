@@ -23,6 +23,7 @@
 #define NFTL_TEST
 #define LOG
 #define ABT_ENABLE
+#define ENV_ENABLE
 //#define DEMO//ONLY TEST CODE, ERASE ALL WHEN INIT
 //#define TEST_LOAD_UPDATE_ABTL2P
 static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read page data */
@@ -198,7 +199,6 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
     uint16_t replace_block,new_replace_block; 
     uint16_t physical_block, logical_block;
     uint16_t proper_block;
-	uint16_t average;
 	uint16_t i = 0;
     //L2P find the physical block    
     logical_block = block_No;
@@ -218,24 +218,7 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
         replace_block = physical_block;
     }
     
-    //check erase cnt
-    //based on wear leveling select the proper physical block
-    #ifdef ABT_ENABLE
-        average = calculate_average(ABT, 1024);
-        if((ABT[replace_block] - average) > WL_THRESHOLD){
-        
-            proper_block = select_proper_block(replace_block);
-            
-            #ifdef LOG
-            printf("***************Wear Leveling************* \nphyblock %d ers_cnt %d average %d rpl_blk %d\n", replace_block, ABT[replace_block], average, proper_block);		
-            #endif
-            //swap mapping table L2P
-            swap_L2P(block_No, proper_block);
-            
-            L2P_CNT++;//COUNTER ++ 
-            //CHECK IF NEED TO UPDATE L2P
-        }
-    #endif
+   
     replace_block = get_mapped_physical_block(logical_block);//ACTUAL PROGRAM PHYSICAL BLOCK
 		
     memset(tem_buffer, 0x5A, SPI_NAND_PAGE_SIZE);
@@ -385,6 +368,7 @@ uint8_t nandflash_block_erase(uint16_t block_No)
     uint16_t replace_block;
     uint16_t proper_block;
     uint16_t physical_block, new_replace_block;
+	uint16_t average;
 
     physical_block = L2P[block_No];
 Start_Erase:
@@ -437,6 +421,26 @@ Start_Erase:
         BST[replace_block] = EMPTY;//CLEAR BLOCK STATUS TO EMPTY
         BST_CNT++;
     }
+
+     //check erase cnt
+    //based on wear leveling select the proper physical block
+    #ifdef ABT_ENABLE
+        average = calculate_average(ABT, 1024);
+        if((ABT[replace_block] - average) > WL_THRESHOLD){
+        
+            proper_block = select_proper_block(replace_block);
+            
+            #ifdef LOG
+            printf("***************Wear Leveling************* \nphyblock %d ers_cnt %d average %d rpl_blk %d\n", replace_block, ABT[replace_block], average, proper_block);		
+            #endif
+            //swap mapping table L2P
+            swap_L2P(block_No, proper_block);
+            
+            L2P_CNT++;//COUNTER ++ 
+            //CHECK IF NEED TO UPDATE L2P
+        }
+    #endif
+
     //CHECK IF NEED TO UPDATE BST&ABT
     if(ABT_CNT > 10){
         #ifdef LOG
@@ -1546,10 +1550,12 @@ static uint16_t calculate_average(uint16_t *array, uint16_t size) {
     uint32_t sum = 0;
 		uint16_t average = 0;
 		uint16_t i;
-    for (i = 0; i < size; i++) {
-        sum += array[i];
+        uint16_t p_block;
+    for (i = 0; i < USER_AREA_END; i++) {
+        p_block = L2P[i];
+        sum += array[p_block];
     }
-		average = sum/size;
+		average = sum/USER_AREA_END;
     return average;
 }
 
@@ -1668,7 +1674,7 @@ static void set_mapped_physical_block(uint16_t block_No, uint16_t physical_block
 
 
 
-// Function to compress BST
+// Function to compress BST for Upating to NAND array efficiently
 void compress_BST(volatile bool *BST, uint8_t *BST_compressed, uint16_t total_blocks) {
 		uint16_t i = 0;
     for (i = 0; i < total_blocks; i++) {
@@ -1681,7 +1687,7 @@ void compress_BST(volatile bool *BST, uint8_t *BST_compressed, uint16_t total_bl
         }
     }
 }
-
+// Function to de-compress BST loaded from the NAND array
 void decompress_BST(const uint8_t *BST_compressed, volatile bool *BST, uint16_t total_blocks) {
     uint16_t i = 0;
 		for ( i = 0; i < total_blocks; i++) {
@@ -1734,7 +1740,13 @@ static void set_BST(uint16_t block_No, uint16_t value){
 bool get_BST(uint16_t block_No){
     return BST[block_No];
 }
-
+/*!
+    \brief      Swap the mapping relation of two logical blocks
+    \param[in]  LogicalBlockNo
+                ReplacePB: PB to be mapped to LogicalBlockNo
+    \param[out] none
+    \retval     none
+*/
 static void swap_L2P(uint16_t LogicalBlockNo, uint16_t ReplacePB){
     // Get the current physical block number mapped to the given logical block number
     uint16_t originalPB = L2P[LogicalBlockNo];

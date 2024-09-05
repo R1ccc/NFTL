@@ -89,6 +89,41 @@ uint8_t nandflash_page_program_partially(uint8_t *buffer, uint16_t buf_len){
 }
 
 /*
+    function: CERTAIN BLOCKS Nand Program
+    description: Fully write data to Nand flash in sequential order or random order
+    parameter: buffer---data to be programmed buf_len---data size type---sequential or random
+*/
+uint8_t nandflash_page_program_certain_blocks(uint8_t *buffer1, uint8_t *buffer2, uint16_t buf_len){
+    uint16_t block_no, p_block_no;
+	uint16_t Block_list[9] = {1, 42, 100, 342, 453, 523, 653, 785, 232};
+	uint8_t  page_no;
+    uint16_t i;
+	uint8_t j;
+    uint8_t result;
+    uint8_t count = 100;
+
+        for(i = 0; i < 9; i++){
+			block_no = Block_list[i];
+            p_block_no = get_mapped_physical_block(block_no);
+            for ( j = 0; j < count; j++)
+            {
+                nandflash_block_erase(block_no);
+                for ( page_no = 0; page_no < 64; page_no++)
+                {   
+                    if(page_no % 2) {nandflash_page_program(buffer1, block_no, page_no, SPI_NAND_PAGE_SIZE);}
+                    else {nandflash_page_program(buffer2, block_no, page_no, SPI_NAND_PAGE_SIZE);}
+                    
+                }
+                
+            }
+            
+            
+    }
+    return result;
+    
+}
+
+/*
     function: Whole Nand Erase
     description: Fully erase data to Nand flash
     parameter: 

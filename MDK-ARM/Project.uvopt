@@ -162,7 +162,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>148</LineNumber>
+          <LineNumber>146</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>134221616</Address>
           <ByteObject>0</ByteObject>
@@ -173,39 +173,39 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\gdnftl\../main.c\148</Expression>
+          <Expression>\\gdnftl\../main.c\146</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>687</LineNumber>
+          <LineNumber>126</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134221550</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\Soft_Drive\gdnftl.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\gdnftl\../main.c\126</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>155</LineNumber>
+          <LineNumber>1232</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134223724</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\main.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Soft_Drive\gdnftl.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\gdnftl\../Soft_Drive/gdnftl.c\1232</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -289,17 +289,22 @@
         <Ww>
           <count>8</count>
           <WinNumber>2</WinNumber>
-          <ItemText>page_No</ItemText>
+          <ItemText>table_area_lastvalid</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>2</WinNumber>
-          <ItemText>SPI_NAND_BLOCK_SIZE</ItemText>
+          <ItemText>average_erase_cnt</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>2</WinNumber>
-          <ItemText>table_area_lastvalid</ItemText>
+          <ItemText>proper_block</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>erase_cnt_min</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>
