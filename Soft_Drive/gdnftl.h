@@ -120,7 +120,7 @@ static uint8_t check_whether_in_DBT_array(uint16_t BlockNo);
 uint8_t update_DBTRBT_to_nand(uint8_t type);
 static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static uint16_t re_mapping_RBT(uint16_t ori_BlockNo,uint16_t old_replace_BlockNo);
-static uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
+uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
 static uint16_t get_replace_block_from_ram(uint16_t BlockNo);
 static uint8_t update_DBTRBT_array(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static void alloc_DBTRBT_block_addr(void);

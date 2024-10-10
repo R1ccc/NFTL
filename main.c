@@ -96,10 +96,10 @@ int main(void)
 {
 		uint32_t i = 0;
     uint8_t j = 0;
-    uint32_t count = 1000;
+    uint32_t count = 10000;
     for(i = 0; i < BUFFER_SIZE; i++){
             tx_buffer1[i] = 0x55;
-						tx_buffer2[i] = 0xAA;
+			tx_buffer2[i] = 0xAA;
         }
 		/* systick configuration */
     systick_config();
@@ -122,10 +122,10 @@ int main(void)
     gd_eval_com_init(EVAL_COM0);
 
     /* configure SPI5 GPIO and parameter */
-		printf("Initializing..........\n");
+	printf("Initializing..........\n");
     nandflash_init();
-		/*PRINT BAD BLOCK INFO*/
-	  printf("Initialiation Success!\n Bad Block Info:\n Bad block number: %d LastValidBlock: %d \n", DBT[0],DBT[1]);
+	/*PRINT BAD BLOCK INFO*/
+	printf("Initialiation Success!\n Bad Block Info:\n Bad block number: %d LastValidBlock: %d \n", DBT[0],DBT[1]);
     for (i = 0; i < DBT[0]; i++){
         printf("%d ", DBT[i+2]);
     }
@@ -135,19 +135,19 @@ int main(void)
 			for(i = 0; i < 800; i++){
 				printf("logical: %d physical: %d erase_cnt: %d \n", i, L2P[i], ABT[L2P[i]]);
 			}
-		#endif
+	#endif
     
     /* read SPI NAND ID */
     nandflash_id = spi_nandflash_read_id();
     printf("\n\rThe Flash_ID:0x%X\n\r\n\r",nandflash_id);
-		printf("*****************CERTAIN BLOCK ERS PGM TEST******************\n");
+	printf("*****************CERTAIN BLOCK ERS PGM TEST******************\n");
     //test_case1();   
-		nandflash_erase();
+	nandflash_erase();
     for ( i = 0; i < count; i++)
     {		
 			
-			printf("CYCLE: %d\n", i);
-            nandflash_page_program_certain_blocks(tx_buffer1, tx_buffer2, SPI_NAND_PAGE_SIZE);
+		printf("CYCLE: %d\n", i);
+        nandflash_page_program_certain_blocks(tx_buffer1, tx_buffer2, SPI_NAND_PAGE_SIZE);
     }
     
     

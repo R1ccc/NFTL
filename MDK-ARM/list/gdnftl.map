@@ -31,12 +31,23 @@ Section Cross References
     systick.o(i.delay_decrement) refers to systick.o(.data) for .data
     systick.o(i.systick_config) refers to systick.o(i.NVIC_SetPriority) for NVIC_SetPriority
     systick.o(i.systick_config) refers to system_gd32f4xx.o(.data) for SystemCoreClock
+    test.o(i.check_duplicates_in_L2P) refers to memseta.o(.text) for __aeabi_memclr4
+    test.o(i.check_duplicates_in_L2P) refers to printf5.o(i.__0printf$5) for __2printf
+    test.o(i.check_duplicates_in_L2P) refers to gdnftl.o(.bss) for L2P
     test.o(i.nandflash_erase) refers to gdnftl.o(i.nandflash_block_erase) for nandflash_block_erase
     test.o(i.nandflash_page_program_certain_blocks) refers to memcpya.o(.text) for __aeabi_memcpy4
     test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(i.get_mapped_physical_block) for get_mapped_physical_block
+    test.o(i.nandflash_page_program_certain_blocks) refers to test.o(i.check_duplicates_in_L2P) for check_duplicates_in_L2P
+    test.o(i.nandflash_page_program_certain_blocks) refers to gd5f1gxx.o(i.spi_nandflash_block_erase) for spi_nandflash_block_erase
+    test.o(i.nandflash_page_program_certain_blocks) refers to gd5f1gxx.o(i.spi_nandflash_write_data) for spi_nandflash_write_data
+    test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(i.select_unmapped_block) for select_unmapped_block
+    test.o(i.nandflash_page_program_certain_blocks) refers to printf5.o(i.__0printf$5) for __2printf
+    test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(i.move_page_data) for move_page_data
+    test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(i.update_DBTRBT_to_nand) for update_DBTRBT_to_nand
     test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(i.nandflash_block_erase) for nandflash_block_erase
     test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(i.nandflash_page_program) for nandflash_page_program
     test.o(i.nandflash_page_program_certain_blocks) refers to test.o(.constdata) for .constdata
+    test.o(i.nandflash_page_program_certain_blocks) refers to gdnftl.o(.data) for ENV
     test.o(i.nandflash_page_program_fully) refers to gdnftl.o(i.get_mapped_physical_block) for get_mapped_physical_block
     test.o(i.nandflash_page_program_fully) refers to gdnftl.o(i.get_BST) for get_BST
     test.o(i.nandflash_page_program_fully) refers to gdnftl.o(i.nandflash_block_erase) for nandflash_block_erase
@@ -244,6 +255,7 @@ Section Cross References
     gd5f1gxx.o(i.spi_nandflash_init) refers to gd5f1gxx.o(i.spi5_init) for spi5_init
     gd5f1gxx.o(i.spi_nandflash_init) refers to gd5f1gxx.o(i.spi_nandflash_reset) for spi_nandflash_reset
     gd5f1gxx.o(i.spi_nandflash_init) refers to gd5f1gxx.o(i.spi_nandflash_set_register) for spi_nandflash_set_register
+    gd5f1gxx.o(i.spi_nandflash_init) refers to gd5f1gxx.o(i.spi_nandflash_block_erase) for spi_nandflash_block_erase
     gd5f1gxx.o(i.spi_nandflash_page_read) refers to gd32f4xx_gpio.o(i.gpio_bit_reset) for gpio_bit_reset
     gd5f1gxx.o(i.spi_nandflash_page_read) refers to gd5f1gxx.o(i.spi_nandflash_send_byte) for spi_nandflash_send_byte
     gd5f1gxx.o(i.spi_nandflash_page_read) refers to gd32f4xx_gpio.o(i.gpio_bit_set) for gpio_bit_set
@@ -335,8 +347,8 @@ Section Cross References
     gdnftl.o(i.move_page_data) refers to gd5f1gxx.o(i.spi_nandflash_read_data) for spi_nandflash_read_data
     gdnftl.o(i.move_page_data) refers to gd5f1gxx.o(i.spi_nandflash_write_data) for spi_nandflash_write_data
     gdnftl.o(i.move_page_data) refers to gdnftl.o(.bss) for .bss
-    gdnftl.o(i.nandflash_block_erase) refers to gdnftl.o(i.check_whether_in_DBT_array) for check_whether_in_DBT_array
     gdnftl.o(i.nandflash_block_erase) refers to printf5.o(i.__0printf$5) for __2printf
+    gdnftl.o(i.nandflash_block_erase) refers to gdnftl.o(i.check_whether_in_DBT_array) for check_whether_in_DBT_array
     gdnftl.o(i.nandflash_block_erase) refers to gd5f1gxx.o(i.spi_nandflash_block_erase) for spi_nandflash_block_erase
     gdnftl.o(i.nandflash_block_erase) refers to gdnftl.o(i.update_DBTRBT_array) for update_DBTRBT_array
     gdnftl.o(i.nandflash_block_erase) refers to gdnftl.o(i.mark_bad_block) for mark_bad_block
@@ -397,9 +409,7 @@ Section Cross References
     gdnftl.o(i.rebuild_DBTRBT_array) refers to gdnftl.o(i.load_L2PBST_from_nand) for load_L2PBST_from_nand
     gdnftl.o(i.rebuild_DBTRBT_array) refers to gdnftl.o(.data) for .data
     gdnftl.o(i.rebuild_DBTRBT_array) refers to gdnftl.o(.bss) for .bss
-    gdnftl.o(i.select_unmapped_block) refers to memcpya.o(.text) for __aeabi_memcpy4
     gdnftl.o(i.select_unmapped_block) refers to gdnftl.o(i.check_whether_in_DBT_array) for check_whether_in_DBT_array
-    gdnftl.o(i.select_unmapped_block) refers to gdnftl.o(.constdata) for .constdata
     gdnftl.o(i.select_unmapped_block) refers to gdnftl.o(.data) for .data
     gdnftl.o(i.select_unmapped_block) refers to gdnftl.o(.bss) for .bss
     gdnftl.o(i.swap_L2P) refers to gdnftl.o(.bss) for .bss
@@ -410,9 +420,9 @@ Section Cross References
     gdnftl.o(i.test_env) refers to gd5f1gxx.o(i.spi_nandflash_block_erase) for spi_nandflash_block_erase
     gdnftl.o(i.test_env) refers to printf5.o(i.__0printf$5) for __2printf
     gdnftl.o(i.test_env) refers to gdnftl.o(i.select_unmapped_block) for select_unmapped_block
-    gdnftl.o(i.test_env) refers to gdnftl.o(i.nandflash_block_erase) for nandflash_block_erase
     gdnftl.o(i.test_env) refers to gdnftl.o(i.move_page_data) for move_page_data
     gdnftl.o(i.test_env) refers to gdnftl.o(i.update_DBTRBT_to_nand) for update_DBTRBT_to_nand
+    gdnftl.o(i.test_env) refers to gdnftl.o(i.nandflash_block_erase) for nandflash_block_erase
     gdnftl.o(i.test_env) refers to gdnftl.o(i.nandflash_page_program) for nandflash_page_program
     gdnftl.o(i.test_env) refers to gdnftl.o(.data) for .data
     gdnftl.o(i.update_ABT_to_nand) refers to memseta.o(.text) for __aeabi_memset
@@ -442,7 +452,6 @@ Section Cross References
     gdnftl.o(i.update_L2PBST_to_nand) refers to gdnftl.o(i.table_block_replacement) for table_block_replacement
     gdnftl.o(i.update_L2PBST_to_nand) refers to gdnftl.o(.data) for .data
     gdnftl.o(i.update_L2PBST_to_nand) refers to gdnftl.o(.bss) for .bss
-    gdnftl.o(.constdata) refers to gdnftl.o(.data) for g16DBT_Block
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
@@ -1639,8 +1648,8 @@ Removing Unused input sections from the image.
     Removing gdnftl.o(.revsh_text), (4 bytes).
     Removing gdnftl.o(i.get_BST), (12 bytes).
     Removing gdnftl.o(i.nandflash_page_read), (256 bytes).
-    Removing gdnftl.o(i.select_unmapped_block), (148 bytes).
-    Removing gdnftl.o(i.test_env), (300 bytes).
+    Removing gdnftl.o(i.test_env), (292 bytes).
+    Removing gdnftl.o(.bss), (2048 bytes).
     Removing gdnftl.o(.data), (1 bytes).
     Removing gdnftl.o(.data), (1 bytes).
     Removing gdnftl.o(.data), (1 bytes).
@@ -1651,7 +1660,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-939 unused section(s) (total 52907 bytes) removed from the image.
+939 unused section(s) (total 54799 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1661,40 +1670,40 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/string/memcmp.c         0x00000000   Number         0  memcmp.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
@@ -1825,98 +1834,99 @@ Image Symbol Table
     alloc_DBTRBTABTPST_block_addr            0x08000711   Thumb Code   490  gdnftl.o(i.alloc_DBTRBTABTPST_block_addr)
     i.calculate_average                      0x08000950   Section        0  gdnftl.o(i.calculate_average)
     calculate_average                        0x08000951   Thumb Code    38  gdnftl.o(i.calculate_average)
-    i.check_whether_in_DBT_array             0x0800097c   Section        0  gdnftl.o(i.check_whether_in_DBT_array)
-    check_whether_in_DBT_array               0x0800097d   Thumb Code    38  gdnftl.o(i.check_whether_in_DBT_array)
-    i.delay_1ms                              0x080009a8   Section        0  systick.o(i.delay_1ms)
-    i.delay_decrement                        0x080009b8   Section        0  systick.o(i.delay_decrement)
-    i.env_check                              0x080009cc   Section        0  gdnftl.o(i.env_check)
-    env_check                                0x080009cd   Thumb Code    76  gdnftl.o(i.env_check)
-    i.fputc                                  0x08000a80   Section        0  main.o(i.fputc)
-    i.gd_eval_com_init                       0x08000aa4   Section        0  gd32f450i_eval.o(i.gd_eval_com_init)
-    i.gd_eval_led_init                       0x08000b38   Section        0  gd32f450i_eval.o(i.gd_eval_led_init)
-    i.gd_eval_led_off                        0x08000b80   Section        0  gd32f450i_eval.o(i.gd_eval_led_off)
-    i.get_mapped_physical_block              0x08000b98   Section        0  gdnftl.o(i.get_mapped_physical_block)
-    i.get_min_erase_block                    0x08000ba4   Section        0  gdnftl.o(i.get_min_erase_block)
-    get_min_erase_block                      0x08000ba5   Thumb Code    82  gdnftl.o(i.get_min_erase_block)
-    i.gpio_af_set                            0x08000c30   Section        0  gd32f4xx_gpio.o(i.gpio_af_set)
-    i.gpio_bit_reset                         0x08000c86   Section        0  gd32f4xx_gpio.o(i.gpio_bit_reset)
-    i.gpio_bit_set                           0x08000c8a   Section        0  gd32f4xx_gpio.o(i.gpio_bit_set)
-    i.gpio_mode_set                          0x08000c8e   Section        0  gd32f4xx_gpio.o(i.gpio_mode_set)
-    i.gpio_output_options_set                0x08000cd6   Section        0  gd32f4xx_gpio.o(i.gpio_output_options_set)
-    i.init_build_DBTRBTABTPST                0x08000d14   Section        0  gdnftl.o(i.init_build_DBTRBTABTPST)
-    init_build_DBTRBTABTPST                  0x08000d15   Thumb Code   120  gdnftl.o(i.init_build_DBTRBTABTPST)
-    i.load_DBTRBT_from_nand                  0x08000d94   Section        0  gdnftl.o(i.load_DBTRBT_from_nand)
-    load_DBTRBT_from_nand                    0x08000d95   Thumb Code   132  gdnftl.o(i.load_DBTRBT_from_nand)
-    i.load_L2PBST_from_nand                  0x08000e20   Section        0  gdnftl.o(i.load_L2PBST_from_nand)
-    i.main                                   0x08000e9c   Section        0  main.o(i.main)
-    i.mark_bad_block                         0x08000fec   Section        0  gdnftl.o(i.mark_bad_block)
-    mark_bad_block                           0x08000fed   Thumb Code    26  gdnftl.o(i.mark_bad_block)
-    i.move_page_data                         0x08001008   Section        0  gdnftl.o(i.move_page_data)
-    move_page_data                           0x08001009   Thumb Code    50  gdnftl.o(i.move_page_data)
-    i.nandflash_block_erase                  0x08001044   Section        0  gdnftl.o(i.nandflash_block_erase)
-    i.nandflash_erase                        0x08001240   Section        0  test.o(i.nandflash_erase)
-    i.nandflash_init                         0x08001258   Section        0  gdnftl.o(i.nandflash_init)
-    i.nandflash_page_program                 0x080012e8   Section        0  gdnftl.o(i.nandflash_page_program)
-    i.nandflash_page_program_certain_blocks  0x08001514   Section        0  test.o(i.nandflash_page_program_certain_blocks)
-    i.rcu_clock_freq_get                     0x08001580   Section        0  gd32f4xx_rcu.o(i.rcu_clock_freq_get)
-    i.rcu_periph_clock_enable                0x0800165c   Section        0  gd32f4xx_rcu.o(i.rcu_periph_clock_enable)
-    i.rcu_periph_reset_disable               0x0800167c   Section        0  gd32f4xx_rcu.o(i.rcu_periph_reset_disable)
-    i.rcu_periph_reset_enable                0x0800169c   Section        0  gd32f4xx_rcu.o(i.rcu_periph_reset_enable)
-    i.re_mapping_RBT                         0x080016bc   Section        0  gdnftl.o(i.re_mapping_RBT)
-    re_mapping_RBT                           0x080016bd   Thumb Code    70  gdnftl.o(i.re_mapping_RBT)
-    i.rebuild_DBTRBT_array                   0x08001710   Section        0  gdnftl.o(i.rebuild_DBTRBT_array)
-    rebuild_DBTRBT_array                     0x08001711   Thumb Code  1466  gdnftl.o(i.rebuild_DBTRBT_array)
-    i.spi5_init                              0x08001cd0   Section        0  gd5f1gxx.o(i.spi5_init)
-    i.spi_enable                             0x08001d70   Section        0  gd32f4xx_spi.o(i.spi_enable)
-    i.spi_i2s_data_receive                   0x08001d7a   Section        0  gd32f4xx_spi.o(i.spi_i2s_data_receive)
-    i.spi_i2s_data_transmit                  0x08001d80   Section        0  gd32f4xx_spi.o(i.spi_i2s_data_transmit)
-    i.spi_i2s_flag_get                       0x08001d84   Section        0  gd32f4xx_spi.o(i.spi_i2s_flag_get)
-    i.spi_init                               0x08001d8e   Section        0  gd32f4xx_spi.o(i.spi_init)
-    i.spi_nandflash_badblock_detect          0x08001dbc   Section        0  gd5f1gxx.o(i.spi_nandflash_badblock_detect)
-    i.spi_nandflash_block_erase              0x08001e18   Section        0  gd5f1gxx.o(i.spi_nandflash_block_erase)
-    i.spi_nandflash_get_feature              0x08001e78   Section        0  gd5f1gxx.o(i.spi_nandflash_get_feature)
-    i.spi_nandflash_get_status_flag          0x08001eb4   Section        0  gd5f1gxx.o(i.spi_nandflash_get_status_flag)
-    i.spi_nandflash_init                     0x08001ed0   Section        0  gd5f1gxx.o(i.spi_nandflash_init)
-    i.spi_nandflash_page_read                0x08001ef0   Section        0  gd5f1gxx.o(i.spi_nandflash_page_read)
-    i.spi_nandflash_program_execute          0x08001f30   Section        0  gd5f1gxx.o(i.spi_nandflash_program_execute)
-    i.spi_nandflash_program_load             0x08001f74   Section        0  gd5f1gxx.o(i.spi_nandflash_program_load)
-    i.spi_nandflash_read_cache               0x08001fcc   Section        0  gd5f1gxx.o(i.spi_nandflash_read_cache)
-    i.spi_nandflash_read_data                0x0800202c   Section        0  gd5f1gxx.o(i.spi_nandflash_read_data)
-    i.spi_nandflash_read_id                  0x08002228   Section        0  gd5f1gxx.o(i.spi_nandflash_read_id)
-    i.spi_nandflash_read_spare               0x08002274   Section        0  gd5f1gxx.o(i.spi_nandflash_read_spare)
-    i.spi_nandflash_reset                    0x08002284   Section        0  gd5f1gxx.o(i.spi_nandflash_reset)
-    i.spi_nandflash_send_byte                0x080022b4   Section        0  gd5f1gxx.o(i.spi_nandflash_send_byte)
-    i.spi_nandflash_set_register             0x080022e8   Section        0  gd5f1gxx.o(i.spi_nandflash_set_register)
-    i.spi_nandflash_write_data               0x0800232c   Section        0  gd5f1gxx.o(i.spi_nandflash_write_data)
-    i.spi_nandflash_write_enable             0x0800238c   Section        0  gd5f1gxx.o(i.spi_nandflash_write_enable)
-    i.spi_nandflash_write_spare              0x080023b4   Section        0  gd5f1gxx.o(i.spi_nandflash_write_spare)
-    i.spi_quad_disable                       0x080023c6   Section        0  gd32f4xx_spi.o(i.spi_quad_disable)
-    i.swap_L2P                               0x080023d4   Section        0  gdnftl.o(i.swap_L2P)
-    swap_L2P                                 0x080023d5   Thumb Code    40  gdnftl.o(i.swap_L2P)
-    i.system_clock_240m_25m_hxtal            0x08002400   Section        0  system_gd32f4xx.o(i.system_clock_240m_25m_hxtal)
-    system_clock_240m_25m_hxtal              0x08002401   Thumb Code   156  system_gd32f4xx.o(i.system_clock_240m_25m_hxtal)
-    i.systick_config                         0x080024a8   Section        0  systick.o(i.systick_config)
-    i.table_block_replacement                0x080024e8   Section        0  gdnftl.o(i.table_block_replacement)
-    table_block_replacement                  0x080024e9   Thumb Code   234  gdnftl.o(i.table_block_replacement)
-    i.test_status_led_init                   0x08002608   Section        0  main.o(i.test_status_led_init)
-    i.update_ABT_to_nand                     0x08002634   Section        0  gdnftl.o(i.update_ABT_to_nand)
-    update_ABT_to_nand                       0x08002635   Thumb Code   216  gdnftl.o(i.update_ABT_to_nand)
-    i.update_DBTRBT_array                    0x0800271c   Section        0  gdnftl.o(i.update_DBTRBT_array)
-    update_DBTRBT_array                      0x0800271d   Thumb Code    28  gdnftl.o(i.update_DBTRBT_array)
-    i.update_DBTRBT_to_nand                  0x08002738   Section        0  gdnftl.o(i.update_DBTRBT_to_nand)
-    i.update_L2PBST_to_nand                  0x080029bc   Section        0  gdnftl.o(i.update_L2PBST_to_nand)
-    i.usart_baudrate_set                     0x08002ae0   Section        0  gd32f4xx_usart.o(i.usart_baudrate_set)
-    i.usart_data_transmit                    0x08002b60   Section        0  gd32f4xx_usart.o(i.usart_data_transmit)
-    i.usart_deinit                           0x08002b68   Section        0  gd32f4xx_usart.o(i.usart_deinit)
-    i.usart_enable                           0x08002be4   Section        0  gd32f4xx_usart.o(i.usart_enable)
-    i.usart_flag_get                         0x08002bee   Section        0  gd32f4xx_usart.o(i.usart_flag_get)
-    i.usart_receive_config                   0x08002c04   Section        0  gd32f4xx_usart.o(i.usart_receive_config)
-    i.usart_transmit_config                  0x08002c10   Section        0  gd32f4xx_usart.o(i.usart_transmit_config)
-    .constdata                               0x08002c1c   Section       58  test.o(.constdata)
-    .constdata                               0x08002c58   Section       48  gdnftl.o(.constdata)
-    .conststring                             0x08002c88   Section       83  main.o(.conststring)
-    .conststring                             0x08002cdc   Section      137  gd5f1gxx.o(.conststring)
-    .conststring                             0x08002d68   Section      173  gdnftl.o(.conststring)
+    i.check_duplicates_in_L2P                0x0800097c   Section        0  test.o(i.check_duplicates_in_L2P)
+    i.check_whether_in_DBT_array             0x080009f8   Section        0  gdnftl.o(i.check_whether_in_DBT_array)
+    check_whether_in_DBT_array               0x080009f9   Thumb Code    38  gdnftl.o(i.check_whether_in_DBT_array)
+    i.delay_1ms                              0x08000a24   Section        0  systick.o(i.delay_1ms)
+    i.delay_decrement                        0x08000a34   Section        0  systick.o(i.delay_decrement)
+    i.env_check                              0x08000a48   Section        0  gdnftl.o(i.env_check)
+    env_check                                0x08000a49   Thumb Code    76  gdnftl.o(i.env_check)
+    i.fputc                                  0x08000afc   Section        0  main.o(i.fputc)
+    i.gd_eval_com_init                       0x08000b20   Section        0  gd32f450i_eval.o(i.gd_eval_com_init)
+    i.gd_eval_led_init                       0x08000bb4   Section        0  gd32f450i_eval.o(i.gd_eval_led_init)
+    i.gd_eval_led_off                        0x08000bfc   Section        0  gd32f450i_eval.o(i.gd_eval_led_off)
+    i.get_mapped_physical_block              0x08000c14   Section        0  gdnftl.o(i.get_mapped_physical_block)
+    i.get_min_erase_block                    0x08000c20   Section        0  gdnftl.o(i.get_min_erase_block)
+    get_min_erase_block                      0x08000c21   Thumb Code    82  gdnftl.o(i.get_min_erase_block)
+    i.gpio_af_set                            0x08000cac   Section        0  gd32f4xx_gpio.o(i.gpio_af_set)
+    i.gpio_bit_reset                         0x08000d02   Section        0  gd32f4xx_gpio.o(i.gpio_bit_reset)
+    i.gpio_bit_set                           0x08000d06   Section        0  gd32f4xx_gpio.o(i.gpio_bit_set)
+    i.gpio_mode_set                          0x08000d0a   Section        0  gd32f4xx_gpio.o(i.gpio_mode_set)
+    i.gpio_output_options_set                0x08000d52   Section        0  gd32f4xx_gpio.o(i.gpio_output_options_set)
+    i.init_build_DBTRBTABTPST                0x08000d90   Section        0  gdnftl.o(i.init_build_DBTRBTABTPST)
+    init_build_DBTRBTABTPST                  0x08000d91   Thumb Code   120  gdnftl.o(i.init_build_DBTRBTABTPST)
+    i.load_DBTRBT_from_nand                  0x08000e10   Section        0  gdnftl.o(i.load_DBTRBT_from_nand)
+    load_DBTRBT_from_nand                    0x08000e11   Thumb Code   174  gdnftl.o(i.load_DBTRBT_from_nand)
+    i.load_L2PBST_from_nand                  0x08000ec8   Section        0  gdnftl.o(i.load_L2PBST_from_nand)
+    i.main                                   0x08000f44   Section        0  main.o(i.main)
+    i.mark_bad_block                         0x08001094   Section        0  gdnftl.o(i.mark_bad_block)
+    mark_bad_block                           0x08001095   Thumb Code    26  gdnftl.o(i.mark_bad_block)
+    i.move_page_data                         0x080010b0   Section        0  gdnftl.o(i.move_page_data)
+    i.nandflash_block_erase                  0x080010ec   Section        0  gdnftl.o(i.nandflash_block_erase)
+    i.nandflash_erase                        0x08001320   Section        0  test.o(i.nandflash_erase)
+    i.nandflash_init                         0x08001338   Section        0  gdnftl.o(i.nandflash_init)
+    i.nandflash_page_program                 0x080013c8   Section        0  gdnftl.o(i.nandflash_page_program)
+    i.nandflash_page_program_certain_blocks  0x080015f4   Section        0  test.o(i.nandflash_page_program_certain_blocks)
+    i.rcu_clock_freq_get                     0x0800172c   Section        0  gd32f4xx_rcu.o(i.rcu_clock_freq_get)
+    i.rcu_periph_clock_enable                0x08001808   Section        0  gd32f4xx_rcu.o(i.rcu_periph_clock_enable)
+    i.rcu_periph_reset_disable               0x08001828   Section        0  gd32f4xx_rcu.o(i.rcu_periph_reset_disable)
+    i.rcu_periph_reset_enable                0x08001848   Section        0  gd32f4xx_rcu.o(i.rcu_periph_reset_enable)
+    i.re_mapping_RBT                         0x08001868   Section        0  gdnftl.o(i.re_mapping_RBT)
+    re_mapping_RBT                           0x08001869   Thumb Code    70  gdnftl.o(i.re_mapping_RBT)
+    i.rebuild_DBTRBT_array                   0x080018bc   Section        0  gdnftl.o(i.rebuild_DBTRBT_array)
+    rebuild_DBTRBT_array                     0x080018bd   Thumb Code  1466  gdnftl.o(i.rebuild_DBTRBT_array)
+    i.select_unmapped_block                  0x08001e7c   Section        0  gdnftl.o(i.select_unmapped_block)
+    i.spi5_init                              0x08001ed4   Section        0  gd5f1gxx.o(i.spi5_init)
+    i.spi_enable                             0x08001f74   Section        0  gd32f4xx_spi.o(i.spi_enable)
+    i.spi_i2s_data_receive                   0x08001f7e   Section        0  gd32f4xx_spi.o(i.spi_i2s_data_receive)
+    i.spi_i2s_data_transmit                  0x08001f84   Section        0  gd32f4xx_spi.o(i.spi_i2s_data_transmit)
+    i.spi_i2s_flag_get                       0x08001f88   Section        0  gd32f4xx_spi.o(i.spi_i2s_flag_get)
+    i.spi_init                               0x08001f92   Section        0  gd32f4xx_spi.o(i.spi_init)
+    i.spi_nandflash_badblock_detect          0x08001fc0   Section        0  gd5f1gxx.o(i.spi_nandflash_badblock_detect)
+    i.spi_nandflash_block_erase              0x0800201c   Section        0  gd5f1gxx.o(i.spi_nandflash_block_erase)
+    i.spi_nandflash_get_feature              0x0800207c   Section        0  gd5f1gxx.o(i.spi_nandflash_get_feature)
+    i.spi_nandflash_get_status_flag          0x080020b8   Section        0  gd5f1gxx.o(i.spi_nandflash_get_status_flag)
+    i.spi_nandflash_init                     0x080020d4   Section        0  gd5f1gxx.o(i.spi_nandflash_init)
+    i.spi_nandflash_page_read                0x08002104   Section        0  gd5f1gxx.o(i.spi_nandflash_page_read)
+    i.spi_nandflash_program_execute          0x08002144   Section        0  gd5f1gxx.o(i.spi_nandflash_program_execute)
+    i.spi_nandflash_program_load             0x08002188   Section        0  gd5f1gxx.o(i.spi_nandflash_program_load)
+    i.spi_nandflash_read_cache               0x080021e0   Section        0  gd5f1gxx.o(i.spi_nandflash_read_cache)
+    i.spi_nandflash_read_data                0x08002240   Section        0  gd5f1gxx.o(i.spi_nandflash_read_data)
+    i.spi_nandflash_read_id                  0x0800243c   Section        0  gd5f1gxx.o(i.spi_nandflash_read_id)
+    i.spi_nandflash_read_spare               0x08002488   Section        0  gd5f1gxx.o(i.spi_nandflash_read_spare)
+    i.spi_nandflash_reset                    0x08002498   Section        0  gd5f1gxx.o(i.spi_nandflash_reset)
+    i.spi_nandflash_send_byte                0x080024c8   Section        0  gd5f1gxx.o(i.spi_nandflash_send_byte)
+    i.spi_nandflash_set_register             0x080024fc   Section        0  gd5f1gxx.o(i.spi_nandflash_set_register)
+    i.spi_nandflash_write_data               0x08002540   Section        0  gd5f1gxx.o(i.spi_nandflash_write_data)
+    i.spi_nandflash_write_enable             0x080025a0   Section        0  gd5f1gxx.o(i.spi_nandflash_write_enable)
+    i.spi_nandflash_write_spare              0x080025c8   Section        0  gd5f1gxx.o(i.spi_nandflash_write_spare)
+    i.spi_quad_disable                       0x080025da   Section        0  gd32f4xx_spi.o(i.spi_quad_disable)
+    i.swap_L2P                               0x080025e8   Section        0  gdnftl.o(i.swap_L2P)
+    swap_L2P                                 0x080025e9   Thumb Code    40  gdnftl.o(i.swap_L2P)
+    i.system_clock_240m_25m_hxtal            0x08002614   Section        0  system_gd32f4xx.o(i.system_clock_240m_25m_hxtal)
+    system_clock_240m_25m_hxtal              0x08002615   Thumb Code   156  system_gd32f4xx.o(i.system_clock_240m_25m_hxtal)
+    i.systick_config                         0x080026bc   Section        0  systick.o(i.systick_config)
+    i.table_block_replacement                0x080026fc   Section        0  gdnftl.o(i.table_block_replacement)
+    table_block_replacement                  0x080026fd   Thumb Code   234  gdnftl.o(i.table_block_replacement)
+    i.test_status_led_init                   0x0800281c   Section        0  main.o(i.test_status_led_init)
+    i.update_ABT_to_nand                     0x08002848   Section        0  gdnftl.o(i.update_ABT_to_nand)
+    update_ABT_to_nand                       0x08002849   Thumb Code   228  gdnftl.o(i.update_ABT_to_nand)
+    i.update_DBTRBT_array                    0x0800293c   Section        0  gdnftl.o(i.update_DBTRBT_array)
+    update_DBTRBT_array                      0x0800293d   Thumb Code    28  gdnftl.o(i.update_DBTRBT_array)
+    i.update_DBTRBT_to_nand                  0x08002958   Section        0  gdnftl.o(i.update_DBTRBT_to_nand)
+    i.update_L2PBST_to_nand                  0x08002bec   Section        0  gdnftl.o(i.update_L2PBST_to_nand)
+    i.usart_baudrate_set                     0x08002d1c   Section        0  gd32f4xx_usart.o(i.usart_baudrate_set)
+    i.usart_data_transmit                    0x08002d9c   Section        0  gd32f4xx_usart.o(i.usart_data_transmit)
+    i.usart_deinit                           0x08002da4   Section        0  gd32f4xx_usart.o(i.usart_deinit)
+    i.usart_enable                           0x08002e20   Section        0  gd32f4xx_usart.o(i.usart_enable)
+    i.usart_flag_get                         0x08002e2a   Section        0  gd32f4xx_usart.o(i.usart_flag_get)
+    i.usart_receive_config                   0x08002e40   Section        0  gd32f4xx_usart.o(i.usart_receive_config)
+    i.usart_transmit_config                  0x08002e4c   Section        0  gd32f4xx_usart.o(i.usart_transmit_config)
+    .constdata                               0x08002e58   Section      110  test.o(.constdata)
+    .constdata                               0x08002ec6   Section       26  gdnftl.o(.constdata)
+    .conststring                             0x08002ee0   Section       83  main.o(.conststring)
+    .conststring                             0x08002f34   Section      137  gd5f1gxx.o(.conststring)
+    .conststring                             0x08002fc0   Section      173  gdnftl.o(.conststring)
     .data                                    0x20000000   Section        4  main.o(.data)
     .data                                    0x20000004   Section        4  systick.o(.data)
     delay                                    0x20000004   Data           4  systick.o(.data)
@@ -1935,14 +1945,14 @@ Image Symbol Table
     KEY_PORT                                 0x20000044   Data          12  gd32f450i_eval.o(.data)
     KEY_PIN                                  0x20000050   Data          12  gd32f450i_eval.o(.data)
     KEY_EXTI_LINE                            0x2000005c   Data          12  gd32f450i_eval.o(.data)
-    .data                                    0x20000068   Section       50  gdnftl.o(.data)
-    .data                                    0x2000009c   Section        4  stdout.o(.data)
-    .bss                                     0x200000a0   Section     6144  main.o(.bss)
-    .bss                                     0x200018a0   Section     2112  gd5f1gxx.o(.bss)
-    tem_buffer                               0x200018a0   Data        2112  gd5f1gxx.o(.bss)
-    .bss                                     0x200020e0   Section     8912  gdnftl.o(.bss)
-    tem_buffer                               0x200020e0   Data        2112  gdnftl.o(.bss)
-    STACK                                    0x200043b0   Section     1024  startup_gd32f450_470.o(STACK)
+    .data                                    0x20000068   Section       56  gdnftl.o(.data)
+    .data                                    0x200000a0   Section        4  stdout.o(.data)
+    .bss                                     0x200000a4   Section     6144  main.o(.bss)
+    .bss                                     0x200018a4   Section     2112  gd5f1gxx.o(.bss)
+    tem_buffer                               0x200018a4   Data        2112  gd5f1gxx.o(.bss)
+    .bss                                     0x200020e4   Section     8912  gdnftl.o(.bss)
+    tem_buffer                               0x200020e4   Data        2112  gdnftl.o(.bss)
+    STACK                                    0x200043b8   Section     1024  startup_gd32f450_470.o(STACK)
 
     Global Symbols
 
@@ -2132,68 +2142,71 @@ Image Symbol Table
     __scatterload_copy                       0x080003ed   Thumb Code    14  handlers.o(i.__scatterload_copy)
     __scatterload_null                       0x080003fb   Thumb Code     2  handlers.o(i.__scatterload_null)
     __scatterload_zeroinit                   0x080003fd   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    delay_1ms                                0x080009a9   Thumb Code    12  systick.o(i.delay_1ms)
-    delay_decrement                          0x080009b9   Thumb Code    16  systick.o(i.delay_decrement)
-    fputc                                    0x08000a81   Thumb Code    30  main.o(i.fputc)
-    gd_eval_com_init                         0x08000aa5   Thumb Code   140  gd32f450i_eval.o(i.gd_eval_com_init)
-    gd_eval_led_init                         0x08000b39   Thumb Code    66  gd32f450i_eval.o(i.gd_eval_led_init)
-    gd_eval_led_off                          0x08000b81   Thumb Code    18  gd32f450i_eval.o(i.gd_eval_led_off)
-    get_mapped_physical_block                0x08000b99   Thumb Code     8  gdnftl.o(i.get_mapped_physical_block)
-    gpio_af_set                              0x08000c31   Thumb Code    86  gd32f4xx_gpio.o(i.gpio_af_set)
-    gpio_bit_reset                           0x08000c87   Thumb Code     4  gd32f4xx_gpio.o(i.gpio_bit_reset)
-    gpio_bit_set                             0x08000c8b   Thumb Code     4  gd32f4xx_gpio.o(i.gpio_bit_set)
-    gpio_mode_set                            0x08000c8f   Thumb Code    72  gd32f4xx_gpio.o(i.gpio_mode_set)
-    gpio_output_options_set                  0x08000cd7   Thumb Code    62  gd32f4xx_gpio.o(i.gpio_output_options_set)
-    load_L2PBST_from_nand                    0x08000e21   Thumb Code   104  gdnftl.o(i.load_L2PBST_from_nand)
-    main                                     0x08000e9d   Thumb Code   182  main.o(i.main)
-    nandflash_block_erase                    0x08001045   Thumb Code   318  gdnftl.o(i.nandflash_block_erase)
-    nandflash_erase                          0x08001241   Thumb Code    24  test.o(i.nandflash_erase)
-    nandflash_init                           0x08001259   Thumb Code    64  gdnftl.o(i.nandflash_init)
-    nandflash_page_program                   0x080012e9   Thumb Code   328  gdnftl.o(i.nandflash_page_program)
-    nandflash_page_program_certain_blocks    0x08001515   Thumb Code   102  test.o(i.nandflash_page_program_certain_blocks)
-    rcu_clock_freq_get                       0x08001581   Thumb Code   192  gd32f4xx_rcu.o(i.rcu_clock_freq_get)
-    rcu_periph_clock_enable                  0x0800165d   Thumb Code    26  gd32f4xx_rcu.o(i.rcu_periph_clock_enable)
-    rcu_periph_reset_disable                 0x0800167d   Thumb Code    26  gd32f4xx_rcu.o(i.rcu_periph_reset_disable)
-    rcu_periph_reset_enable                  0x0800169d   Thumb Code    26  gd32f4xx_rcu.o(i.rcu_periph_reset_enable)
-    spi5_init                                0x08001cd1   Thumb Code   146  gd5f1gxx.o(i.spi5_init)
-    spi_enable                               0x08001d71   Thumb Code    10  gd32f4xx_spi.o(i.spi_enable)
-    spi_i2s_data_receive                     0x08001d7b   Thumb Code     6  gd32f4xx_spi.o(i.spi_i2s_data_receive)
-    spi_i2s_data_transmit                    0x08001d81   Thumb Code     4  gd32f4xx_spi.o(i.spi_i2s_data_transmit)
-    spi_i2s_flag_get                         0x08001d85   Thumb Code    10  gd32f4xx_spi.o(i.spi_i2s_flag_get)
-    spi_init                                 0x08001d8f   Thumb Code    46  gd32f4xx_spi.o(i.spi_init)
-    spi_nandflash_badblock_detect            0x08001dbd   Thumb Code    90  gd5f1gxx.o(i.spi_nandflash_badblock_detect)
-    spi_nandflash_block_erase                0x08001e19   Thumb Code    92  gd5f1gxx.o(i.spi_nandflash_block_erase)
-    spi_nandflash_get_feature                0x08001e79   Thumb Code    54  gd5f1gxx.o(i.spi_nandflash_get_feature)
-    spi_nandflash_get_status_flag            0x08001eb5   Thumb Code    28  gd5f1gxx.o(i.spi_nandflash_get_status_flag)
-    spi_nandflash_init                       0x08001ed1   Thumb Code    30  gd5f1gxx.o(i.spi_nandflash_init)
-    spi_nandflash_page_read                  0x08001ef1   Thumb Code    58  gd5f1gxx.o(i.spi_nandflash_page_read)
-    spi_nandflash_program_execute            0x08001f31   Thumb Code    62  gd5f1gxx.o(i.spi_nandflash_program_execute)
-    spi_nandflash_program_load               0x08001f75   Thumb Code    80  gd5f1gxx.o(i.spi_nandflash_program_load)
-    spi_nandflash_read_cache                 0x08001fcd   Thumb Code    88  gd5f1gxx.o(i.spi_nandflash_read_cache)
-    spi_nandflash_read_data                  0x0800202d   Thumb Code   242  gd5f1gxx.o(i.spi_nandflash_read_data)
-    spi_nandflash_read_id                    0x08002229   Thumb Code    70  gd5f1gxx.o(i.spi_nandflash_read_id)
-    spi_nandflash_read_spare                 0x08002275   Thumb Code    16  gd5f1gxx.o(i.spi_nandflash_read_spare)
-    spi_nandflash_reset                      0x08002285   Thumb Code    42  gd5f1gxx.o(i.spi_nandflash_reset)
-    spi_nandflash_send_byte                  0x080022b5   Thumb Code    48  gd5f1gxx.o(i.spi_nandflash_send_byte)
-    spi_nandflash_set_register               0x080022e9   Thumb Code    62  gd5f1gxx.o(i.spi_nandflash_set_register)
-    spi_nandflash_write_data                 0x0800232d   Thumb Code    92  gd5f1gxx.o(i.spi_nandflash_write_data)
-    spi_nandflash_write_enable               0x0800238d   Thumb Code    34  gd5f1gxx.o(i.spi_nandflash_write_enable)
-    spi_nandflash_write_spare                0x080023b5   Thumb Code    18  gd5f1gxx.o(i.spi_nandflash_write_spare)
-    spi_quad_disable                         0x080023c7   Thumb Code    12  gd32f4xx_spi.o(i.spi_quad_disable)
-    systick_config                           0x080024a9   Thumb Code    60  systick.o(i.systick_config)
-    test_status_led_init                     0x08002609   Thumb Code    42  main.o(i.test_status_led_init)
-    update_DBTRBT_to_nand                    0x08002739   Thumb Code   622  gdnftl.o(i.update_DBTRBT_to_nand)
-    update_L2PBST_to_nand                    0x080029bd   Thumb Code   246  gdnftl.o(i.update_L2PBST_to_nand)
-    usart_baudrate_set                       0x08002ae1   Thumb Code   118  gd32f4xx_usart.o(i.usart_baudrate_set)
-    usart_data_transmit                      0x08002b61   Thumb Code     8  gd32f4xx_usart.o(i.usart_data_transmit)
-    usart_deinit                             0x08002b69   Thumb Code   116  gd32f4xx_usart.o(i.usart_deinit)
-    usart_enable                             0x08002be5   Thumb Code    10  gd32f4xx_usart.o(i.usart_enable)
-    usart_flag_get                           0x08002bef   Thumb Code    22  gd32f4xx_usart.o(i.usart_flag_get)
-    usart_receive_config                     0x08002c05   Thumb Code    12  gd32f4xx_usart.o(i.usart_receive_config)
-    usart_transmit_config                    0x08002c11   Thumb Code    12  gd32f4xx_usart.o(i.usart_transmit_config)
-    supported_flash_ids                      0x08002c58   Data          26  gdnftl.o(.constdata)
-    Region$$Table$$Base                      0x08002e18   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08002e38   Number         0  anon$$obj.o(Region$$Table)
+    check_duplicates_in_L2P                  0x0800097d   Thumb Code    74  test.o(i.check_duplicates_in_L2P)
+    delay_1ms                                0x08000a25   Thumb Code    12  systick.o(i.delay_1ms)
+    delay_decrement                          0x08000a35   Thumb Code    16  systick.o(i.delay_decrement)
+    fputc                                    0x08000afd   Thumb Code    30  main.o(i.fputc)
+    gd_eval_com_init                         0x08000b21   Thumb Code   140  gd32f450i_eval.o(i.gd_eval_com_init)
+    gd_eval_led_init                         0x08000bb5   Thumb Code    66  gd32f450i_eval.o(i.gd_eval_led_init)
+    gd_eval_led_off                          0x08000bfd   Thumb Code    18  gd32f450i_eval.o(i.gd_eval_led_off)
+    get_mapped_physical_block                0x08000c15   Thumb Code     8  gdnftl.o(i.get_mapped_physical_block)
+    gpio_af_set                              0x08000cad   Thumb Code    86  gd32f4xx_gpio.o(i.gpio_af_set)
+    gpio_bit_reset                           0x08000d03   Thumb Code     4  gd32f4xx_gpio.o(i.gpio_bit_reset)
+    gpio_bit_set                             0x08000d07   Thumb Code     4  gd32f4xx_gpio.o(i.gpio_bit_set)
+    gpio_mode_set                            0x08000d0b   Thumb Code    72  gd32f4xx_gpio.o(i.gpio_mode_set)
+    gpio_output_options_set                  0x08000d53   Thumb Code    62  gd32f4xx_gpio.o(i.gpio_output_options_set)
+    load_L2PBST_from_nand                    0x08000ec9   Thumb Code   104  gdnftl.o(i.load_L2PBST_from_nand)
+    main                                     0x08000f45   Thumb Code   182  main.o(i.main)
+    move_page_data                           0x080010b1   Thumb Code    50  gdnftl.o(i.move_page_data)
+    nandflash_block_erase                    0x080010ed   Thumb Code   342  gdnftl.o(i.nandflash_block_erase)
+    nandflash_erase                          0x08001321   Thumb Code    24  test.o(i.nandflash_erase)
+    nandflash_init                           0x08001339   Thumb Code    64  gdnftl.o(i.nandflash_init)
+    nandflash_page_program                   0x080013c9   Thumb Code   328  gdnftl.o(i.nandflash_page_program)
+    nandflash_page_program_certain_blocks    0x080015f5   Thumb Code   228  test.o(i.nandflash_page_program_certain_blocks)
+    rcu_clock_freq_get                       0x0800172d   Thumb Code   192  gd32f4xx_rcu.o(i.rcu_clock_freq_get)
+    rcu_periph_clock_enable                  0x08001809   Thumb Code    26  gd32f4xx_rcu.o(i.rcu_periph_clock_enable)
+    rcu_periph_reset_disable                 0x08001829   Thumb Code    26  gd32f4xx_rcu.o(i.rcu_periph_reset_disable)
+    rcu_periph_reset_enable                  0x08001849   Thumb Code    26  gd32f4xx_rcu.o(i.rcu_periph_reset_enable)
+    select_unmapped_block                    0x08001e7d   Thumb Code    78  gdnftl.o(i.select_unmapped_block)
+    spi5_init                                0x08001ed5   Thumb Code   146  gd5f1gxx.o(i.spi5_init)
+    spi_enable                               0x08001f75   Thumb Code    10  gd32f4xx_spi.o(i.spi_enable)
+    spi_i2s_data_receive                     0x08001f7f   Thumb Code     6  gd32f4xx_spi.o(i.spi_i2s_data_receive)
+    spi_i2s_data_transmit                    0x08001f85   Thumb Code     4  gd32f4xx_spi.o(i.spi_i2s_data_transmit)
+    spi_i2s_flag_get                         0x08001f89   Thumb Code    10  gd32f4xx_spi.o(i.spi_i2s_flag_get)
+    spi_init                                 0x08001f93   Thumb Code    46  gd32f4xx_spi.o(i.spi_init)
+    spi_nandflash_badblock_detect            0x08001fc1   Thumb Code    90  gd5f1gxx.o(i.spi_nandflash_badblock_detect)
+    spi_nandflash_block_erase                0x0800201d   Thumb Code    90  gd5f1gxx.o(i.spi_nandflash_block_erase)
+    spi_nandflash_get_feature                0x0800207d   Thumb Code    54  gd5f1gxx.o(i.spi_nandflash_get_feature)
+    spi_nandflash_get_status_flag            0x080020b9   Thumb Code    28  gd5f1gxx.o(i.spi_nandflash_get_status_flag)
+    spi_nandflash_init                       0x080020d5   Thumb Code    48  gd5f1gxx.o(i.spi_nandflash_init)
+    spi_nandflash_page_read                  0x08002105   Thumb Code    58  gd5f1gxx.o(i.spi_nandflash_page_read)
+    spi_nandflash_program_execute            0x08002145   Thumb Code    62  gd5f1gxx.o(i.spi_nandflash_program_execute)
+    spi_nandflash_program_load               0x08002189   Thumb Code    80  gd5f1gxx.o(i.spi_nandflash_program_load)
+    spi_nandflash_read_cache                 0x080021e1   Thumb Code    88  gd5f1gxx.o(i.spi_nandflash_read_cache)
+    spi_nandflash_read_data                  0x08002241   Thumb Code   242  gd5f1gxx.o(i.spi_nandflash_read_data)
+    spi_nandflash_read_id                    0x0800243d   Thumb Code    70  gd5f1gxx.o(i.spi_nandflash_read_id)
+    spi_nandflash_read_spare                 0x08002489   Thumb Code    16  gd5f1gxx.o(i.spi_nandflash_read_spare)
+    spi_nandflash_reset                      0x08002499   Thumb Code    42  gd5f1gxx.o(i.spi_nandflash_reset)
+    spi_nandflash_send_byte                  0x080024c9   Thumb Code    48  gd5f1gxx.o(i.spi_nandflash_send_byte)
+    spi_nandflash_set_register               0x080024fd   Thumb Code    62  gd5f1gxx.o(i.spi_nandflash_set_register)
+    spi_nandflash_write_data                 0x08002541   Thumb Code    90  gd5f1gxx.o(i.spi_nandflash_write_data)
+    spi_nandflash_write_enable               0x080025a1   Thumb Code    34  gd5f1gxx.o(i.spi_nandflash_write_enable)
+    spi_nandflash_write_spare                0x080025c9   Thumb Code    18  gd5f1gxx.o(i.spi_nandflash_write_spare)
+    spi_quad_disable                         0x080025db   Thumb Code    12  gd32f4xx_spi.o(i.spi_quad_disable)
+    systick_config                           0x080026bd   Thumb Code    60  systick.o(i.systick_config)
+    test_status_led_init                     0x0800281d   Thumb Code    42  main.o(i.test_status_led_init)
+    update_DBTRBT_to_nand                    0x08002959   Thumb Code   638  gdnftl.o(i.update_DBTRBT_to_nand)
+    update_L2PBST_to_nand                    0x08002bed   Thumb Code   260  gdnftl.o(i.update_L2PBST_to_nand)
+    usart_baudrate_set                       0x08002d1d   Thumb Code   118  gd32f4xx_usart.o(i.usart_baudrate_set)
+    usart_data_transmit                      0x08002d9d   Thumb Code     8  gd32f4xx_usart.o(i.usart_data_transmit)
+    usart_deinit                             0x08002da5   Thumb Code   116  gd32f4xx_usart.o(i.usart_deinit)
+    usart_enable                             0x08002e21   Thumb Code    10  gd32f4xx_usart.o(i.usart_enable)
+    usart_flag_get                           0x08002e2b   Thumb Code    22  gd32f4xx_usart.o(i.usart_flag_get)
+    usart_receive_config                     0x08002e41   Thumb Code    12  gd32f4xx_usart.o(i.usart_receive_config)
+    usart_transmit_config                    0x08002e4d   Thumb Code    12  gd32f4xx_usart.o(i.usart_transmit_config)
+    supported_flash_ids                      0x08002ec6   Data          26  gdnftl.o(.constdata)
+    Region$$Table$$Base                      0x08003070   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08003090   Number         0  anon$$obj.o(Region$$Table)
     nandflash_id                             0x20000000   Data           4  main.o(.data)
     SystemCoreClock                          0x20000008   Data           4  system_gd32f4xx.o(.data)
     ABT_CNT                                  0x20000068   Data           1  gdnftl.o(.data)
@@ -2220,17 +2233,18 @@ Image Symbol Table
     g16ENV_Block                             0x2000008c   Data           4  gdnftl.o(.data)
     flash_id                                 0x20000090   Data           4  gdnftl.o(.data)
     ENV                                      0x20000094   Data           6  gdnftl.o(.data)
-    __stdout                                 0x2000009c   Data           4  stdout.o(.data)
-    tx_buffer1                               0x200000a0   Data        2048  main.o(.bss)
-    tx_buffer2                               0x200008a0   Data        2048  main.o(.bss)
-    rx_buffer                                0x200010a0   Data        2048  main.o(.bss)
-    DBT                                      0x20002920   Data         400  gdnftl.o(.bss)
-    RBT                                      0x20002ab0   Data        1600  gdnftl.o(.bss)
-    BST_compressed                           0x200030f0   Data         128  gdnftl.o(.bss)
-    BST                                      0x20003170   Data        1024  gdnftl.o(.bss)
-    ABT                                      0x20003570   Data        2048  gdnftl.o(.bss)
-    L2P                                      0x20003d70   Data        1600  gdnftl.o(.bss)
-    __initial_sp                             0x200047b0   Data           0  startup_gd32f450_470.o(STACK)
+    PL1                                      0x2000009a   Data           6  gdnftl.o(.data)
+    __stdout                                 0x200000a0   Data           4  stdout.o(.data)
+    tx_buffer1                               0x200000a4   Data        2048  main.o(.bss)
+    tx_buffer2                               0x200008a4   Data        2048  main.o(.bss)
+    rx_buffer                                0x200010a4   Data        2048  main.o(.bss)
+    DBT                                      0x20002924   Data         400  gdnftl.o(.bss)
+    RBT                                      0x20002ab4   Data        1600  gdnftl.o(.bss)
+    BST_compressed                           0x200030f4   Data         128  gdnftl.o(.bss)
+    BST                                      0x20003174   Data        1024  gdnftl.o(.bss)
+    ABT                                      0x20003574   Data        2048  gdnftl.o(.bss)
+    L2P                                      0x20003d74   Data        1600  gdnftl.o(.bss)
+    __initial_sp                             0x200047b8   Data           0  startup_gd32f450_470.o(STACK)
 
 
 
@@ -2240,30 +2254,30 @@ Memory Map of the image
 
   Image Entry point : 0x080001ad
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00002ed8, Max: 0x00300000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003134, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00002e38, Max: 0x00300000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00003090, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000001ac   Data   RO         6098    RESET               startup_gd32f450_470.o
-    0x080001ac   0x080001ac   0x00000000   Code   RO         6439  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080001ac   0x080001ac   0x00000004   Code   RO         6711    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080001b0   0x080001b0   0x00000004   Code   RO         6714    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080001b4   0x080001b4   0x00000000   Code   RO         6716    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080001b4   0x080001b4   0x00000000   Code   RO         6718    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080001b4   0x080001b4   0x00000008   Code   RO         6719    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080001bc   0x080001bc   0x00000000   Code   RO         6721    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x080001bc   0x080001bc   0x00000000   Code   RO         6723    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x080001bc   0x080001bc   0x00000004   Code   RO         6712    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
-    0x080001c0   0x080001c0   0x00000024   Code   RO         6099    .text               startup_gd32f450_470.o
-    0x080001e4   0x080001e4   0x00000024   Code   RO         6442    .text               mc_w.l(memcpya.o)
-    0x08000208   0x08000208   0x00000024   Code   RO         6444    .text               mc_w.l(memseta.o)
-    0x0800022c   0x0800022c   0x0000001a   Code   RO         6446    .text               mc_w.l(memcmp.o)
-    0x08000246   0x08000246   0x00000062   Code   RO         6728    .text               mc_w.l(uldiv.o)
-    0x080002a8   0x080002a8   0x00000024   Code   RO         6741    .text               mc_w.l(init.o)
-    0x080002cc   0x080002cc   0x0000001e   Code   RO         6743    .text               mc_w.l(llshl.o)
-    0x080002ea   0x080002ea   0x00000020   Code   RO         6745    .text               mc_w.l(llushr.o)
+    0x08000000   0x08000000   0x000001ac   Data   RO         6105    RESET               startup_gd32f450_470.o
+    0x080001ac   0x080001ac   0x00000000   Code   RO         6448  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080001ac   0x080001ac   0x00000004   Code   RO         6720    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080001b0   0x080001b0   0x00000004   Code   RO         6723    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080001b4   0x080001b4   0x00000000   Code   RO         6725    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080001b4   0x080001b4   0x00000000   Code   RO         6727    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080001b4   0x080001b4   0x00000008   Code   RO         6728    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080001bc   0x080001bc   0x00000000   Code   RO         6730    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x080001bc   0x080001bc   0x00000000   Code   RO         6732    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x080001bc   0x080001bc   0x00000004   Code   RO         6721    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x080001c0   0x080001c0   0x00000024   Code   RO         6106    .text               startup_gd32f450_470.o
+    0x080001e4   0x080001e4   0x00000024   Code   RO         6451    .text               mc_w.l(memcpya.o)
+    0x08000208   0x08000208   0x00000024   Code   RO         6453    .text               mc_w.l(memseta.o)
+    0x0800022c   0x0800022c   0x0000001a   Code   RO         6455    .text               mc_w.l(memcmp.o)
+    0x08000246   0x08000246   0x00000062   Code   RO         6737    .text               mc_w.l(uldiv.o)
+    0x080002a8   0x080002a8   0x00000024   Code   RO         6750    .text               mc_w.l(init.o)
+    0x080002cc   0x080002cc   0x0000001e   Code   RO         6752    .text               mc_w.l(llshl.o)
+    0x080002ea   0x080002ea   0x00000020   Code   RO         6754    .text               mc_w.l(llushr.o)
     0x0800030a   0x0800030a   0x00000002   Code   RO          215    i.BusFault_Handler  gd32f4xx_it.o
     0x0800030c   0x0800030c   0x00000002   Code   RO          216    i.DebugMon_Handler  gd32f4xx_it.o
     0x0800030e   0x0800030e   0x00000002   Code   RO          217    i.HardFault_Handler  gd32f4xx_it.o
@@ -2273,123 +2287,123 @@ Memory Map of the image
     0x08000334   0x08000334   0x00000002   Code   RO          220    i.PendSV_Handler    gd32f4xx_it.o
     0x08000336   0x08000336   0x00000002   Code   RO          221    i.SVC_Handler       gd32f4xx_it.o
     0x08000338   0x08000338   0x00000004   Code   RO          222    i.SysTick_Handler   gd32f4xx_it.o
-    0x0800033c   0x0800033c   0x0000008c   Code   RO          391    i.SystemInit        system_gd32f4xx.o
+    0x0800033c   0x0800033c   0x0000008c   Code   RO          398    i.SystemInit        system_gd32f4xx.o
     0x080003c8   0x080003c8   0x00000002   Code   RO          223    i.UsageFault_Handler  gd32f4xx_it.o
     0x080003ca   0x080003ca   0x00000002   PAD
-    0x080003cc   0x080003cc   0x00000020   Code   RO         6583    i.__0printf$5       mc_w.l(printf5.o)
-    0x080003ec   0x080003ec   0x0000000e   Code   RO         6753    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080003fa   0x080003fa   0x00000002   Code   RO         6754    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080003fc   0x080003fc   0x0000000e   Code   RO         6755    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x080003cc   0x080003cc   0x00000020   Code   RO         6592    i.__0printf$5       mc_w.l(printf5.o)
+    0x080003ec   0x080003ec   0x0000000e   Code   RO         6762    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080003fa   0x080003fa   0x00000002   Code   RO         6763    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080003fc   0x080003fc   0x0000000e   Code   RO         6764    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x0800040a   0x0800040a   0x00000002   PAD
-    0x0800040c   0x0800040c   0x000002c0   Code   RO         6590    i._printf_core      mc_w.l(printf5.o)
-    0x080006cc   0x080006cc   0x00000044   Code   RO         6272    i.add_bad_Block_to_DBTRBT_ram  gdnftl.o
-    0x08000710   0x08000710   0x00000240   Code   RO         6273    i.alloc_DBTRBTABTPST_block_addr  gdnftl.o
-    0x08000950   0x08000950   0x0000002c   Code   RO         6274    i.calculate_average  gdnftl.o
-    0x0800097c   0x0800097c   0x0000002c   Code   RO         6275    i.check_whether_in_DBT_array  gdnftl.o
-    0x080009a8   0x080009a8   0x00000010   Code   RO          309    i.delay_1ms         systick.o
-    0x080009b8   0x080009b8   0x00000014   Code   RO          310    i.delay_decrement   systick.o
-    0x080009cc   0x080009cc   0x000000b4   Code   RO         6276    i.env_check         gdnftl.o
-    0x08000a80   0x08000a80   0x00000024   Code   RO            3    i.fputc             main.o
-    0x08000aa4   0x08000aa4   0x00000094   Code   RO         6037    i.gd_eval_com_init  gd32f450i_eval.o
-    0x08000b38   0x08000b38   0x00000048   Code   RO         6040    i.gd_eval_led_init  gd32f450i_eval.o
-    0x08000b80   0x08000b80   0x00000018   Code   RO         6041    i.gd_eval_led_off   gd32f450i_eval.o
-    0x08000b98   0x08000b98   0x0000000c   Code   RO         6278    i.get_mapped_physical_block  gdnftl.o
-    0x08000ba4   0x08000ba4   0x0000008c   Code   RO         6279    i.get_min_erase_block  gdnftl.o
-    0x08000c30   0x08000c30   0x00000056   Code   RO         2987    i.gpio_af_set       gd32f4xx_gpio.o
-    0x08000c86   0x08000c86   0x00000004   Code   RO         2988    i.gpio_bit_reset    gd32f4xx_gpio.o
-    0x08000c8a   0x08000c8a   0x00000004   Code   RO         2989    i.gpio_bit_set      gd32f4xx_gpio.o
-    0x08000c8e   0x08000c8e   0x00000048   Code   RO         2995    i.gpio_mode_set     gd32f4xx_gpio.o
-    0x08000cd6   0x08000cd6   0x0000003e   Code   RO         2997    i.gpio_output_options_set  gd32f4xx_gpio.o
-    0x08000d14   0x08000d14   0x00000080   Code   RO         6280    i.init_build_DBTRBTABTPST  gdnftl.o
-    0x08000d94   0x08000d94   0x0000008c   Code   RO         6281    i.load_DBTRBT_from_nand  gdnftl.o
-    0x08000e20   0x08000e20   0x0000007c   Code   RO         6282    i.load_L2PBST_from_nand  gdnftl.o
-    0x08000e9c   0x08000e9c   0x00000150   Code   RO            4    i.main              main.o
-    0x08000fec   0x08000fec   0x0000001a   Code   RO         6283    i.mark_bad_block    gdnftl.o
-    0x08001006   0x08001006   0x00000002   PAD
-    0x08001008   0x08001008   0x0000003c   Code   RO         6284    i.move_page_data    gdnftl.o
-    0x08001044   0x08001044   0x000001fc   Code   RO         6285    i.nandflash_block_erase  gdnftl.o
-    0x08001240   0x08001240   0x00000018   Code   RO          351    i.nandflash_erase   test.o
-    0x08001258   0x08001258   0x00000090   Code   RO         6286    i.nandflash_init    gdnftl.o
-    0x080012e8   0x080012e8   0x0000022c   Code   RO         6287    i.nandflash_page_program  gdnftl.o
-    0x08001514   0x08001514   0x0000006c   Code   RO          352    i.nandflash_page_program_certain_blocks  test.o
-    0x08001580   0x08001580   0x000000dc   Code   RO         3774    i.rcu_clock_freq_get  gd32f4xx_rcu.o
-    0x0800165c   0x0800165c   0x00000020   Code   RO         3793    i.rcu_periph_clock_enable  gd32f4xx_rcu.o
-    0x0800167c   0x0800167c   0x00000020   Code   RO         3796    i.rcu_periph_reset_disable  gd32f4xx_rcu.o
-    0x0800169c   0x0800169c   0x00000020   Code   RO         3797    i.rcu_periph_reset_enable  gd32f4xx_rcu.o
-    0x080016bc   0x080016bc   0x00000054   Code   RO         6289    i.re_mapping_RBT    gdnftl.o
-    0x08001710   0x08001710   0x000005c0   Code   RO         6290    i.rebuild_DBTRBT_array  gdnftl.o
-    0x08001cd0   0x08001cd0   0x000000a0   Code   RO         6105    i.spi5_init         gd5f1gxx.o
-    0x08001d70   0x08001d70   0x0000000a   Code   RO         4639    i.spi_enable        gd32f4xx_spi.o
-    0x08001d7a   0x08001d7a   0x00000006   Code   RO         4641    i.spi_i2s_data_receive  gd32f4xx_spi.o
-    0x08001d80   0x08001d80   0x00000004   Code   RO         4642    i.spi_i2s_data_transmit  gd32f4xx_spi.o
-    0x08001d84   0x08001d84   0x0000000a   Code   RO         4644    i.spi_i2s_flag_get  gd32f4xx_spi.o
-    0x08001d8e   0x08001d8e   0x0000002e   Code   RO         4649    i.spi_init          gd32f4xx_spi.o
-    0x08001dbc   0x08001dbc   0x0000005a   Code   RO         6106    i.spi_nandflash_badblock_detect  gd5f1gxx.o
-    0x08001e16   0x08001e16   0x00000002   PAD
-    0x08001e18   0x08001e18   0x00000060   Code   RO         6107    i.spi_nandflash_block_erase  gd5f1gxx.o
-    0x08001e78   0x08001e78   0x0000003c   Code   RO         6110    i.spi_nandflash_get_feature  gd5f1gxx.o
-    0x08001eb4   0x08001eb4   0x0000001c   Code   RO         6111    i.spi_nandflash_get_status_flag  gd5f1gxx.o
-    0x08001ed0   0x08001ed0   0x0000001e   Code   RO         6112    i.spi_nandflash_init  gd5f1gxx.o
-    0x08001eee   0x08001eee   0x00000002   PAD
-    0x08001ef0   0x08001ef0   0x00000040   Code   RO         6113    i.spi_nandflash_page_read  gd5f1gxx.o
-    0x08001f30   0x08001f30   0x00000044   Code   RO         6115    i.spi_nandflash_program_execute  gd5f1gxx.o
-    0x08001f74   0x08001f74   0x00000058   Code   RO         6116    i.spi_nandflash_program_load  gd5f1gxx.o
-    0x08001fcc   0x08001fcc   0x00000060   Code   RO         6118    i.spi_nandflash_read_cache  gd5f1gxx.o
-    0x0800202c   0x0800202c   0x000001fc   Code   RO         6119    i.spi_nandflash_read_data  gd5f1gxx.o
-    0x08002228   0x08002228   0x0000004c   Code   RO         6120    i.spi_nandflash_read_id  gd5f1gxx.o
-    0x08002274   0x08002274   0x00000010   Code   RO         6121    i.spi_nandflash_read_spare  gd5f1gxx.o
-    0x08002284   0x08002284   0x00000030   Code   RO         6122    i.spi_nandflash_reset  gd5f1gxx.o
-    0x080022b4   0x080022b4   0x00000034   Code   RO         6123    i.spi_nandflash_send_byte  gd5f1gxx.o
-    0x080022e8   0x080022e8   0x00000044   Code   RO         6124    i.spi_nandflash_set_register  gd5f1gxx.o
-    0x0800232c   0x0800232c   0x00000060   Code   RO         6125    i.spi_nandflash_write_data  gd5f1gxx.o
-    0x0800238c   0x0800238c   0x00000028   Code   RO         6126    i.spi_nandflash_write_enable  gd5f1gxx.o
-    0x080023b4   0x080023b4   0x00000012   Code   RO         6127    i.spi_nandflash_write_spare  gd5f1gxx.o
-    0x080023c6   0x080023c6   0x0000000c   Code   RO         4654    i.spi_quad_disable  gd32f4xx_spi.o
-    0x080023d2   0x080023d2   0x00000002   PAD
-    0x080023d4   0x080023d4   0x0000002c   Code   RO         6292    i.swap_L2P          gdnftl.o
-    0x08002400   0x08002400   0x000000a8   Code   RO          392    i.system_clock_240m_25m_hxtal  system_gd32f4xx.o
-    0x080024a8   0x080024a8   0x00000040   Code   RO          311    i.systick_config    systick.o
-    0x080024e8   0x080024e8   0x00000120   Code   RO         6293    i.table_block_replacement  gdnftl.o
-    0x08002608   0x08002608   0x0000002a   Code   RO            7    i.test_status_led_init  main.o
-    0x08002632   0x08002632   0x00000002   PAD
-    0x08002634   0x08002634   0x000000e8   Code   RO         6295    i.update_ABT_to_nand  gdnftl.o
-    0x0800271c   0x0800271c   0x0000001c   Code   RO         6296    i.update_DBTRBT_array  gdnftl.o
-    0x08002738   0x08002738   0x00000284   Code   RO         6297    i.update_DBTRBT_to_nand  gdnftl.o
-    0x080029bc   0x080029bc   0x00000124   Code   RO         6298    i.update_L2PBST_to_nand  gdnftl.o
-    0x08002ae0   0x08002ae0   0x00000080   Code   RO         5635    i.usart_baudrate_set  gd32f4xx_usart.o
-    0x08002b60   0x08002b60   0x00000008   Code   RO         5640    i.usart_data_transmit  gd32f4xx_usart.o
-    0x08002b68   0x08002b68   0x0000007c   Code   RO         5641    i.usart_deinit      gd32f4xx_usart.o
-    0x08002be4   0x08002be4   0x0000000a   Code   RO         5645    i.usart_enable      gd32f4xx_usart.o
-    0x08002bee   0x08002bee   0x00000016   Code   RO         5647    i.usart_flag_get    gd32f4xx_usart.o
-    0x08002c04   0x08002c04   0x0000000c   Code   RO         5672    i.usart_receive_config  gd32f4xx_usart.o
-    0x08002c10   0x08002c10   0x0000000c   Code   RO         5687    i.usart_transmit_config  gd32f4xx_usart.o
-    0x08002c1c   0x08002c1c   0x0000003a   Data   RO          355    .constdata          test.o
-    0x08002c56   0x08002c56   0x00000002   PAD
-    0x08002c58   0x08002c58   0x00000030   Data   RO         6300    .constdata          gdnftl.o
-    0x08002c88   0x08002c88   0x00000053   Data   RO           13    .conststring        main.o
-    0x08002cdb   0x08002cdb   0x00000001   PAD
-    0x08002cdc   0x08002cdc   0x00000089   Data   RO         6130    .conststring        gd5f1gxx.o
-    0x08002d65   0x08002d65   0x00000003   PAD
-    0x08002d68   0x08002d68   0x000000ad   Data   RO         6301    .conststring        gdnftl.o
-    0x08002e15   0x08002e15   0x00000003   PAD
-    0x08002e18   0x08002e18   0x00000020   Data   RO         6751    Region$$Table       anon$$obj.o
+    0x0800040c   0x0800040c   0x000002c0   Code   RO         6599    i._printf_core      mc_w.l(printf5.o)
+    0x080006cc   0x080006cc   0x00000044   Code   RO         6279    i.add_bad_Block_to_DBTRBT_ram  gdnftl.o
+    0x08000710   0x08000710   0x00000240   Code   RO         6280    i.alloc_DBTRBTABTPST_block_addr  gdnftl.o
+    0x08000950   0x08000950   0x0000002c   Code   RO         6281    i.calculate_average  gdnftl.o
+    0x0800097c   0x0800097c   0x0000007c   Code   RO          351    i.check_duplicates_in_L2P  test.o
+    0x080009f8   0x080009f8   0x0000002c   Code   RO         6282    i.check_whether_in_DBT_array  gdnftl.o
+    0x08000a24   0x08000a24   0x00000010   Code   RO          309    i.delay_1ms         systick.o
+    0x08000a34   0x08000a34   0x00000014   Code   RO          310    i.delay_decrement   systick.o
+    0x08000a48   0x08000a48   0x000000b4   Code   RO         6283    i.env_check         gdnftl.o
+    0x08000afc   0x08000afc   0x00000024   Code   RO            3    i.fputc             main.o
+    0x08000b20   0x08000b20   0x00000094   Code   RO         6044    i.gd_eval_com_init  gd32f450i_eval.o
+    0x08000bb4   0x08000bb4   0x00000048   Code   RO         6047    i.gd_eval_led_init  gd32f450i_eval.o
+    0x08000bfc   0x08000bfc   0x00000018   Code   RO         6048    i.gd_eval_led_off   gd32f450i_eval.o
+    0x08000c14   0x08000c14   0x0000000c   Code   RO         6285    i.get_mapped_physical_block  gdnftl.o
+    0x08000c20   0x08000c20   0x0000008c   Code   RO         6286    i.get_min_erase_block  gdnftl.o
+    0x08000cac   0x08000cac   0x00000056   Code   RO         2994    i.gpio_af_set       gd32f4xx_gpio.o
+    0x08000d02   0x08000d02   0x00000004   Code   RO         2995    i.gpio_bit_reset    gd32f4xx_gpio.o
+    0x08000d06   0x08000d06   0x00000004   Code   RO         2996    i.gpio_bit_set      gd32f4xx_gpio.o
+    0x08000d0a   0x08000d0a   0x00000048   Code   RO         3002    i.gpio_mode_set     gd32f4xx_gpio.o
+    0x08000d52   0x08000d52   0x0000003e   Code   RO         3004    i.gpio_output_options_set  gd32f4xx_gpio.o
+    0x08000d90   0x08000d90   0x00000080   Code   RO         6287    i.init_build_DBTRBTABTPST  gdnftl.o
+    0x08000e10   0x08000e10   0x000000b8   Code   RO         6288    i.load_DBTRBT_from_nand  gdnftl.o
+    0x08000ec8   0x08000ec8   0x0000007c   Code   RO         6289    i.load_L2PBST_from_nand  gdnftl.o
+    0x08000f44   0x08000f44   0x00000150   Code   RO            4    i.main              main.o
+    0x08001094   0x08001094   0x0000001a   Code   RO         6290    i.mark_bad_block    gdnftl.o
+    0x080010ae   0x080010ae   0x00000002   PAD
+    0x080010b0   0x080010b0   0x0000003c   Code   RO         6291    i.move_page_data    gdnftl.o
+    0x080010ec   0x080010ec   0x00000234   Code   RO         6292    i.nandflash_block_erase  gdnftl.o
+    0x08001320   0x08001320   0x00000018   Code   RO          352    i.nandflash_erase   test.o
+    0x08001338   0x08001338   0x00000090   Code   RO         6293    i.nandflash_init    gdnftl.o
+    0x080013c8   0x080013c8   0x0000022c   Code   RO         6294    i.nandflash_page_program  gdnftl.o
+    0x080015f4   0x080015f4   0x00000138   Code   RO          353    i.nandflash_page_program_certain_blocks  test.o
+    0x0800172c   0x0800172c   0x000000dc   Code   RO         3781    i.rcu_clock_freq_get  gd32f4xx_rcu.o
+    0x08001808   0x08001808   0x00000020   Code   RO         3800    i.rcu_periph_clock_enable  gd32f4xx_rcu.o
+    0x08001828   0x08001828   0x00000020   Code   RO         3803    i.rcu_periph_reset_disable  gd32f4xx_rcu.o
+    0x08001848   0x08001848   0x00000020   Code   RO         3804    i.rcu_periph_reset_enable  gd32f4xx_rcu.o
+    0x08001868   0x08001868   0x00000054   Code   RO         6296    i.re_mapping_RBT    gdnftl.o
+    0x080018bc   0x080018bc   0x000005c0   Code   RO         6297    i.rebuild_DBTRBT_array  gdnftl.o
+    0x08001e7c   0x08001e7c   0x00000058   Code   RO         6298    i.select_unmapped_block  gdnftl.o
+    0x08001ed4   0x08001ed4   0x000000a0   Code   RO         6112    i.spi5_init         gd5f1gxx.o
+    0x08001f74   0x08001f74   0x0000000a   Code   RO         4646    i.spi_enable        gd32f4xx_spi.o
+    0x08001f7e   0x08001f7e   0x00000006   Code   RO         4648    i.spi_i2s_data_receive  gd32f4xx_spi.o
+    0x08001f84   0x08001f84   0x00000004   Code   RO         4649    i.spi_i2s_data_transmit  gd32f4xx_spi.o
+    0x08001f88   0x08001f88   0x0000000a   Code   RO         4651    i.spi_i2s_flag_get  gd32f4xx_spi.o
+    0x08001f92   0x08001f92   0x0000002e   Code   RO         4656    i.spi_init          gd32f4xx_spi.o
+    0x08001fc0   0x08001fc0   0x0000005a   Code   RO         6113    i.spi_nandflash_badblock_detect  gd5f1gxx.o
+    0x0800201a   0x0800201a   0x00000002   PAD
+    0x0800201c   0x0800201c   0x00000060   Code   RO         6114    i.spi_nandflash_block_erase  gd5f1gxx.o
+    0x0800207c   0x0800207c   0x0000003c   Code   RO         6117    i.spi_nandflash_get_feature  gd5f1gxx.o
+    0x080020b8   0x080020b8   0x0000001c   Code   RO         6118    i.spi_nandflash_get_status_flag  gd5f1gxx.o
+    0x080020d4   0x080020d4   0x00000030   Code   RO         6119    i.spi_nandflash_init  gd5f1gxx.o
+    0x08002104   0x08002104   0x00000040   Code   RO         6120    i.spi_nandflash_page_read  gd5f1gxx.o
+    0x08002144   0x08002144   0x00000044   Code   RO         6122    i.spi_nandflash_program_execute  gd5f1gxx.o
+    0x08002188   0x08002188   0x00000058   Code   RO         6123    i.spi_nandflash_program_load  gd5f1gxx.o
+    0x080021e0   0x080021e0   0x00000060   Code   RO         6125    i.spi_nandflash_read_cache  gd5f1gxx.o
+    0x08002240   0x08002240   0x000001fc   Code   RO         6126    i.spi_nandflash_read_data  gd5f1gxx.o
+    0x0800243c   0x0800243c   0x0000004c   Code   RO         6127    i.spi_nandflash_read_id  gd5f1gxx.o
+    0x08002488   0x08002488   0x00000010   Code   RO         6128    i.spi_nandflash_read_spare  gd5f1gxx.o
+    0x08002498   0x08002498   0x00000030   Code   RO         6129    i.spi_nandflash_reset  gd5f1gxx.o
+    0x080024c8   0x080024c8   0x00000034   Code   RO         6130    i.spi_nandflash_send_byte  gd5f1gxx.o
+    0x080024fc   0x080024fc   0x00000044   Code   RO         6131    i.spi_nandflash_set_register  gd5f1gxx.o
+    0x08002540   0x08002540   0x00000060   Code   RO         6132    i.spi_nandflash_write_data  gd5f1gxx.o
+    0x080025a0   0x080025a0   0x00000028   Code   RO         6133    i.spi_nandflash_write_enable  gd5f1gxx.o
+    0x080025c8   0x080025c8   0x00000012   Code   RO         6134    i.spi_nandflash_write_spare  gd5f1gxx.o
+    0x080025da   0x080025da   0x0000000c   Code   RO         4661    i.spi_quad_disable  gd32f4xx_spi.o
+    0x080025e6   0x080025e6   0x00000002   PAD
+    0x080025e8   0x080025e8   0x0000002c   Code   RO         6299    i.swap_L2P          gdnftl.o
+    0x08002614   0x08002614   0x000000a8   Code   RO          399    i.system_clock_240m_25m_hxtal  system_gd32f4xx.o
+    0x080026bc   0x080026bc   0x00000040   Code   RO          311    i.systick_config    systick.o
+    0x080026fc   0x080026fc   0x00000120   Code   RO         6300    i.table_block_replacement  gdnftl.o
+    0x0800281c   0x0800281c   0x0000002a   Code   RO            7    i.test_status_led_init  main.o
+    0x08002846   0x08002846   0x00000002   PAD
+    0x08002848   0x08002848   0x000000f4   Code   RO         6302    i.update_ABT_to_nand  gdnftl.o
+    0x0800293c   0x0800293c   0x0000001c   Code   RO         6303    i.update_DBTRBT_array  gdnftl.o
+    0x08002958   0x08002958   0x00000294   Code   RO         6304    i.update_DBTRBT_to_nand  gdnftl.o
+    0x08002bec   0x08002bec   0x00000130   Code   RO         6305    i.update_L2PBST_to_nand  gdnftl.o
+    0x08002d1c   0x08002d1c   0x00000080   Code   RO         5642    i.usart_baudrate_set  gd32f4xx_usart.o
+    0x08002d9c   0x08002d9c   0x00000008   Code   RO         5647    i.usart_data_transmit  gd32f4xx_usart.o
+    0x08002da4   0x08002da4   0x0000007c   Code   RO         5648    i.usart_deinit      gd32f4xx_usart.o
+    0x08002e20   0x08002e20   0x0000000a   Code   RO         5652    i.usart_enable      gd32f4xx_usart.o
+    0x08002e2a   0x08002e2a   0x00000016   Code   RO         5654    i.usart_flag_get    gd32f4xx_usart.o
+    0x08002e40   0x08002e40   0x0000000c   Code   RO         5679    i.usart_receive_config  gd32f4xx_usart.o
+    0x08002e4c   0x08002e4c   0x0000000c   Code   RO         5694    i.usart_transmit_config  gd32f4xx_usart.o
+    0x08002e58   0x08002e58   0x0000006e   Data   RO          356    .constdata          test.o
+    0x08002ec6   0x08002ec6   0x0000001a   Data   RO         6308    .constdata          gdnftl.o
+    0x08002ee0   0x08002ee0   0x00000053   Data   RO           13    .conststring        main.o
+    0x08002f33   0x08002f33   0x00000001   PAD
+    0x08002f34   0x08002f34   0x00000089   Data   RO         6137    .conststring        gd5f1gxx.o
+    0x08002fbd   0x08002fbd   0x00000003   PAD
+    0x08002fc0   0x08002fc0   0x000000ad   Data   RO         6309    .conststring        gdnftl.o
+    0x0800306d   0x0800306d   0x00000003   PAD
+    0x08003070   0x08003070   0x00000020   Data   RO         6760    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08002e38, Size: 0x000047b0, Max: 0x00030000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08003090, Size: 0x000047b8, Max: 0x00030000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08002e38   0x00000004   Data   RW           15    .data               main.o
-    0x20000004   0x08002e3c   0x00000004   Data   RW          312    .data               systick.o
-    0x20000008   0x08002e40   0x00000004   Data   RW          393    .data               system_gd32f4xx.o
-    0x2000000c   0x08002e44   0x0000005c   Data   RW         6044    .data               gd32f450i_eval.o
-    0x20000068   0x08002ea0   0x00000032   Data   RW         6302    .data               gdnftl.o
-    0x2000009a   0x08002ed2   0x00000002   PAD
-    0x2000009c   0x08002ed4   0x00000004   Data   RW         6725    .data               mc_w.l(stdout.o)
-    0x200000a0        -       0x00001800   Zero   RW           10    .bss                main.o
-    0x200018a0        -       0x00000840   Zero   RW         6129    .bss                gd5f1gxx.o
-    0x200020e0        -       0x000022d0   Zero   RW         6299    .bss                gdnftl.o
-    0x200043b0        -       0x00000400   Zero   RW         6096    STACK               startup_gd32f450_470.o
+    0x20000000   0x08003090   0x00000004   Data   RW           15    .data               main.o
+    0x20000004   0x08003094   0x00000004   Data   RW          312    .data               systick.o
+    0x20000008   0x08003098   0x00000004   Data   RW          400    .data               system_gd32f4xx.o
+    0x2000000c   0x0800309c   0x0000005c   Data   RW         6051    .data               gd32f450i_eval.o
+    0x20000068   0x080030f8   0x00000038   Data   RW         6310    .data               gdnftl.o
+    0x200000a0   0x08003130   0x00000004   Data   RW         6734    .data               mc_w.l(stdout.o)
+    0x200000a4        -       0x00001800   Zero   RW           10    .bss                main.o
+    0x200018a4        -       0x00000840   Zero   RW         6136    .bss                gd5f1gxx.o
+    0x200020e4        -       0x000022d0   Zero   RW         6306    .bss                gdnftl.o
+    0x200043b4   0x08003134   0x00000004   PAD
+    0x200043b8        -       0x00000400   Zero   RW         6103    STACK               startup_gd32f450_470.o
 
 
 ==============================================================================
@@ -2405,18 +2419,18 @@ Image component sizes
        316         46          0          0          0      29155   gd32f4xx_rcu.o
         88          0          0          0          0      11805   gd32f4xx_spi.o
        316         18          0          0          0      13277   gd32f4xx_usart.o
-      1702        350        137          0       2112      15697   gd5f1gxx.o
-      5834       1000        221         50       8912      25933   gdnftl.o
+      1720        354        137          0       2112      15725   gd5f1gxx.o
+      6062       1042        199         56       8912      27199   gdnftl.o
        414        160         83          4       6144      50737   main.o
         36          8        428          0       1024       1016   startup_gd32f450_470.o
        308         30          0          4          0       3007   system_gd32f4xx.o
        132         12          0          4          0      29622   systick.o
-       132          6         58          0          0       2206   test.o
+       460        134        110          0          0       3298   test.o
 
     ----------------------------------------------------------------------
-      9782       1650        968        156      18192     197837   Object Totals
+     10354       1824        996        160      18196     200223   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        12          0          9          2          0          0   (incl. Padding)
+        10          0          7          0          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2461,15 +2475,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     10864       1722        968        160      18192     190465   Grand Totals
-     10864       1722        968        160      18192     190465   ELF Image Totals
-     10864       1722        968        160          0          0   ROM Totals
+     11436       1896        996        164      18196     192651   Grand Totals
+     11436       1896        996        164      18196     192651   ELF Image Totals
+     11436       1896        996        164          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                11832 (  11.55kB)
-    Total RW  Size (RW Data + ZI Data)             18352 (  17.92kB)
-    Total ROM Size (Code + RO Data + RW Data)      11992 (  11.71kB)
+    Total RO  Size (Code + RO Data)                12432 (  12.14kB)
+    Total RW  Size (RW Data + ZI Data)             18360 (  17.93kB)
+    Total ROM Size (Code + RO Data + RW Data)      12596 (  12.30kB)
 
 ==============================================================================
 

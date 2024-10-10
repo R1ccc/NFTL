@@ -738,11 +738,11 @@ ARM Macro Assembler    Page 12
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=.\output\startup_gd32f450_470.d -o.\output\startup_gd32f450_
-470.o -IC:\Users\weijie.huang\AppData\Local\Keil_v5\ARM\RV31\INC -IC:\Users\wei
-jie.huang\AppData\Local\Keil_v5\ARM\INC\GD\GD32F4xx --predefine="__EVAL SETA 1"
- --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 540" --lis
-t=.\list\startup_gd32f450_470.lst ..\..\..\..\GD32F4xx_Firmware_Library\CMSIS\G
-D\GD32F4xx\Source\ARM\startup_gd32f450_470.s
+470.o -IC:\Users\weijie.huang\AppData\Local\Arm\Packs\GigaDevice\GD32F4xx_DFP\3
+.0.3\Device\F4XX\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SE
+TA 1" --predefine="__UVISION_VERSION SETA 540" --predefine="GD32F450 SETA 1" --
+list=.\list\startup_gd32f450_470.lst ..\..\..\..\GD32F4xx_Firmware_Library\CMSI
+S\GD\GD32F4xx\Source\ARM\startup_gd32f450_470.s
 
 
 
@@ -2262,4 +2262,4 @@ xx\Source\ARM\startup_gd32f450_470.s
 xx\Source\ARM\startup_gd32f450_470.s
 Comment: __main used once
 2 symbols
-452 symbols in table
+453 symbols in table

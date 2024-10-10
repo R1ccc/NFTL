@@ -21,7 +21,7 @@
 //#define  TEST
 #define NFTL_TEST
 #define LOG
-//#define DEMO//ONLY TEST CODE, ERASE ALL WHEN INIT
+#define DEMO//ONLY TEST CODE, ERASE ALL WHEN INIT
 //#define TEST_LOAD_UPDATE_ABTL2P
 static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read page data */
 
@@ -77,7 +77,7 @@ void spi5_init(void)
     rcu_periph_clock_enable(RCU_GPIOG);
     rcu_periph_clock_enable(SPI_CS_CLK);
     rcu_periph_clock_enable(RCU_SPI5);
-
+	
     /* SPI5_CLK(PG13), SPI5_MISO(PG12), SPI5_MOSI(PG14),SPI5_IO2(PG10) and SPI5_IO3(PG11) GPIO pin configuration */
     gpio_af_set(GPIOG, GPIO_AF_5, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
     gpio_mode_set(GPIOG, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
@@ -571,11 +571,12 @@ uint8_t spi_nandflash_block_erase(uint32_t block_No)
     /* check program result */        
     while(1){
         spi_nandflash_get_feature( STATUS, &status );
-        if( (status & E_FAIL) == E_FAIL ){
-            result = SPI_NAND_FAIL;
+        if( (status & OIP) == 0 ){
             break;
         }
-        if( (status & OIP) == 0 ){
+				
+        if( (status & E_FAIL) == E_FAIL ){
+            result = SPI_NAND_FAIL;
             break;
         }
     }
@@ -790,12 +791,13 @@ uint8_t spi_nandflash_write_data(uint8_t *buffer,uint32_t page_No,uint16_t addre
     /* check program result */
     while(1){
         //status = spi_nandflash_get_status_flag();
-        spi_nandflash_get_feature( STATUS, &status );   
+        spi_nandflash_get_feature( STATUS, &status );  
+
+        if( (status & OIP) == 0 ){
+            break;
+        }			
         if( (status & P_FAIL) == P_FAIL ){
             result = SPI_NAND_FAIL;
-            break;
-        }
-        if( (status & OIP) == 0 ){
             break;
         }
     }       

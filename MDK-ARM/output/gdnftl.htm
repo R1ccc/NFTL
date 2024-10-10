@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\output\gdnftl.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\gdnftl.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Aug 30 17:49:23 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Oct 10 14:43:53 2024
 <BR><P>
-<H3>Maximum Stack Usage =        368 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =       1136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; nandflash_page_program_certain_blocks &rArr; nandflash_page_program &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
+main &rArr; nandflash_page_program_certain_blocks &rArr; check_duplicates_in_L2P &rArr; __2printf
 <P>
 <H3>
 Mutually Recursive functions
@@ -136,7 +136,7 @@ Global Symbols
 <P><STRONG><a name="[65]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_gd32f450_470.o(.text)
 </UL>
-<P><STRONG><a name="[c1]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[c4]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[67]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -146,15 +146,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[c2]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[c5]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[c3]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[c6]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[c4]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[c7]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[c5]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[c8]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[c6]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[c9]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_gd32f450_470.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_gd32f450_470.o(RESET)
@@ -430,34 +430,34 @@ Global Symbols
 <P><STRONG><a name="[a]"></a>WWDGT_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32f450_470.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_gd32f450_470.o(RESET)
 </UL>
-<P><STRONG><a name="[8e]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_L2PBST_from_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
+<P><STRONG><a name="[90]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_L2PBST_from_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
 </UL>
 
-<P><STRONG><a name="[a4]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<P><STRONG><a name="[a6]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
 </UL>
 
-<P><STRONG><a name="[c7]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
+<P><STRONG><a name="[ca]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
 
 <P><STRONG><a name="[6a]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
 </UL>
 
-<P><STRONG><a name="[c8]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[cb]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[c9]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[cc]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[69]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
@@ -465,18 +465,20 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_DBTRBTABTPST_block_addr
 </UL>
 
-<P><STRONG><a name="[ca]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[78]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_duplicates_in_L2P
+</UL>
 
-<P><STRONG><a name="[cb]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[cd]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[6b]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, memseta.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[ba]"></a>memcmp</STRONG> (Thumb, 26 bytes, Stack size 12 bytes, memcmp.o(.text))
+<P><STRONG><a name="[bd]"></a>memcmp</STRONG> (Thumb, 26 bytes, Stack size 12 bytes, memcmp.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = memcmp
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
 </UL>
 
 <P><STRONG><a name="[6c]"></a>__aeabi_uldivmod</STRONG> (Thumb, 98 bytes, Stack size 40 bytes, uldiv.o(.text), UNUSED)
@@ -492,19 +494,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[cc]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[ce]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
 <P><STRONG><a name="[6e]"></a>__aeabi_llsl</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
-<P><STRONG><a name="[cd]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
+<P><STRONG><a name="[cf]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
 
 <P><STRONG><a name="[6d]"></a>__aeabi_llsr</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
-<P><STRONG><a name="[ce]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
+<P><STRONG><a name="[d0]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
 
 <P><STRONG><a name="[4]"></a>BusFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, gd32f4xx_it.o(i.BusFault_Handler))
 <BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BusFault_Handler
@@ -578,30 +580,41 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
-<P><STRONG><a name="[cf]"></a>__1printf$5</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
+<P><STRONG><a name="[d1]"></a>__1printf$5</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
 
 <P><STRONG><a name="[76]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_duplicates_in_L2P
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_min_erase_block
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_min_erase_block
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_DBTRBTABTPST_block_addr
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
 
-<P><STRONG><a name="[d0]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[d2]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[d1]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[d3]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[d2]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P><STRONG><a name="[d4]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[91]"></a>delay_1ms</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, systick.o(i.delay_1ms))
+<P><STRONG><a name="[77]"></a>check_duplicates_in_L2P</STRONG> (Thumb, 74 bytes, Stack size 976 bytes, test.o(i.check_duplicates_in_L2P))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1000<LI>Call Chain = check_duplicates_in_L2P &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+</UL>
+
+<P><STRONG><a name="[93]"></a>delay_1ms</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, systick.o(i.delay_1ms))
 <BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -612,561 +625,592 @@ Global Symbols
 <P><STRONG><a name="[66]"></a>fputc</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, main.o(i.fputc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = fputc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_flag_get
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_data_transmit
+<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_flag_get
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_data_transmit
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printf5.o(i.__0printf$5)
 </UL>
-<P><STRONG><a name="[7e]"></a>gd_eval_com_init</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, gd32f450i_eval.o(i.gd_eval_com_init))
+<P><STRONG><a name="[80]"></a>gd_eval_com_init</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, gd32f450i_eval.o(i.gd_eval_com_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = gd_eval_com_init &rArr; usart_baudrate_set &rArr; rcu_clock_freq_get
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_af_set
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_transmit_config
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_receive_config
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_enable
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_baudrate_set
+<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_af_set
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_transmit_config
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_receive_config
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_enable
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_baudrate_set
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[88]"></a>gd_eval_led_init</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, gd32f450i_eval.o(i.gd_eval_led_init))
+<P><STRONG><a name="[8a]"></a>gd_eval_led_init</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, gd32f450i_eval.o(i.gd_eval_led_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = gd_eval_led_init &rArr; gpio_mode_set
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
+<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
 </UL>
-<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_status_led_init
-</UL>
-
-<P><STRONG><a name="[bd]"></a>gd_eval_led_off</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, gd32f450i_eval.o(i.gd_eval_led_off))
-<BR><BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_status_led_init
+<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_status_led_init
 </UL>
 
-<P><STRONG><a name="[a5]"></a>get_mapped_physical_block</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, gdnftl.o(i.get_mapped_physical_block))
-<BR><BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<P><STRONG><a name="[c0]"></a>gd_eval_led_off</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, gd32f450i_eval.o(i.gd_eval_led_off))
+<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_status_led_init
 </UL>
 
-<P><STRONG><a name="[80]"></a>gpio_af_set</STRONG> (Thumb, 86 bytes, Stack size 20 bytes, gd32f4xx_gpio.o(i.gpio_af_set))
+<P><STRONG><a name="[a7]"></a>get_mapped_physical_block</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, gdnftl.o(i.get_mapped_physical_block))
+<BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+</UL>
+
+<P><STRONG><a name="[82]"></a>gpio_af_set</STRONG> (Thumb, 86 bytes, Stack size 20 bytes, gd32f4xx_gpio.o(i.gpio_af_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = gpio_af_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
-<P><STRONG><a name="[ae]"></a>gpio_bit_reset</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32f4xx_gpio.o(i.gpio_bit_reset))
-<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<P><STRONG><a name="[b1]"></a>gpio_bit_reset</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32f4xx_gpio.o(i.gpio_bit_reset))
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 </UL>
 
-<P><STRONG><a name="[a8]"></a>gpio_bit_set</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32f4xx_gpio.o(i.gpio_bit_set))
-<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<P><STRONG><a name="[ab]"></a>gpio_bit_set</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32f4xx_gpio.o(i.gpio_bit_set))
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
-<P><STRONG><a name="[81]"></a>gpio_mode_set</STRONG> (Thumb, 72 bytes, Stack size 32 bytes, gd32f4xx_gpio.o(i.gpio_mode_set))
+<P><STRONG><a name="[83]"></a>gpio_mode_set</STRONG> (Thumb, 72 bytes, Stack size 32 bytes, gd32f4xx_gpio.o(i.gpio_mode_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = gpio_mode_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
-<P><STRONG><a name="[82]"></a>gpio_output_options_set</STRONG> (Thumb, 62 bytes, Stack size 20 bytes, gd32f4xx_gpio.o(i.gpio_output_options_set))
+<P><STRONG><a name="[84]"></a>gpio_output_options_set</STRONG> (Thumb, 62 bytes, Stack size 20 bytes, gd32f4xx_gpio.o(i.gpio_output_options_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = gpio_output_options_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
-<P><STRONG><a name="[8f]"></a>load_L2PBST_from_nand</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, gdnftl.o(i.load_L2PBST_from_nand))
+<P><STRONG><a name="[91]"></a>load_L2PBST_from_nand</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, gdnftl.o(i.load_L2PBST_from_nand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = load_L2PBST_from_nand &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
 </UL>
 
 <P><STRONG><a name="[63]"></a>main</STRONG> (Thumb, 182 bytes, Stack size 24 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = main &rArr; nandflash_page_program_certain_blocks &rArr; nandflash_page_program &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
+<BR><BR>[Stack]<UL><LI>Max Depth = 1136<LI>Call Chain = main &rArr; nandflash_page_program_certain_blocks &rArr; check_duplicates_in_L2P &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_config
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_erase
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1ms
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_status_led_init
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_config
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_erase
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1ms
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_status_led_init
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[79]"></a>nandflash_block_erase</STRONG> (Thumb, 318 bytes, Stack size 40 bytes, gdnftl.o(i.nandflash_block_erase))
+<P><STRONG><a name="[7c]"></a>move_page_data</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, gdnftl.o(i.move_page_data))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = move_page_data &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+</UL>
+
+<P><STRONG><a name="[7b]"></a>nandflash_block_erase</STRONG> (Thumb, 342 bytes, Stack size 40 bytes, gdnftl.o(i.nandflash_block_erase))
 <BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = nandflash_block_erase &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swap_L2P
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;re_mapping_RBT
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_min_erase_block
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculate_average
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swap_L2P
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;re_mapping_RBT
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_min_erase_block
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculate_average
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_erase
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_erase
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
 </UL>
 
-<P><STRONG><a name="[95]"></a>nandflash_erase</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, test.o(i.nandflash_erase))
+<P><STRONG><a name="[97]"></a>nandflash_erase</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, test.o(i.nandflash_erase))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = nandflash_erase &rArr; nandflash_block_erase &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[93]"></a>nandflash_init</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, gdnftl.o(i.nandflash_init))
+<P><STRONG><a name="[95]"></a>nandflash_init</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, gdnftl.o(i.nandflash_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = nandflash_init &rArr; rebuild_DBTRBT_array &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a3]"></a>nandflash_page_program</STRONG> (Thumb, 328 bytes, Stack size 56 bytes, gdnftl.o(i.nandflash_page_program))
+<P><STRONG><a name="[a5]"></a>nandflash_page_program</STRONG> (Thumb, 328 bytes, Stack size 56 bytes, gdnftl.o(i.nandflash_page_program))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = nandflash_page_program &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swap_L2P
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;re_mapping_RBT
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swap_L2P
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;re_mapping_RBT
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
 </UL>
 
-<P><STRONG><a name="[96]"></a>nandflash_page_program_certain_blocks</STRONG> (Thumb, 102 bytes, Stack size 72 bytes, test.o(i.nandflash_page_program_certain_blocks))
-<BR><BR>[Stack]<UL><LI>Max Depth = 344<LI>Call Chain = nandflash_page_program_certain_blocks &rArr; nandflash_page_program &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
+<P><STRONG><a name="[98]"></a>nandflash_page_program_certain_blocks</STRONG> (Thumb, 228 bytes, Stack size 112 bytes, test.o(i.nandflash_page_program_certain_blocks))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1112<LI>Call Chain = nandflash_page_program_certain_blocks &rArr; check_duplicates_in_L2P &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_mapped_physical_block
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;select_unmapped_block
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_mapped_physical_block
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_duplicates_in_L2P
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[be]"></a>rcu_clock_freq_get</STRONG> (Thumb, 192 bytes, Stack size 52 bytes, gd32f4xx_rcu.o(i.rcu_clock_freq_get))
+<P><STRONG><a name="[c1]"></a>rcu_clock_freq_get</STRONG> (Thumb, 192 bytes, Stack size 52 bytes, gd32f4xx_rcu.o(i.rcu_clock_freq_get))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = rcu_clock_freq_get
 </UL>
-<BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_baudrate_set
+<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_baudrate_set
 </UL>
 
-<P><STRONG><a name="[7f]"></a>rcu_periph_clock_enable</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, gd32f4xx_rcu.o(i.rcu_periph_clock_enable))
-<BR><BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<P><STRONG><a name="[81]"></a>rcu_periph_clock_enable</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, gd32f4xx_rcu.o(i.rcu_periph_clock_enable))
+<BR><BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
-<P><STRONG><a name="[c0]"></a>rcu_periph_reset_disable</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, gd32f4xx_rcu.o(i.rcu_periph_reset_disable))
-<BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
+<P><STRONG><a name="[c3]"></a>rcu_periph_reset_disable</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, gd32f4xx_rcu.o(i.rcu_periph_reset_disable))
+<BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
 </UL>
 
-<P><STRONG><a name="[bf]"></a>rcu_periph_reset_enable</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, gd32f4xx_rcu.o(i.rcu_periph_reset_enable))
-<BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
+<P><STRONG><a name="[c2]"></a>rcu_periph_reset_enable</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, gd32f4xx_rcu.o(i.rcu_periph_reset_enable))
+<BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
 </UL>
 
-<P><STRONG><a name="[a7]"></a>spi5_init</STRONG> (Thumb, 146 bytes, Stack size 40 bytes, gd5f1gxx.o(i.spi5_init))
+<P><STRONG><a name="[a8]"></a>select_unmapped_block</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, gdnftl.o(i.select_unmapped_block))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = select_unmapped_block &rArr; check_whether_in_DBT_array
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
+</UL>
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+</UL>
+
+<P><STRONG><a name="[aa]"></a>spi5_init</STRONG> (Thumb, 146 bytes, Stack size 40 bytes, gd5f1gxx.o(i.spi5_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = spi5_init &rArr; gpio_mode_set
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_af_set
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_init
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_enable
+<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_af_set
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_init
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_enable
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
-</UL>
-
-<P><STRONG><a name="[aa]"></a>spi_enable</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_enable))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
 </UL>
 
-<P><STRONG><a name="[b9]"></a>spi_i2s_data_receive</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_i2s_data_receive))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<P><STRONG><a name="[ad]"></a>spi_enable</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_enable))
+<BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
-<P><STRONG><a name="[b8]"></a>spi_i2s_data_transmit</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_i2s_data_transmit))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<P><STRONG><a name="[bc]"></a>spi_i2s_data_receive</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_i2s_data_receive))
+<BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
 
-<P><STRONG><a name="[b7]"></a>spi_i2s_flag_get</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_i2s_flag_get))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<P><STRONG><a name="[bb]"></a>spi_i2s_data_transmit</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_i2s_data_transmit))
+<BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
 
-<P><STRONG><a name="[a9]"></a>spi_init</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_init))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+<P><STRONG><a name="[ba]"></a>spi_i2s_flag_get</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_i2s_flag_get))
+<BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+</UL>
+
+<P><STRONG><a name="[ac]"></a>spi_init</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_init))
+<BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
 </UL>
 
 <P><STRONG><a name="[75]"></a>spi_nandflash_badblock_detect</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_badblock_detect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = spi_nandflash_badblock_detect &rArr; spi_nandflash_read_spare &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_spare
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_spare
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_build_DBTRBTABTPST
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_build_DBTRBTABTPST
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_DBTRBTABTPST_block_addr
 </UL>
 
-<P><STRONG><a name="[98]"></a>spi_nandflash_block_erase</STRONG> (Thumb, 92 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_block_erase))
+<P><STRONG><a name="[9a]"></a>spi_nandflash_block_erase</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_block_erase))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = spi_nandflash_block_erase &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 </UL>
-<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
 </UL>
 
-<P><STRONG><a name="[ab]"></a>spi_nandflash_get_feature</STRONG> (Thumb, 54 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_get_feature))
+<P><STRONG><a name="[ae]"></a>spi_nandflash_get_feature</STRONG> (Thumb, 54 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_get_feature))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_badblock_detect
 </UL>
 
-<P><STRONG><a name="[b0]"></a>spi_nandflash_get_status_flag</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_get_status_flag))
+<P><STRONG><a name="[b3]"></a>spi_nandflash_get_status_flag</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_get_status_flag))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
-</UL>
-
-<P><STRONG><a name="[a1]"></a>spi_nandflash_init</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, gd5f1gxx.o(i.spi_nandflash_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = spi_nandflash_init &rArr; spi_nandflash_set_register &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
-</UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
 
-<P><STRONG><a name="[b2]"></a>spi_nandflash_page_read</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_page_read))
+<P><STRONG><a name="[a3]"></a>spi_nandflash_init</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = spi_nandflash_init &rArr; spi_nandflash_set_register &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi5_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+</UL>
+
+<P><STRONG><a name="[b5]"></a>spi_nandflash_page_read</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_page_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = spi_nandflash_page_read &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
 
-<P><STRONG><a name="[b3]"></a>spi_nandflash_program_execute</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_program_execute))
+<P><STRONG><a name="[b6]"></a>spi_nandflash_program_execute</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_program_execute))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = spi_nandflash_program_execute &rArr; spi_nandflash_write_enable &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
 </UL>
 
-<P><STRONG><a name="[b4]"></a>spi_nandflash_program_load</STRONG> (Thumb, 80 bytes, Stack size 32 bytes, gd5f1gxx.o(i.spi_nandflash_program_load))
+<P><STRONG><a name="[b7]"></a>spi_nandflash_program_load</STRONG> (Thumb, 80 bytes, Stack size 32 bytes, gd5f1gxx.o(i.spi_nandflash_program_load))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = spi_nandflash_program_load &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_quad_disable
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_quad_disable
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
 </UL>
 
-<P><STRONG><a name="[b6]"></a>spi_nandflash_read_cache</STRONG> (Thumb, 88 bytes, Stack size 32 bytes, gd5f1gxx.o(i.spi_nandflash_read_cache))
+<P><STRONG><a name="[b9]"></a>spi_nandflash_read_cache</STRONG> (Thumb, 88 bytes, Stack size 32 bytes, gd5f1gxx.o(i.spi_nandflash_read_cache))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = spi_nandflash_read_cache &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_quad_disable
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_quad_disable
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
 
-<P><STRONG><a name="[8d]"></a>spi_nandflash_read_data</STRONG> (Thumb, 242 bytes, Stack size 48 bytes, gd5f1gxx.o(i.spi_nandflash_read_data))
+<P><STRONG><a name="[8f]"></a>spi_nandflash_read_data</STRONG> (Thumb, 242 bytes, Stack size 48 bytes, gd5f1gxx.o(i.spi_nandflash_read_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
+<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_L2PBST_from_nand
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_spare
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_L2PBST_from_nand
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_spare
 </UL>
 
-<P><STRONG><a name="[94]"></a>spi_nandflash_read_id</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_read_id))
+<P><STRONG><a name="[96]"></a>spi_nandflash_read_id</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_read_id))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = spi_nandflash_read_id &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a6]"></a>spi_nandflash_read_spare</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, gd5f1gxx.o(i.spi_nandflash_read_spare))
+<P><STRONG><a name="[a9]"></a>spi_nandflash_read_spare</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, gd5f1gxx.o(i.spi_nandflash_read_spare))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = spi_nandflash_read_spare &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_badblock_detect
 </UL>
 
-<P><STRONG><a name="[b1]"></a>spi_nandflash_reset</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_reset))
+<P><STRONG><a name="[b4]"></a>spi_nandflash_reset</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_reset))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = spi_nandflash_reset &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
 </UL>
 
-<P><STRONG><a name="[af]"></a>spi_nandflash_send_byte</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_send_byte))
+<P><STRONG><a name="[b2]"></a>spi_nandflash_send_byte</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_send_byte))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_i2s_flag_get
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_i2s_data_transmit
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_i2s_data_receive
+<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_i2s_flag_get
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_i2s_data_transmit
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_i2s_data_receive
 </UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_id
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_enable
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_set_register
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_reset
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_page_read
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 </UL>
 
-<P><STRONG><a name="[ac]"></a>spi_nandflash_set_register</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_set_register))
+<P><STRONG><a name="[af]"></a>spi_nandflash_set_register</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, gd5f1gxx.o(i.spi_nandflash_set_register))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = spi_nandflash_set_register &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_status_flag
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_init
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_badblock_detect
 </UL>
 
-<P><STRONG><a name="[9a]"></a>spi_nandflash_write_data</STRONG> (Thumb, 92 bytes, Stack size 32 bytes, gd5f1gxx.o(i.spi_nandflash_write_data))
+<P><STRONG><a name="[9c]"></a>spi_nandflash_write_data</STRONG> (Thumb, 90 bytes, Stack size 32 bytes, gd5f1gxx.o(i.spi_nandflash_write_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
+<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_get_feature
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_spare
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_spare
 </UL>
 
-<P><STRONG><a name="[ad]"></a>spi_nandflash_write_enable</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_write_enable))
+<P><STRONG><a name="[b0]"></a>spi_nandflash_write_enable</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, gd5f1gxx.o(i.spi_nandflash_write_enable))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = spi_nandflash_write_enable &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_set
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_bit_reset
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_send_byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_execute
 </UL>
 
-<P><STRONG><a name="[99]"></a>spi_nandflash_write_spare</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, gd5f1gxx.o(i.spi_nandflash_write_spare))
+<P><STRONG><a name="[9b]"></a>spi_nandflash_write_spare</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, gd5f1gxx.o(i.spi_nandflash_write_spare))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
-</UL>
-
-<P><STRONG><a name="[b5]"></a>spi_quad_disable</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_quad_disable))
-<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
 </UL>
 
-<P><STRONG><a name="[90]"></a>systick_config</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, systick.o(i.systick_config))
+<P><STRONG><a name="[b8]"></a>spi_quad_disable</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gd32f4xx_spi.o(i.spi_quad_disable))
+<BR><BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_cache
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_program_load
+</UL>
+
+<P><STRONG><a name="[92]"></a>systick_config</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, systick.o(i.systick_config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = systick_config
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[92]"></a>test_status_led_init</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, main.o(i.test_status_led_init))
+<P><STRONG><a name="[94]"></a>test_status_led_init</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, main.o(i.test_status_led_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = test_status_led_init &rArr; gd_eval_led_init &rArr; gpio_mode_set
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_off
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
+<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_off
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_led_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7b]"></a>update_DBTRBT_to_nand</STRONG> (Thumb, 622 bytes, Stack size 48 bytes, gdnftl.o(i.update_DBTRBT_to_nand))
+<P><STRONG><a name="[7d]"></a>update_DBTRBT_to_nand</STRONG> (Thumb, 638 bytes, Stack size 48 bytes, gdnftl.o(i.update_DBTRBT_to_nand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program_certain_blocks
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
 </UL>
 
-<P><STRONG><a name="[a0]"></a>update_L2PBST_to_nand</STRONG> (Thumb, 246 bytes, Stack size 40 bytes, gdnftl.o(i.update_L2PBST_to_nand))
+<P><STRONG><a name="[a2]"></a>update_L2PBST_to_nand</STRONG> (Thumb, 260 bytes, Stack size 40 bytes, gdnftl.o(i.update_L2PBST_to_nand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = update_L2PBST_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
 </UL>
 
-<P><STRONG><a name="[84]"></a>usart_baudrate_set</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, gd32f4xx_usart.o(i.usart_baudrate_set))
+<P><STRONG><a name="[86]"></a>usart_baudrate_set</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, gd32f4xx_usart.o(i.usart_baudrate_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = usart_baudrate_set &rArr; rcu_clock_freq_get
 </UL>
-<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_clock_freq_get
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_clock_freq_get
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
 </UL>
 
-<P><STRONG><a name="[7c]"></a>usart_data_transmit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_data_transmit))
+<P><STRONG><a name="[7e]"></a>usart_data_transmit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_data_transmit))
 <BR><BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
 </UL>
 
-<P><STRONG><a name="[83]"></a>usart_deinit</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, gd32f4xx_usart.o(i.usart_deinit))
+<P><STRONG><a name="[85]"></a>usart_deinit</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, gd32f4xx_usart.o(i.usart_deinit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = usart_deinit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_reset_enable
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_reset_disable
+<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_reset_enable
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_reset_disable
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
-</UL>
-
-<P><STRONG><a name="[87]"></a>usart_enable</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_enable))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
 </UL>
 
-<P><STRONG><a name="[7d]"></a>usart_flag_get</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_flag_get))
+<P><STRONG><a name="[89]"></a>usart_enable</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_enable))
+<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+</UL>
+
+<P><STRONG><a name="[7f]"></a>usart_flag_get</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_flag_get))
 <BR><BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
 </UL>
 
-<P><STRONG><a name="[85]"></a>usart_receive_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_receive_config))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<P><STRONG><a name="[87]"></a>usart_receive_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_receive_config))
+<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
 </UL>
 
-<P><STRONG><a name="[86]"></a>usart_transmit_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_transmit_config))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
+<P><STRONG><a name="[88]"></a>usart_transmit_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gd32f4xx_usart.o(i.usart_transmit_config))
+<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gd_eval_com_init
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[bb]"></a>NVIC_SetPriority</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, systick.o(i.NVIC_SetPriority))
-<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_config
+<P><STRONG><a name="[be]"></a>NVIC_SetPriority</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, systick.o(i.NVIC_SetPriority))
+<BR><BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_config
 </UL>
 
 <P><STRONG><a name="[71]"></a>system_clock_240m_25m_hxtal</STRONG> (Thumb, 156 bytes, Stack size 8 bytes, system_gd32f4xx.o(i.system_clock_240m_25m_hxtal))
@@ -1175,11 +1219,11 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
-<P><STRONG><a name="[8c]"></a>add_bad_Block_to_DBTRBT_ram</STRONG> (Thumb, 54 bytes, Stack size 12 bytes, gdnftl.o(i.add_bad_Block_to_DBTRBT_ram))
+<P><STRONG><a name="[8e]"></a>add_bad_Block_to_DBTRBT_ram</STRONG> (Thumb, 54 bytes, Stack size 12 bytes, gdnftl.o(i.add_bad_Block_to_DBTRBT_ram))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = add_bad_Block_to_DBTRBT_ram
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_build_DBTRBTABTPST
+<BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_build_DBTRBTABTPST
 </UL>
 
 <P><STRONG><a name="[74]"></a>alloc_DBTRBTABTPST_block_addr</STRONG> (Thumb, 490 bytes, Stack size 40 bytes, gdnftl.o(i.alloc_DBTRBTABTPST_block_addr))
@@ -1189,156 +1233,147 @@ Local Symbols
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_badblock_detect
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
 </UL>
 
-<P><STRONG><a name="[9e]"></a>calculate_average</STRONG> (Thumb, 38 bytes, Stack size 12 bytes, gdnftl.o(i.calculate_average))
+<P><STRONG><a name="[a0]"></a>calculate_average</STRONG> (Thumb, 38 bytes, Stack size 12 bytes, gdnftl.o(i.calculate_average))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = calculate_average
 </UL>
-<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
 </UL>
 
-<P><STRONG><a name="[8a]"></a>check_whether_in_DBT_array</STRONG> (Thumb, 38 bytes, Stack size 12 bytes, gdnftl.o(i.check_whether_in_DBT_array))
+<P><STRONG><a name="[8c]"></a>check_whether_in_DBT_array</STRONG> (Thumb, 38 bytes, Stack size 12 bytes, gdnftl.o(i.check_whether_in_DBT_array))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = check_whether_in_DBT_array
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_min_erase_block
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;select_unmapped_block
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_min_erase_block
 </UL>
 
-<P><STRONG><a name="[77]"></a>env_check</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, gdnftl.o(i.env_check))
+<P><STRONG><a name="[79]"></a>env_check</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, gdnftl.o(i.env_check))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = env_check &rArr; nandflash_block_erase &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_page_data
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
 </UL>
 
-<P><STRONG><a name="[89]"></a>get_min_erase_block</STRONG> (Thumb, 82 bytes, Stack size 40 bytes, gdnftl.o(i.get_min_erase_block))
+<P><STRONG><a name="[8b]"></a>get_min_erase_block</STRONG> (Thumb, 82 bytes, Stack size 40 bytes, gdnftl.o(i.get_min_erase_block))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = get_min_erase_block &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
 </UL>
 
-<P><STRONG><a name="[8b]"></a>init_build_DBTRBTABTPST</STRONG> (Thumb, 120 bytes, Stack size 24 bytes, gdnftl.o(i.init_build_DBTRBTABTPST))
+<P><STRONG><a name="[8d]"></a>init_build_DBTRBTABTPST</STRONG> (Thumb, 120 bytes, Stack size 24 bytes, gdnftl.o(i.init_build_DBTRBTABTPST))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = init_build_DBTRBTABTPST &rArr; spi_nandflash_badblock_detect &rArr; spi_nandflash_read_spare &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_bad_Block_to_DBTRBT_ram
+<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_bad_Block_to_DBTRBT_ram
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_badblock_detect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
 </UL>
 
-<P><STRONG><a name="[78]"></a>load_DBTRBT_from_nand</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, gdnftl.o(i.load_DBTRBT_from_nand))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = load_DBTRBT_from_nand &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
+<P><STRONG><a name="[7a]"></a>load_DBTRBT_from_nand</STRONG> (Thumb, 174 bytes, Stack size 16 bytes, gdnftl.o(i.load_DBTRBT_from_nand))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = load_DBTRBT_from_nand &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
 </UL>
 
-<P><STRONG><a name="[97]"></a>mark_bad_block</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, gdnftl.o(i.mark_bad_block))
+<P><STRONG><a name="[99]"></a>mark_bad_block</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, gdnftl.o(i.mark_bad_block))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_spare
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_spare
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
-</UL>
-
-<P><STRONG><a name="[7a]"></a>move_page_data</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, gdnftl.o(i.move_page_data))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = move_page_data &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
-</UL>
-<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
-</UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;env_check
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
 </UL>
 
-<P><STRONG><a name="[9c]"></a>re_mapping_RBT</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, gdnftl.o(i.re_mapping_RBT))
+<P><STRONG><a name="[9e]"></a>re_mapping_RBT</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, gdnftl.o(i.re_mapping_RBT))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = re_mapping_RBT
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
 </UL>
 
-<P><STRONG><a name="[a2]"></a>rebuild_DBTRBT_array</STRONG> (Thumb, 1466 bytes, Stack size 88 bytes, gdnftl.o(i.rebuild_DBTRBT_array))
+<P><STRONG><a name="[a4]"></a>rebuild_DBTRBT_array</STRONG> (Thumb, 1466 bytes, Stack size 88 bytes, gdnftl.o(i.rebuild_DBTRBT_array))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = rebuild_DBTRBT_array &rArr; update_DBTRBT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_L2PBST_from_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_build_DBTRBTABTPST
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_L2PBST_from_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_DBTRBT_from_nand
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_build_DBTRBTABTPST
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_DBTRBTABTPST_block_addr
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_spare
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_spare
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_read_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
+<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_init
 </UL>
 
-<P><STRONG><a name="[9d]"></a>swap_L2P</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, gdnftl.o(i.swap_L2P))
+<P><STRONG><a name="[9f]"></a>swap_L2P</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, gdnftl.o(i.swap_L2P))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = swap_L2P
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
 </UL>
 
-<P><STRONG><a name="[bc]"></a>table_block_replacement</STRONG> (Thumb, 234 bytes, Stack size 16 bytes, gdnftl.o(i.table_block_replacement))
+<P><STRONG><a name="[bf]"></a>table_block_replacement</STRONG> (Thumb, 234 bytes, Stack size 16 bytes, gdnftl.o(i.table_block_replacement))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mark_bad_block
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
 </UL>
 
-<P><STRONG><a name="[9f]"></a>update_ABT_to_nand</STRONG> (Thumb, 216 bytes, Stack size 40 bytes, gdnftl.o(i.update_ABT_to_nand))
+<P><STRONG><a name="[a1]"></a>update_ABT_to_nand</STRONG> (Thumb, 228 bytes, Stack size 40 bytes, gdnftl.o(i.update_ABT_to_nand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = update_ABT_to_nand &rArr; table_block_replacement &rArr; mark_bad_block &rArr; spi_nandflash_write_spare &rArr; spi_nandflash_write_data &rArr; spi_nandflash_read_data &rArr; spi_nandflash_get_status_flag &rArr; spi_nandflash_get_feature &rArr; spi_nandflash_send_byte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_write_data
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nandflash_block_erase
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_array
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;table_block_replacement
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rebuild_DBTRBT_array
 </UL>
 
-<P><STRONG><a name="[9b]"></a>update_DBTRBT_array</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, gdnftl.o(i.update_DBTRBT_array))
+<P><STRONG><a name="[9d]"></a>update_DBTRBT_array</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, gdnftl.o(i.update_DBTRBT_array))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = update_DBTRBT_array &rArr; check_whether_in_DBT_array
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_bad_Block_to_DBTRBT_ram
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_whether_in_DBT_array
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_bad_Block_to_DBTRBT_ram
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_DBTRBT_to_nand
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_page_program
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nandflash_block_erase
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_L2PBST_to_nand
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ABT_to_nand
 </UL>
 
 <P><STRONG><a name="[73]"></a>_printf_core</STRONG> (Thumb, 658 bytes, Stack size 104 bytes, printf5.o(i._printf_core), UNUSED)

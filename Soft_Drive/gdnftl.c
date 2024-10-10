@@ -36,7 +36,6 @@ static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read pag
 #define TYPE_ENV        2
 #define TYPE_ABT        3
 #define TYPE_L2PBST     4
-#define WL_THRESHOLD 5
 #define DBT_SIZE    200
 #define RBT_SIZE    BLOCK_NUM_FOR_USER
 #define ENV_SIZE    3
@@ -83,6 +82,7 @@ uint16_t table_area_lastvalid = Table_AREA_END;
 volatile bool     BST[TOTAL_BLOCK];//mark if the physical block is empty
 uint16_t ABT[TOTAL_BLOCK];//PHYSICAL BLOCK ERASE COUNT
 uint16_t L2P[RBT_SIZE];//LOGICAL BLOCK ADDRESS TO PHYSICAL BLOCK ADDRESS
+uint16_t ENVT[1024];
 uint8_t  ABT_CNT = 0;//COUNTER RECORD HOW MANY TIMES ABT MODIFIED 
 uint8_t  L2P_CNT = 0;//COUNTER RECORD HOW MANY TIMES L2P MODIFIED 
 uint8_t  BST_CNT = 0;//COUNTER RECORD HOW MANY TIMES BST MODIFIED 
@@ -93,6 +93,15 @@ uint8_t  DBT_BLOCK_1;
 bool FLAG_ABT_UPDATE = 0;
 bool FLAG_L2P_UPDATE = 0;
 bool FLAG_BST_UPDATE = 0;
+
+typedef struct 
+{
+    uint8_t flag;
+    uint16_t ori_block;
+    uint16_t des_block;
+} PL ; 
+
+PL PL1;
 
 const uint16_t supported_flash_ids[SUPPORTED_FLASH_IDS_COUNT] = {
     0xC891,//GD5F1GM7UE
@@ -115,7 +124,7 @@ static uint8_t check_whether_in_DBT_array(uint16_t BlockNo);
 uint8_t update_DBTRBT_to_nand(uint8_t type);
 static void add_bad_Block_to_DBTRBT_ram(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static uint16_t re_mapping_RBT(uint16_t ori_BlockNo,uint16_t old_replace_BlockNo);
-static uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
+uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
 static uint16_t get_replace_block_from_ram(uint16_t BlockNo);
 static uint8_t update_DBTRBT_array(uint16_t BlockNo, uint16_t PhysicalBlockNo);
 static void alloc_DBTRBT_block_addr(void);
@@ -369,18 +378,19 @@ uint8_t nandflash_block_erase(uint16_t block_No)
     uint16_t proper_block;
     uint16_t physical_block, new_replace_block;
 	uint16_t average;
-
-    physical_block = L2P[block_No];
+		if(block_No <= USER_AREA_END){
+			physical_block = L2P[block_No];
+		}
+		else if(block_No > ReplaceBlock_AREA_END){
+			#ifdef LOG
+				printf("Block No %d OUT OF BOUND!", block_No);
+			#endif
+				return SPI_NAND_FAIL;
+		}
+		else {
+			physical_block = block_No;
+		}
 Start_Erase:
-#ifdef DEBUG
-    //printf("\rnandflash_page_erase:%x\n",block_No);
-#endif
-    if(block_No > USER_AREA_END){
-#ifdef DEBUG
-        printf("\rBlock error:%x\n",block_No);
-#endif
-        return SPI_NAND_FAIL;
-    }    
     
     if(true==check_whether_in_DBT_array(physical_block)){//if the lba is a bad block
 
@@ -426,8 +436,8 @@ Start_Erase:
     //based on wear leveling select the proper physical block
     #ifdef ABT_ENABLE
         average = calculate_average(ABT, 1024);
-        if((ABT[replace_block] - average) > WL_THRESHOLD){
-        
+        if((ABT[replace_block] - average) > WL_THRESHOLD && replace_block <= USER_AREA_END){
+						
             proper_block = select_proper_block(replace_block);
             
             #ifdef LOG
@@ -503,7 +513,8 @@ Start_Erase:
     \retval     none
 */
 static void load_DBTRBT_from_nand(uint8_t type)
-{
+{   
+    uint16_t i;
     //printf("\r%s:%x\n",__func__,type);
     /* load DBT table */
     if(type == TYPE_DBT){
@@ -521,6 +532,19 @@ static void load_DBTRBT_from_nand(uint8_t type)
     if(type == TYPE_ENV){
         spi_nandflash_read_data(tem_buffer,g16ENV_Block[g8ENV_CRT_Block_Idx]*SPI_NAND_BLOCK_SIZE+g8ENV_CRT_Page,0,SPI_NAND_PAGE_SIZE);
         memcpy(ENV,tem_buffer,ENV_SIZE*sizeof(ENV[0]));
+        for ( i = 2048 ; i > 0; i--)
+        {
+            if (tem_buffer[i-1] != 0xFF)
+            {
+                PL1.flag = tem_buffer[i-3];
+                
+                PL1.ori_block = tem_buffer[i-2];
+                PL1.des_block = tem_buffer[i-1];
+                break;
+            }
+            
+        }
+        
     }
 }
 
@@ -635,6 +659,7 @@ static uint8_t update_ABT_to_nand()
         }
         if(ABT_Erase_Flag == true){
             spi_nandflash_block_erase(g16ABT_Block[1-g8ABT_CRT_Block_Idx]);
+						ABT[g16ABT_Block[1-g8ABT_CRT_Block_Idx]] ++;
             BST[g16ABT_Block[1-g8ABT_CRT_Block_Idx]] = EMPTY;
         }
 
@@ -700,6 +725,7 @@ static uint8_t update_ABT_to_nand()
         }
         if(L2PBST_Erase_Flag == true){
             spi_nandflash_block_erase(g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]);
+						ABT[g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]] ++;
             BST[g16L2PBST_Block[1-g8DL2PBST_CRT_Block_Idx]] = EMPTY;
         }
     
@@ -763,6 +789,7 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
         }
         if(DBT_Erase_Flag == true){
             spi_nandflash_block_erase(g16DBT_Block[1-g8DBT_CRT_Block_Idx]);
+						ABT[g16DBT_Block[1-g8DBT_CRT_Block_Idx]] ++;
             BST[g16DBT_Block[1-g8DBT_CRT_Block_Idx]] = EMPTY;
         }
     }
@@ -805,6 +832,7 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
         }    
         if(RBT_Erase_Flag == true){
             spi_nandflash_block_erase( g16RBT_Block[1-g8RBT_CRT_Block_Idx]);
+						ABT[g16RBT_Block[1-g8RBT_CRT_Block_Idx]] ++;
             BST[g16RBT_Block[1-g8RBT_CRT_Block_Idx]] = EMPTY;
         }
     }
@@ -847,6 +875,7 @@ uint8_t update_DBTRBT_to_nand(uint8_t type)
         }       
         if(ENV_Erase_Flag == true){
             spi_nandflash_block_erase( g16ENV_Block[1-g8ENV_CRT_Block_Idx]);
+						ABT[g16ENV_Block[1-g8ENV_CRT_Block_Idx]]++;
             BST[g16ENV_Block[1-g8ENV_CRT_Block_Idx]] = EMPTY;
         }
     }
@@ -983,7 +1012,7 @@ static uint8_t table_block_replacement(uint8_t type){
     \param[out] none
     \retval     none
 */
-static uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No)
+uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No)
 {
     uint8_t result;
     result = spi_nandflash_read_data(tem_buffer,src_block_No*SPI_NAND_BLOCK_SIZE+page_No,0,(SPI_NAND_PAGE_SIZE+SPI_NAND_SPARE_AREA_SIZE));
@@ -1498,31 +1527,15 @@ uint16_t select_unmapped_block(void){
     uint16_t j = 0;
 	uint16_t block = 0;
     uint16_t physical_replace_block = 0xFFFF;
-    uint16_t *skip_blocks[5] = {g16DBT_Block, g16RBT_Block, g16ABT_Block, g16L2PBST_Block, g16ENV_Block};
+    //uint16_t *skip_blocks[5] = {g16DBT_Block, g16RBT_Block, g16ABT_Block, g16L2PBST_Block, g16ENV_Block};
 		// check all block
-    for (block = 0; block < g16LastValidBlock; block++) {
+    for (block = g16LastValidBlock; block > 0 ; block--) {
         bool is_bad_block = false;
         bool is_mapped = false;
         bool skip = false;
         
         // check bad block
         if(check_whether_in_DBT_array(block)) continue;
-
-        for (i = 0; i < sizeof(skip_blocks); i++) {
-            for ( j = 0; j < sizeof(g16DBT_Block); j++)
-            {
-                if (block == skip_blocks[i][j]) {
-                skip = true;
-                break;  // SKIP
-                }               
-            }  
-            if (skip)
-                {
-                    break;
-                } 
-        }
-        
-        if (skip) continue;
         
         // check if it is mapped
         for (i = 0; i < RBT_SIZE; i++) {
@@ -1535,7 +1548,10 @@ uint16_t select_unmapped_block(void){
 
         // check if empty
         if(BST[block] == NOT_EMPTY) continue;
-        else physical_replace_block = block;
+        else {
+					physical_replace_block = block;
+					return physical_replace_block;
+				}
     }
     return physical_replace_block;
 }
@@ -1819,7 +1835,7 @@ uint8_t test_env(uint16_t BlockNo)
 	ENV[1] = BlockNo;
 	ENV[2] = select_unmapped_block();//empty block
 
-	nandflash_block_erase(ENV[1]);
+	//nandflash_block_erase(ENV[1]);
 	for(i = 0; i < 64; i++){
 			move_page_data(ENV[1],ENV[2],i);
 	}//move block data from source to dest
