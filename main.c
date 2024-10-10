@@ -142,7 +142,7 @@ int main(void)
     printf("\n\rThe Flash_ID:0x%X\n\r\n\r",nandflash_id);
 	printf("*****************CERTAIN BLOCK ERS PGM TEST******************\n");
     //test_case1();   
-	nandflash_erase();
+	//nandflash_erase();
     for ( i = 0; i < count; i++)
     {		
 			

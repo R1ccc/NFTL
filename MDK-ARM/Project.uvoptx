@@ -152,9 +152,25 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
+          <LineNumber>194</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134220202</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\test.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\gdnftl\../test.c\194</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
           <LineNumber>799</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134227308</Address>
+          <Address>134227396</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -166,11 +182,11 @@
           <Expression>\\gdnftl\../Soft_Drive/gd5f1gxx.c\799</Expression>
         </Bp>
         <Bp>
-          <Number>1</Number>
+          <Number>2</Number>
           <Type>0</Type>
           <LineNumber>794</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134227292</Address>
+          <Address>134227380</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -182,27 +198,11 @@
           <Expression>\\gdnftl\../Soft_Drive/gd5f1gxx.c\794</Expression>
         </Bp>
         <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>238</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134222898</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Soft_Drive\gdnftl.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\gdnftl\../Soft_Drive/gdnftl.c\238</Expression>
-        </Bp>
-        <Bp>
           <Number>3</Number>
           <Type>0</Type>
           <LineNumber>250</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134223022</Address>
+          <Address>134223082</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -218,7 +218,7 @@
           <Type>0</Type>
           <LineNumber>573</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134226004</Address>
+          <Address>134226092</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -234,7 +234,7 @@
           <Type>0</Type>
           <LineNumber>128</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134221722</Address>
+          <Address>134221770</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -247,22 +247,6 @@
         </Bp>
         <Bp>
           <Number>6</Number>
-          <Type>0</Type>
-          <LineNumber>149</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134221788</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\gdnftl\../main.c\149</Expression>
-        </Bp>
-        <Bp>
-          <Number>7</Number>
           <Type>0</Type>
           <LineNumber>61</LineNumber>
           <EnabledFlag>0</EnabledFlag>
@@ -278,23 +262,23 @@
           <Expression>\\gdnftl\../gd32f4xx_it.c\61</Expression>
         </Bp>
         <Bp>
-          <Number>8</Number>
+          <Number>7</Number>
           <Type>0</Type>
-          <LineNumber>110</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134223378</Address>
+          <LineNumber>149</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221832</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\test.c</Filename>
+          <Filename>..\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\gdnftl\../test.c\110</Expression>
+          <Expression>\\gdnftl\../main.c\149</Expression>
         </Bp>
         <Bp>
-          <Number>9</Number>
+          <Number>8</Number>
           <Type>0</Type>
           <LineNumber>109</LineNumber>
           <EnabledFlag>0</EnabledFlag>
@@ -310,7 +294,7 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>10</Number>
+          <Number>9</Number>
           <Type>0</Type>
           <LineNumber>119</LineNumber>
           <EnabledFlag>0</EnabledFlag>
@@ -326,7 +310,7 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>11</Number>
+          <Number>10</Number>
           <Type>0</Type>
           <LineNumber>392</LineNumber>
           <EnabledFlag>1</EnabledFlag>
@@ -342,7 +326,7 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>12</Number>
+          <Number>11</Number>
           <Type>0</Type>
           <LineNumber>393</LineNumber>
           <EnabledFlag>1</EnabledFlag>
@@ -354,6 +338,38 @@
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
           <Filename>..\Soft_Drive\gdnftl.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>12</Number>
+          <Type>0</Type>
+          <LineNumber>116</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\test.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>13</Number>
+          <Type>0</Type>
+          <LineNumber>141</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\test.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -393,6 +409,21 @@
           <count>6</count>
           <WinNumber>1</WinNumber>
           <ItemText>physical_replace_block</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>average</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>replace_block</ItemText>
+        </Ww>
+        <Ww>
+          <count>9</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>sum</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

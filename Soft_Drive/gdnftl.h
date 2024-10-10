@@ -143,7 +143,7 @@ bool get_BST(uint16_t block_No);
 
 //static uint16_t get_empty_block(bool *array);
 
-static uint16_t calculate_average(uint16_t *array, uint16_t size);
+static uint16_t calculate_average(uint16_t size);
 static uint16_t select_proper_block(uint16_t physical_block_No);
 uint16_t select_unmapped_block(void);
 

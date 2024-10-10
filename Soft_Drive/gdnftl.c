@@ -148,7 +148,7 @@ bool get_BST(uint16_t block_No);
 
 static uint16_t get_empty_block(bool *array, size_t size, uint16_t ori_block);
 static uint16_t get_min_erase_block(uint16_t ori_pb);
-static uint16_t calculate_average(uint16_t *array, uint16_t size);
+static uint16_t calculate_average(uint16_t size);
 static uint16_t select_proper_block(uint16_t physical_block_No);
 uint16_t select_unmapped_block(void);
 static void env_check(void);
@@ -435,8 +435,11 @@ Start_Erase:
      //check erase cnt
     //based on wear leveling select the proper physical block
     #ifdef ABT_ENABLE
-        average = calculate_average(ABT, 1024);
-        if((ABT[replace_block] - average) > WL_THRESHOLD && replace_block <= USER_AREA_END){
+        average = calculate_average(1024);
+				#ifdef LOG
+					printf("average erase count : %d\n", average);
+				#endif
+        if(((ABT[replace_block] - average) > WL_THRESHOLD) && (block_No <= USER_AREA_END)){
 						
             proper_block = select_proper_block(replace_block);
             
@@ -1506,7 +1509,7 @@ static uint8_t mark_bad_block(uint16_t physical_block_no){
     \retval     result: rebuild success or not
 */
 static uint16_t select_proper_block(uint16_t physical_block_No){
-    uint16_t average_erase_cnt = calculate_average(ABT, 1024);//get average erase cnt
+    uint16_t average_erase_cnt = calculate_average(1024);//get average erase cnt
     //uint16_t physical_block_no = L2P[physical_block_No];
     uint16_t physical_replace_block;
     uint16_t i;
@@ -1562,14 +1565,14 @@ uint16_t select_unmapped_block(void){
     \param[out] none
     \retval     none
 */
-static uint16_t calculate_average(uint16_t *array, uint16_t size) {
+static uint16_t calculate_average(uint16_t size) {
     uint32_t sum = 0;
 		uint16_t average = 0;
 		uint16_t i;
         uint16_t p_block;
     for (i = 0; i < USER_AREA_END; i++) {
         p_block = L2P[i];
-        sum += array[p_block];
+        sum += ABT[p_block];
     }
 		average = sum/USER_AREA_END;
     return average;

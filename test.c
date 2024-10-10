@@ -23,6 +23,8 @@ extern uint16_t ENV[ENV_SIZE];
 extern uint8_t move_page_data(uint16_t des_block_No,uint16_t src_block_No,uint8_t page_No);
 void shuffle(uint16_t *array, uint16_t n);
 bool check_duplicates_in_L2P(int size);
+
+bool seen[ReplaceBlock_AREA_END] = {false}; // record seen value
 /*
     function: Full Nand Program
     description: Fully write data to Nand flash in sequential order or random order
@@ -113,10 +115,13 @@ uint8_t nandflash_page_program_certain_blocks(uint8_t *buffer1, uint8_t *buffer2
         for ( j = 0; j < count; j++)
         {
             //check the L2P map table every 50 cycles
-            if( (j % 50 == 0) && (j != 0)){
+            if( (j % 5 == 0) && (j != 0)){
                 if(check_duplicates_in_L2P(800)){
                     spi_nandflash_block_erase(0);
                     spi_nandflash_write_data(L2P_err_msg, 0, 0, 50);
+										//back up data to BLOCK ENV[2]
+										printf("L2P TABLE ERROR ! \n");
+										while(1);
                 };
             }
             
@@ -180,12 +185,13 @@ uint8_t nandflash_erase(void){
     parameter: 
 */
 bool check_duplicates_in_L2P(int size) {
-    bool seen[ReplaceBlock_AREA_END] = {false}; // record seen value
+    
 		uint16_t i;
-		
+		memset(seen, 0, sizeof(seen)); 
     for (i = 0; i < size; i++) {
         if (L2P[i] >= 0 && L2P[i] < ReplaceBlock_AREA_END) { 
-            if (seen[L2P[i]]) {  
+            if (seen[L2P[i]]) { 
+							printf("Duplicated Block---LB: %d  PB: %d \n", i, L2P[i]);
                 return true;     
             }
             seen[L2P[i]] = true;  
