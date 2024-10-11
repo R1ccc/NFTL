@@ -37,6 +37,7 @@ OF SUCH DAMAGE.
 #include "gd32f4xx.h"
 #include "systick.h"
 #include "gd32f450i_eval.h"
+#include "gd32f4xx_pmu.h"
 //#include "gd5f1gxx.h"
 #include "string.h"
 #include "gdnftl.h"
@@ -120,6 +121,9 @@ int main(void)
 
     /* USART parameter configuration */
     gd_eval_com_init(EVAL_COM0);
+
+    /*PMU LVD init*/
+    lvd_init();
 
     /* configure SPI5 GPIO and parameter */
 	printf("Initializing..........\n");

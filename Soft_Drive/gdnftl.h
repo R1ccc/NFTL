@@ -147,6 +147,10 @@ static uint16_t calculate_average(uint16_t size);
 static uint16_t select_proper_block(uint16_t physical_block_No);
 uint16_t select_unmapped_block(void);
 
+//LVD function
+void lvd_init(void);
+void LVD_IRQHandler(void);
+
 /*nandflash initialization*/
 void nandflash_init(void);
 /* write the page data to SPI nandflash, block_No(0~USER_AREA_END), page_No(0~SPI_NAND_BLOCK_SIZE-1), buf_len(length of buffer to be written) */

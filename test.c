@@ -127,7 +127,7 @@ uint8_t nandflash_page_program_certain_blocks(uint8_t *buffer1, uint8_t *buffer2
             
             //SET OP FLAG
             ENV[0] = 0x00;
-            ENV[1] = block_no;
+            ENV[1] = L2P[block_no];
             ENV[2] = select_unmapped_block();
             //back up data to BLOCK ENV[2]
 						printf("Backing Up Data from %d to %d \n", ENV[1], ENV[2]);

@@ -1796,7 +1796,7 @@ static void env_check(void)
 			move_page_data(ENV[1],ENV[2],i);
 		}
 	    #ifdef LOG
-            printf("Unexpected Power Loss, Data Recovering...\n");
+            printf("Unexpected Power Loss, Data Recovering... FROM %d TO %d\n", ENV[2], ENV[1]);
         #endif
 		ENV[0] = 0xFF;
 		//ENV[2] = ENV[1];
@@ -1879,7 +1879,52 @@ uint8_t test_env(uint16_t BlockNo)
 	
 }
 
+/*!
+    \brief      Initialize LVD function, set voltage as 3.1V. 
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void lvd_init(void) {
+    pmu_lvd_select(PMU_LVDT_7);
 
+    nvic_irq_enable(LVD_IRQn, 13U, 0U);
+
+    exti_init(EXTI_16, EXTI_INTERRUPT, EXTI_TRIG_RISING);  
+    exti_interrupt_flag_clear(EXTI_16);
+    exti_interrupt_enable(EXTI_16);
+}
+
+/*!
+    \brief      LVD interrupt handler. UPDATE ALL TABLES TO ARRAY
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void LVD_IRQHandler(void) {
+    if (exti_interrupt_flag_get(EXTI_16) == SET) {
+        exti_interrupt_flag_clear(EXTI_16);
+        printf("%s", "low voltage detected\r\n");
+        //operation needed
+        spi_nandflash_write_data("LVD", 0, 0, 4);
+		update_L2PBST_to_nand();
+        #ifdef LOG
+            printf("LVD update L2PBST done \n");
+        #endif
+        update_DBTRBT_to_nand(TYPE_ENV);
+        #ifdef LOG
+            printf("LVD update ENV done \n");
+        #endif
+        update_DBTRBT_to_nand(TYPE_RBT);
+        #ifdef LOG
+            printf("LVD update RBT done \n");
+        #endif
+        update_DBTRBT_to_nand(TYPE_DBT);
+        #ifdef LOG
+            printf("LVD update DBT done \n");
+        #endif	
+    }
+}
 /*!
     \brief      for debug
     \param[in]  none

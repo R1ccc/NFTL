@@ -21,7 +21,7 @@
 //#define  TEST
 #define NFTL_TEST
 #define LOG
-#define DEMO//ONLY TEST CODE, ERASE ALL WHEN INIT
+//#define DEMO//ONLY TEST CODE, ERASE ALL WHEN INIT
 //#define TEST_LOAD_UPDATE_ABTL2P
 static uint8_t tem_buffer[SPI_NAND_PAGE_TOTAL_SIZE];   /* the buffer of read page data */
 
