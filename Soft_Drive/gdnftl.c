@@ -209,6 +209,7 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
     uint16_t physical_block, logical_block;
     uint16_t proper_block;
 	uint16_t i = 0;
+    
     //L2P find the physical block    
     logical_block = block_No;
     physical_block = get_mapped_physical_block(logical_block);
@@ -217,6 +218,7 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
     if((block_No > USER_AREA_END)||(page_No>=SPI_NAND_BLOCK_SIZE)||(buf_len>SPI_NAND_PAGE_SIZE)){
         return SPI_NAND_FAIL;
     }
+    
     if(check_whether_in_DBT_array(physical_block)==true){//check if the mapped physical block is bad block
         replace_block = get_replace_block_from_ram(block_No);
         #ifdef LOG
@@ -235,21 +237,25 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
     #ifdef LOG
 				printf("*********PROGRAM LB:%d PB:%d PAGE:%d**********\n",block_No, replace_block, page_No);
 	#endif
+   
     result = spi_nandflash_write_data(tem_buffer,replace_block*SPI_NAND_BLOCK_SIZE+page_No,0,SPI_NAND_PAGE_SIZE);
+    
     if(result == SPI_NAND_FAIL){
         #ifdef LOG
             printf("***************Program Failed, Block Replacing************* \n");		
         #endif     
-        update_DBTRBT_array(block_No, replace_block);
-        mark_bad_block(replace_block);
+        update_DBTRBT_array(block_No, replace_block);//ADD BAD BLOCK TO DBT
+        mark_bad_block(replace_block);//MARK AS BB IN THAT PHYSICAL BLOCK
         re_mapping_RBT(block_No,replace_block);
         update_DBTRBT_to_nand(TYPE_DBT);
         update_DBTRBT_to_nand(TYPE_RBT); 
         new_replace_block = get_replace_block_from_ram(block_No);
+        
         //copy the old block content to new alloced block
         for(page_idx = 0;page_idx < page_No;page_idx++){
             move_page_data(new_replace_block,replace_block,page_idx);
         }
+        
         swap_L2P(block_No, new_replace_block);
         //L2P[block_No] = new_replace_block;//update the L2P table
     }
@@ -257,7 +263,9 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
         BST[replace_block] = NOT_EMPTY;//mark this physical block as not empty
         BST_CNT++;
     }
+    
     compress_BST(BST, BST_compressed, TOTAL_BLOCK);
+    
     //CHECK IF NEED TO UPDATE BST
     //CHECK IF NEED TO UPDATE BST&ABT
     if(ABT_CNT > 10){
@@ -275,6 +283,7 @@ uint8_t nandflash_page_program(uint8_t *buffer, uint16_t block_No, uint8_t page_
         update_L2PBST_to_nand();
         BST_CNT = 0;
     }
+    
     return result;
 }
 
@@ -321,7 +330,6 @@ uint8_t nandflash_page_read(uint8_t *buffer, uint16_t block_No, uint8_t page_No,
         swap_L2P(block_No, des_block);
 				#ifdef LOG
             printf("\n***************ECC TRIGGER. MOVE DATA FROM BLOCK: %d TO BLOCK: %d******************\n", ori_block, des_block);
-            //while (1);
         #endif
         //L2P[block_No] = des_block;//update the L2P table
         for(i = 0; i < SPI_NAND_BLOCK_SIZE; i++){//move current block to a new block
@@ -1767,6 +1775,7 @@ bool get_BST(uint16_t block_No){
     \retval     none
 */
 static void swap_L2P(uint16_t LogicalBlockNo, uint16_t ReplacePB){
+    
     // Get the current physical block number mapped to the given logical block number
     uint16_t originalPB = L2P[LogicalBlockNo];
     
@@ -1786,12 +1795,20 @@ static void swap_L2P(uint16_t LogicalBlockNo, uint16_t ReplacePB){
 static void env_check(void)
 {
 	uint8_t i;
+    uint16_t result;
 	load_DBTRBT_from_nand(TYPE_ENV);
 #ifdef LOG
     printf("***********Unexpected Power Loss Checking************\n");
 #endif
 	if(ENV[0] == 0x00){
-		nandflash_block_erase(ENV[1]);
+		result = spi_nandflash_block_erase(ENV[1]);
+        if (result == SPI_NAND_FAIL)
+        {
+            #ifdef LOG
+            printf("ERASE FAIL PB %d\n", ENV[2], ENV[1]);
+            #endif
+        }
+        
 		for(i = 0; i < 64; i++){
 			move_page_data(ENV[1],ENV[2],i);
 		}
@@ -1810,12 +1827,15 @@ static void env_check(void)
 
 // Check if the ID is in the list of supported IDs
 static bool is_supported_flash_id(uint16_t id) {
-		int i = 0;
+	
+    int i = 0;
+    
     for (i = 0; i < SUPPORTED_FLASH_IDS_COUNT; i++) {
         if (supported_flash_ids[i] == id) {
             return true;
         }
     }
+    
     return false;
 }
 
